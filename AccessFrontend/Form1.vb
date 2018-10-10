@@ -19,6 +19,7 @@
     End Sub
 
     Private Function resizeControlsGroupboxContent(ByVal isReadPage As Boolean)
+        'TODO: make this stuff run when tabs are changed
         If isReadPage Then
             If tab_controls.Height > 370 Then
                 tab_results.Width = tab_controls.Width - 30
@@ -36,10 +37,10 @@
                 lbl_resultsHint.Top = 7
             End If
 
-            txt_FeaturesEdit.Height = tpg_FeaturesEdit.Height - 14
-            txt_NotesEdit.Height = tpg_NotesEdit.Height - 14
-            txt_FeaturesEdit.Width = tpg_FeaturesEdit.Width - 14
-            txt_NotesEdit.Width = tpg_FeaturesEdit.Width - 14
+            txt_Features.Height = tpg_Features.Height - 14
+            txt_Notes.Height = tpg_Notes.Height - 14
+            txt_Features.Width = tpg_Features.Width - 14
+            txt_Notes.Width = tpg_Features.Width - 14
         Else
             If tab_controls.Height > 370 Then
                 tab_ExtrasEdit.Width = tab_controls.Width - 30
@@ -48,15 +49,15 @@
                 tab_ExtrasEdit.Height = tpg_edit.Height - 249
             Else
                 tab_ExtrasEdit.Left = 374
-                tab_ExtrasEdit.Width = tab_controls.Width - lbl_osParentEdit.Width - lbl_osBootEdit.Width - cbx_osBootEdit.Width - cbx_osParentEdit.Width - 250
+                tab_ExtrasEdit.Width = tab_controls.Width - lbl_osParentEdit.Width - lbl_osBootEdit.Width - cbx_osBootEdit.Width - cbx_osParentEdit.Width - 70
                 tab_ExtrasEdit.Top = 12
                 tab_ExtrasEdit.Height = 137
             End If
 
-            txt_Features.Height = tpg_Features.Height - 14
-            txt_Notes.Height = tpg_Notes.Height - 14
-            txt_Features.Width = tpg_Features.Width - 14
-            txt_Notes.Width = tpg_Features.Width - 14
+            txt_FeaturesEdit.Height = tpg_FeaturesEdit.Height - 14
+            txt_NotesEdit.Height = tpg_notesEdit.Height - 14
+            txt_FeaturesEdit.Width = tpg_FeaturesEdit.Width - 14
+            txt_NotesEdit.Width = tpg_FeaturesEdit.Width - 14
             btn_Save.Left = tpg_edit.Width - btn_Save.Width - 10
             btn_Save.Top = tab_ExtrasEdit.Height + tab_ExtrasEdit.Top + 10
         End If
