@@ -63,35 +63,35 @@ Partial Class frm_main
         Me.lbl_searchHint = New System.Windows.Forms.Label()
         Me.tpg_edit = New System.Windows.Forms.TabPage()
         Me.btn_Save = New System.Windows.Forms.Button()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.ComboBox12 = New System.Windows.Forms.ComboBox()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.cbx_osTypeEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osTypeEdit = New System.Windows.Forms.Label()
+        Me.cbx_osFormatEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osFormatEdit = New System.Windows.Forms.Label()
+        Me.tab_ExtrasEdit = New System.Windows.Forms.TabControl()
+        Me.tpg_FeaturesEdit = New System.Windows.Forms.TabPage()
+        Me.txt_FeaturesEdit = New System.Windows.Forms.TextBox()
+        Me.tpg_notesEdit = New System.Windows.Forms.TabPage()
+        Me.txt_NotesEdit = New System.Windows.Forms.TextBox()
+        Me.cbx_osSizeEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osSizeEdit = New System.Windows.Forms.Label()
+        Me.cbx_osNameEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osNameEdit = New System.Windows.Forms.Label()
+        Me.cbx_osBuildEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osBuildEdit = New System.Windows.Forms.Label()
+        Me.cbx_osVersionEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osVersionEdit = New System.Windows.Forms.Label()
+        Me.cbx_osBootEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osBootEdit = New System.Windows.Forms.Label()
+        Me.cbx_osRamEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osRamEdit = New System.Windows.Forms.Label()
+        Me.cbx_osPlatformEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osPlatformEdit = New System.Windows.Forms.Label()
+        Me.cbx_osEditionEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osEditionEdit = New System.Windows.Forms.Label()
+        Me.cbx_osVariantEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osVariantEdit = New System.Windows.Forms.Label()
+        Me.cbx_osParentEdit = New System.Windows.Forms.ComboBox()
+        Me.lbl_osParentEdit = New System.Windows.Forms.Label()
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
         Me.tbg_specs = New System.Windows.Forms.TabPage()
         Me.grp_connect.SuspendLayout()
@@ -102,9 +102,9 @@ Partial Class frm_main
         Me.tpg_Features.SuspendLayout()
         Me.tpg_Notes.SuspendLayout()
         Me.tpg_edit.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.tab_ExtrasEdit.SuspendLayout()
+        Me.tpg_FeaturesEdit.SuspendLayout()
+        Me.tpg_notesEdit.SuspendLayout()
         Me.SuspendLayout()
         '
         'grp_connect
@@ -494,31 +494,31 @@ Partial Class frm_main
         'tpg_edit
         '
         Me.tpg_edit.Controls.Add(Me.btn_Save)
-        Me.tpg_edit.Controls.Add(Me.ComboBox1)
-        Me.tpg_edit.Controls.Add(Me.Label1)
-        Me.tpg_edit.Controls.Add(Me.ComboBox2)
-        Me.tpg_edit.Controls.Add(Me.Label2)
-        Me.tpg_edit.Controls.Add(Me.TabControl1)
-        Me.tpg_edit.Controls.Add(Me.ComboBox3)
-        Me.tpg_edit.Controls.Add(Me.Label3)
-        Me.tpg_edit.Controls.Add(Me.ComboBox4)
-        Me.tpg_edit.Controls.Add(Me.Label4)
-        Me.tpg_edit.Controls.Add(Me.ComboBox5)
-        Me.tpg_edit.Controls.Add(Me.Label5)
-        Me.tpg_edit.Controls.Add(Me.ComboBox6)
-        Me.tpg_edit.Controls.Add(Me.Label6)
-        Me.tpg_edit.Controls.Add(Me.ComboBox7)
-        Me.tpg_edit.Controls.Add(Me.Label7)
-        Me.tpg_edit.Controls.Add(Me.ComboBox8)
-        Me.tpg_edit.Controls.Add(Me.Label8)
-        Me.tpg_edit.Controls.Add(Me.ComboBox9)
-        Me.tpg_edit.Controls.Add(Me.Label9)
-        Me.tpg_edit.Controls.Add(Me.ComboBox10)
-        Me.tpg_edit.Controls.Add(Me.Label11)
-        Me.tpg_edit.Controls.Add(Me.ComboBox11)
-        Me.tpg_edit.Controls.Add(Me.Label12)
-        Me.tpg_edit.Controls.Add(Me.ComboBox12)
-        Me.tpg_edit.Controls.Add(Me.Label13)
+        Me.tpg_edit.Controls.Add(Me.cbx_osTypeEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osTypeEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osFormatEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osFormatEdit)
+        Me.tpg_edit.Controls.Add(Me.tab_ExtrasEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osSizeEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osSizeEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osNameEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osNameEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osBuildEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osBuildEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osVersionEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osVersionEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osBootEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osBootEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osRamEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osRamEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osPlatformEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osPlatformEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osEditionEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osEditionEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osVariantEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osVariantEdit)
+        Me.tpg_edit.Controls.Add(Me.cbx_osParentEdit)
+        Me.tpg_edit.Controls.Add(Me.lbl_osParentEdit)
         Me.tpg_edit.Location = New System.Drawing.Point(4, 22)
         Me.tpg_edit.Name = "tpg_edit"
         Me.tpg_edit.Padding = New System.Windows.Forms.Padding(3)
@@ -536,257 +536,257 @@ Partial Class frm_main
         Me.btn_Save.Text = "Save"
         Me.btn_Save.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'cbx_osTypeEdit
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(247, 157)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 51
+        Me.cbx_osTypeEdit.FormattingEnabled = True
+        Me.cbx_osTypeEdit.Location = New System.Drawing.Point(247, 157)
+        Me.cbx_osTypeEdit.Name = "cbx_osTypeEdit"
+        Me.cbx_osTypeEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osTypeEdit.TabIndex = 51
         '
-        'Label1
+        'lbl_osTypeEdit
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(200, 160)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(34, 13)
-        Me.Label1.TabIndex = 50
-        Me.Label1.Text = "Type:"
+        Me.lbl_osTypeEdit.AutoSize = True
+        Me.lbl_osTypeEdit.Location = New System.Drawing.Point(200, 160)
+        Me.lbl_osTypeEdit.Name = "lbl_osTypeEdit"
+        Me.lbl_osTypeEdit.Size = New System.Drawing.Size(34, 13)
+        Me.lbl_osTypeEdit.TabIndex = 50
+        Me.lbl_osTypeEdit.Text = "Type:"
         '
-        'ComboBox2
+        'cbx_osFormatEdit
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(247, 128)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 49
+        Me.cbx_osFormatEdit.FormattingEnabled = True
+        Me.cbx_osFormatEdit.Location = New System.Drawing.Point(247, 128)
+        Me.cbx_osFormatEdit.Name = "cbx_osFormatEdit"
+        Me.cbx_osFormatEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osFormatEdit.TabIndex = 49
         '
-        'Label2
+        'lbl_osFormatEdit
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(200, 131)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(42, 13)
-        Me.Label2.TabIndex = 48
-        Me.Label2.Text = "Format:"
+        Me.lbl_osFormatEdit.AutoSize = True
+        Me.lbl_osFormatEdit.Location = New System.Drawing.Point(200, 131)
+        Me.lbl_osFormatEdit.Name = "lbl_osFormatEdit"
+        Me.lbl_osFormatEdit.Size = New System.Drawing.Size(42, 13)
+        Me.lbl_osFormatEdit.TabIndex = 48
+        Me.lbl_osFormatEdit.Text = "Format:"
         '
-        'TabControl1
+        'tab_ExtrasEdit
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(374, 12)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(423, 137)
-        Me.TabControl1.TabIndex = 47
+        Me.tab_ExtrasEdit.Controls.Add(Me.tpg_FeaturesEdit)
+        Me.tab_ExtrasEdit.Controls.Add(Me.tpg_notesEdit)
+        Me.tab_ExtrasEdit.Location = New System.Drawing.Point(374, 12)
+        Me.tab_ExtrasEdit.Name = "tab_ExtrasEdit"
+        Me.tab_ExtrasEdit.SelectedIndex = 0
+        Me.tab_ExtrasEdit.Size = New System.Drawing.Size(423, 137)
+        Me.tab_ExtrasEdit.TabIndex = 47
         '
-        'TabPage1
+        'tpg_FeaturesEdit
         '
-        Me.TabPage1.Controls.Add(Me.TextBox1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(415, 111)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Features"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tpg_FeaturesEdit.Controls.Add(Me.txt_FeaturesEdit)
+        Me.tpg_FeaturesEdit.Location = New System.Drawing.Point(4, 22)
+        Me.tpg_FeaturesEdit.Name = "tpg_FeaturesEdit"
+        Me.tpg_FeaturesEdit.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpg_FeaturesEdit.Size = New System.Drawing.Size(415, 111)
+        Me.tpg_FeaturesEdit.TabIndex = 0
+        Me.tpg_FeaturesEdit.Text = "Features"
+        Me.tpg_FeaturesEdit.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'txt_FeaturesEdit
         '
-        Me.TextBox1.Location = New System.Drawing.Point(7, 7)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(402, 98)
-        Me.TextBox1.TabIndex = 0
+        Me.txt_FeaturesEdit.Location = New System.Drawing.Point(7, 7)
+        Me.txt_FeaturesEdit.Multiline = True
+        Me.txt_FeaturesEdit.Name = "txt_FeaturesEdit"
+        Me.txt_FeaturesEdit.Size = New System.Drawing.Size(402, 98)
+        Me.txt_FeaturesEdit.TabIndex = 0
         '
-        'TabPage2
+        'tpg_notesEdit
         '
-        Me.TabPage2.Controls.Add(Me.TextBox2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(415, 111)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Install Notes"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tpg_notesEdit.Controls.Add(Me.txt_NotesEdit)
+        Me.tpg_notesEdit.Location = New System.Drawing.Point(4, 22)
+        Me.tpg_notesEdit.Name = "tpg_notesEdit"
+        Me.tpg_notesEdit.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpg_notesEdit.Size = New System.Drawing.Size(415, 111)
+        Me.tpg_notesEdit.TabIndex = 1
+        Me.tpg_notesEdit.Text = "Install Notes"
+        Me.tpg_notesEdit.UseVisualStyleBackColor = True
         '
-        'TextBox2
+        'txt_NotesEdit
         '
-        Me.TextBox2.Location = New System.Drawing.Point(7, 7)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(402, 98)
-        Me.TextBox2.TabIndex = 1
+        Me.txt_NotesEdit.Location = New System.Drawing.Point(7, 7)
+        Me.txt_NotesEdit.Multiline = True
+        Me.txt_NotesEdit.Name = "txt_NotesEdit"
+        Me.txt_NotesEdit.Size = New System.Drawing.Size(402, 98)
+        Me.txt_NotesEdit.TabIndex = 1
         '
-        'ComboBox3
+        'cbx_osSizeEdit
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(247, 99)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox3.TabIndex = 46
+        Me.cbx_osSizeEdit.FormattingEnabled = True
+        Me.cbx_osSizeEdit.Location = New System.Drawing.Point(247, 99)
+        Me.cbx_osSizeEdit.Name = "cbx_osSizeEdit"
+        Me.cbx_osSizeEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osSizeEdit.TabIndex = 46
         '
-        'Label3
+        'lbl_osSizeEdit
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(200, 102)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(30, 13)
-        Me.Label3.TabIndex = 45
-        Me.Label3.Text = "Size:"
+        Me.lbl_osSizeEdit.AutoSize = True
+        Me.lbl_osSizeEdit.Location = New System.Drawing.Point(200, 102)
+        Me.lbl_osSizeEdit.Name = "lbl_osSizeEdit"
+        Me.lbl_osSizeEdit.Size = New System.Drawing.Size(30, 13)
+        Me.lbl_osSizeEdit.TabIndex = 45
+        Me.lbl_osSizeEdit.Text = "Size:"
         '
-        'ComboBox4
+        'cbx_osNameEdit
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(58, 99)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox4.TabIndex = 44
+        Me.cbx_osNameEdit.FormattingEnabled = True
+        Me.cbx_osNameEdit.Location = New System.Drawing.Point(58, 99)
+        Me.cbx_osNameEdit.Name = "cbx_osNameEdit"
+        Me.cbx_osNameEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osNameEdit.TabIndex = 44
         '
-        'Label4
+        'lbl_osNameEdit
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(11, 102)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 13)
-        Me.Label4.TabIndex = 43
-        Me.Label4.Text = "Name:"
+        Me.lbl_osNameEdit.AutoSize = True
+        Me.lbl_osNameEdit.Location = New System.Drawing.Point(11, 102)
+        Me.lbl_osNameEdit.Name = "lbl_osNameEdit"
+        Me.lbl_osNameEdit.Size = New System.Drawing.Size(38, 13)
+        Me.lbl_osNameEdit.TabIndex = 43
+        Me.lbl_osNameEdit.Text = "Name:"
         '
-        'ComboBox5
+        'cbx_osBuildEdit
         '
-        Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(247, 70)
-        Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox5.TabIndex = 42
+        Me.cbx_osBuildEdit.FormattingEnabled = True
+        Me.cbx_osBuildEdit.Location = New System.Drawing.Point(247, 70)
+        Me.cbx_osBuildEdit.Name = "cbx_osBuildEdit"
+        Me.cbx_osBuildEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osBuildEdit.TabIndex = 42
         '
-        'Label5
+        'lbl_osBuildEdit
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(200, 73)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(33, 13)
-        Me.Label5.TabIndex = 41
-        Me.Label5.Text = "Build:"
+        Me.lbl_osBuildEdit.AutoSize = True
+        Me.lbl_osBuildEdit.Location = New System.Drawing.Point(200, 73)
+        Me.lbl_osBuildEdit.Name = "lbl_osBuildEdit"
+        Me.lbl_osBuildEdit.Size = New System.Drawing.Size(33, 13)
+        Me.lbl_osBuildEdit.TabIndex = 41
+        Me.lbl_osBuildEdit.Text = "Build:"
         '
-        'ComboBox6
+        'cbx_osVersionEdit
         '
-        Me.ComboBox6.FormattingEnabled = True
-        Me.ComboBox6.Location = New System.Drawing.Point(247, 41)
-        Me.ComboBox6.Name = "ComboBox6"
-        Me.ComboBox6.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox6.TabIndex = 40
+        Me.cbx_osVersionEdit.FormattingEnabled = True
+        Me.cbx_osVersionEdit.Location = New System.Drawing.Point(247, 41)
+        Me.cbx_osVersionEdit.Name = "cbx_osVersionEdit"
+        Me.cbx_osVersionEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osVersionEdit.TabIndex = 40
         '
-        'Label6
+        'lbl_osVersionEdit
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(200, 44)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(45, 13)
-        Me.Label6.TabIndex = 39
-        Me.Label6.Text = "Version:"
+        Me.lbl_osVersionEdit.AutoSize = True
+        Me.lbl_osVersionEdit.Location = New System.Drawing.Point(200, 44)
+        Me.lbl_osVersionEdit.Name = "lbl_osVersionEdit"
+        Me.lbl_osVersionEdit.Size = New System.Drawing.Size(45, 13)
+        Me.lbl_osVersionEdit.TabIndex = 39
+        Me.lbl_osVersionEdit.Text = "Version:"
         '
-        'ComboBox7
+        'cbx_osBootEdit
         '
-        Me.ComboBox7.FormattingEnabled = True
-        Me.ComboBox7.Location = New System.Drawing.Point(247, 12)
-        Me.ComboBox7.Name = "ComboBox7"
-        Me.ComboBox7.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox7.TabIndex = 38
+        Me.cbx_osBootEdit.FormattingEnabled = True
+        Me.cbx_osBootEdit.Location = New System.Drawing.Point(247, 12)
+        Me.cbx_osBootEdit.Name = "cbx_osBootEdit"
+        Me.cbx_osBootEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osBootEdit.TabIndex = 38
         '
-        'Label7
+        'lbl_osBootEdit
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(200, 15)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(32, 13)
-        Me.Label7.TabIndex = 37
-        Me.Label7.Text = "Boot:"
+        Me.lbl_osBootEdit.AutoSize = True
+        Me.lbl_osBootEdit.Location = New System.Drawing.Point(200, 15)
+        Me.lbl_osBootEdit.Name = "lbl_osBootEdit"
+        Me.lbl_osBootEdit.Size = New System.Drawing.Size(32, 13)
+        Me.lbl_osBootEdit.TabIndex = 37
+        Me.lbl_osBootEdit.Text = "Boot:"
         '
-        'ComboBox8
+        'cbx_osRamEdit
         '
-        Me.ComboBox8.FormattingEnabled = True
-        Me.ComboBox8.Location = New System.Drawing.Point(58, 154)
-        Me.ComboBox8.Name = "ComboBox8"
-        Me.ComboBox8.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox8.TabIndex = 36
+        Me.cbx_osRamEdit.FormattingEnabled = True
+        Me.cbx_osRamEdit.Location = New System.Drawing.Point(58, 154)
+        Me.cbx_osRamEdit.Name = "cbx_osRamEdit"
+        Me.cbx_osRamEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osRamEdit.TabIndex = 36
         '
-        'Label8
+        'lbl_osRamEdit
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(11, 157)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(47, 13)
-        Me.Label8.TabIndex = 35
-        Me.Label8.Text = "Memory:"
+        Me.lbl_osRamEdit.AutoSize = True
+        Me.lbl_osRamEdit.Location = New System.Drawing.Point(11, 157)
+        Me.lbl_osRamEdit.Name = "lbl_osRamEdit"
+        Me.lbl_osRamEdit.Size = New System.Drawing.Size(47, 13)
+        Me.lbl_osRamEdit.TabIndex = 35
+        Me.lbl_osRamEdit.Text = "Memory:"
         '
-        'ComboBox9
+        'cbx_osPlatformEdit
         '
-        Me.ComboBox9.FormattingEnabled = True
-        Me.ComboBox9.Location = New System.Drawing.Point(58, 125)
-        Me.ComboBox9.Name = "ComboBox9"
-        Me.ComboBox9.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox9.TabIndex = 34
+        Me.cbx_osPlatformEdit.FormattingEnabled = True
+        Me.cbx_osPlatformEdit.Location = New System.Drawing.Point(58, 125)
+        Me.cbx_osPlatformEdit.Name = "cbx_osPlatformEdit"
+        Me.cbx_osPlatformEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osPlatformEdit.TabIndex = 34
         '
-        'Label9
+        'lbl_osPlatformEdit
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(11, 128)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(48, 13)
-        Me.Label9.TabIndex = 33
-        Me.Label9.Text = "Platform:"
+        Me.lbl_osPlatformEdit.AutoSize = True
+        Me.lbl_osPlatformEdit.Location = New System.Drawing.Point(11, 128)
+        Me.lbl_osPlatformEdit.Name = "lbl_osPlatformEdit"
+        Me.lbl_osPlatformEdit.Size = New System.Drawing.Size(48, 13)
+        Me.lbl_osPlatformEdit.TabIndex = 33
+        Me.lbl_osPlatformEdit.Text = "Platform:"
         '
-        'ComboBox10
+        'cbx_osEditionEdit
         '
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.Location = New System.Drawing.Point(58, 70)
-        Me.ComboBox10.Name = "ComboBox10"
-        Me.ComboBox10.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox10.TabIndex = 32
+        Me.cbx_osEditionEdit.FormattingEnabled = True
+        Me.cbx_osEditionEdit.Location = New System.Drawing.Point(58, 70)
+        Me.cbx_osEditionEdit.Name = "cbx_osEditionEdit"
+        Me.cbx_osEditionEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osEditionEdit.TabIndex = 32
         '
-        'Label11
+        'lbl_osEditionEdit
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(11, 73)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(42, 13)
-        Me.Label11.TabIndex = 31
-        Me.Label11.Text = "Edition:"
+        Me.lbl_osEditionEdit.AutoSize = True
+        Me.lbl_osEditionEdit.Location = New System.Drawing.Point(11, 73)
+        Me.lbl_osEditionEdit.Name = "lbl_osEditionEdit"
+        Me.lbl_osEditionEdit.Size = New System.Drawing.Size(42, 13)
+        Me.lbl_osEditionEdit.TabIndex = 31
+        Me.lbl_osEditionEdit.Text = "Edition:"
         '
-        'ComboBox11
+        'cbx_osVariantEdit
         '
-        Me.ComboBox11.FormattingEnabled = True
-        Me.ComboBox11.Location = New System.Drawing.Point(58, 41)
-        Me.ComboBox11.Name = "ComboBox11"
-        Me.ComboBox11.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox11.TabIndex = 30
+        Me.cbx_osVariantEdit.FormattingEnabled = True
+        Me.cbx_osVariantEdit.Location = New System.Drawing.Point(58, 41)
+        Me.cbx_osVariantEdit.Name = "cbx_osVariantEdit"
+        Me.cbx_osVariantEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osVariantEdit.TabIndex = 30
         '
-        'Label12
+        'lbl_osVariantEdit
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(11, 44)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(43, 13)
-        Me.Label12.TabIndex = 29
-        Me.Label12.Text = "Variant:"
+        Me.lbl_osVariantEdit.AutoSize = True
+        Me.lbl_osVariantEdit.Location = New System.Drawing.Point(11, 44)
+        Me.lbl_osVariantEdit.Name = "lbl_osVariantEdit"
+        Me.lbl_osVariantEdit.Size = New System.Drawing.Size(43, 13)
+        Me.lbl_osVariantEdit.TabIndex = 29
+        Me.lbl_osVariantEdit.Text = "Variant:"
         '
-        'ComboBox12
+        'cbx_osParentEdit
         '
-        Me.ComboBox12.FormattingEnabled = True
-        Me.ComboBox12.Location = New System.Drawing.Point(58, 12)
-        Me.ComboBox12.Name = "ComboBox12"
-        Me.ComboBox12.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox12.TabIndex = 28
+        Me.cbx_osParentEdit.FormattingEnabled = True
+        Me.cbx_osParentEdit.Location = New System.Drawing.Point(58, 12)
+        Me.cbx_osParentEdit.Name = "cbx_osParentEdit"
+        Me.cbx_osParentEdit.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osParentEdit.TabIndex = 28
         '
-        'Label13
+        'lbl_osParentEdit
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(11, 15)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(41, 13)
-        Me.Label13.TabIndex = 27
-        Me.Label13.Text = "Parent:"
+        Me.lbl_osParentEdit.AutoSize = True
+        Me.lbl_osParentEdit.Location = New System.Drawing.Point(11, 15)
+        Me.lbl_osParentEdit.Name = "lbl_osParentEdit"
+        Me.lbl_osParentEdit.Size = New System.Drawing.Size(41, 13)
+        Me.lbl_osParentEdit.TabIndex = 27
+        Me.lbl_osParentEdit.Text = "Parent:"
         '
         'ofd_database
         '
@@ -823,11 +823,11 @@ Partial Class frm_main
         Me.tpg_Notes.PerformLayout()
         Me.tpg_edit.ResumeLayout(False)
         Me.tpg_edit.PerformLayout()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
+        Me.tab_ExtrasEdit.ResumeLayout(False)
+        Me.tpg_FeaturesEdit.ResumeLayout(False)
+        Me.tpg_FeaturesEdit.PerformLayout()
+        Me.tpg_notesEdit.ResumeLayout(False)
+        Me.tpg_notesEdit.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -873,35 +873,35 @@ Partial Class frm_main
     Friend WithEvents lbl_osEdition As Label
     Friend WithEvents cbx_osVariant As ComboBox
     Friend WithEvents lbl_osVariant As Label
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents ComboBox4 As ComboBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents ComboBox5 As ComboBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents ComboBox6 As ComboBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents ComboBox7 As ComboBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents ComboBox8 As ComboBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents ComboBox9 As ComboBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents ComboBox10 As ComboBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents ComboBox11 As ComboBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents ComboBox12 As ComboBox
-    Friend WithEvents Label13 As Label
+    Friend WithEvents cbx_osTypeEdit As ComboBox
+    Friend WithEvents lbl_osTypeEdit As Label
+    Friend WithEvents cbx_osFormatEdit As ComboBox
+    Friend WithEvents lbl_osFormatEdit As Label
+    Friend WithEvents tab_ExtrasEdit As TabControl
+    Friend WithEvents tpg_FeaturesEdit As TabPage
+    Friend WithEvents txt_FeaturesEdit As TextBox
+    Friend WithEvents tpg_notesEdit As TabPage
+    Friend WithEvents txt_NotesEdit As TextBox
+    Friend WithEvents cbx_osSizeEdit As ComboBox
+    Friend WithEvents lbl_osSizeEdit As Label
+    Friend WithEvents cbx_osNameEdit As ComboBox
+    Friend WithEvents lbl_osNameEdit As Label
+    Friend WithEvents cbx_osBuildEdit As ComboBox
+    Friend WithEvents lbl_osBuildEdit As Label
+    Friend WithEvents cbx_osVersionEdit As ComboBox
+    Friend WithEvents lbl_osVersionEdit As Label
+    Friend WithEvents cbx_osBootEdit As ComboBox
+    Friend WithEvents lbl_osBootEdit As Label
+    Friend WithEvents cbx_osRamEdit As ComboBox
+    Friend WithEvents lbl_osRamEdit As Label
+    Friend WithEvents cbx_osPlatformEdit As ComboBox
+    Friend WithEvents lbl_osPlatformEdit As Label
+    Friend WithEvents cbx_osEditionEdit As ComboBox
+    Friend WithEvents lbl_osEditionEdit As Label
+    Friend WithEvents cbx_osVariantEdit As ComboBox
+    Friend WithEvents lbl_osVariantEdit As Label
+    Friend WithEvents cbx_osParentEdit As ComboBox
+    Friend WithEvents lbl_osParentEdit As Label
     Friend WithEvents btn_Save As Button
     Friend WithEvents tbg_specs As TabPage
 End Class
