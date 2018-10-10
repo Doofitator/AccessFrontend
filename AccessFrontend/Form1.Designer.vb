@@ -34,10 +34,10 @@ Partial Class frm_main
         Me.lbl_osType = New System.Windows.Forms.Label()
         Me.cbx_osFormat = New System.Windows.Forms.ComboBox()
         Me.lbl_osFormat = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lbl_resultsHint = New System.Windows.Forms.Label()
         Me.tab_results = New System.Windows.Forms.TabControl()
         Me.tpg_Features = New System.Windows.Forms.TabPage()
-        Me.txt_Specs = New System.Windows.Forms.TextBox()
+        Me.txt_Features = New System.Windows.Forms.TextBox()
         Me.tpg_Notes = New System.Windows.Forms.TabPage()
         Me.txt_Notes = New System.Windows.Forms.TextBox()
         Me.cbx_osSize = New System.Windows.Forms.ComboBox()
@@ -62,6 +62,7 @@ Partial Class frm_main
         Me.lbl_osParent = New System.Windows.Forms.Label()
         Me.lbl_searchHint = New System.Windows.Forms.Label()
         Me.tpg_edit = New System.Windows.Forms.TabPage()
+        Me.btn_Save = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
@@ -92,7 +93,7 @@ Partial Class frm_main
         Me.ComboBox12 = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
-        Me.btn_Save = New System.Windows.Forms.Button()
+        Me.tbg_specs = New System.Windows.Forms.TabPage()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
@@ -170,6 +171,7 @@ Partial Class frm_main
         '
         Me.tab_controls.Controls.Add(Me.tpg_read)
         Me.tab_controls.Controls.Add(Me.tpg_edit)
+        Me.tab_controls.Enabled = False
         Me.tab_controls.Location = New System.Drawing.Point(10, 19)
         Me.tab_controls.Name = "tab_controls"
         Me.tab_controls.SelectedIndex = 0
@@ -182,7 +184,7 @@ Partial Class frm_main
         Me.tpg_read.Controls.Add(Me.lbl_osType)
         Me.tpg_read.Controls.Add(Me.cbx_osFormat)
         Me.tpg_read.Controls.Add(Me.lbl_osFormat)
-        Me.tpg_read.Controls.Add(Me.Label10)
+        Me.tpg_read.Controls.Add(Me.lbl_resultsHint)
         Me.tpg_read.Controls.Add(Me.tab_results)
         Me.tpg_read.Controls.Add(Me.cbx_osSize)
         Me.tpg_read.Controls.Add(Me.lbl_osSize)
@@ -247,20 +249,22 @@ Partial Class frm_main
         Me.lbl_osFormat.TabIndex = 23
         Me.lbl_osFormat.Text = "Format:"
         '
-        'Label10
+        'lbl_resultsHint
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(551, 7)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(53, 13)
-        Me.Label10.TabIndex = 22
-        Me.Label10.Text = "Results:"
+        Me.lbl_resultsHint.AutoSize = True
+        Me.lbl_resultsHint.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_resultsHint.Location = New System.Drawing.Point(551, 7)
+        Me.lbl_resultsHint.Name = "lbl_resultsHint"
+        Me.lbl_resultsHint.Size = New System.Drawing.Size(53, 13)
+        Me.lbl_resultsHint.TabIndex = 22
+        Me.lbl_resultsHint.Text = "Results:"
         '
         'tab_results
         '
+        Me.tab_results.Controls.Add(Me.tbg_specs)
         Me.tab_results.Controls.Add(Me.tpg_Features)
         Me.tab_results.Controls.Add(Me.tpg_Notes)
+        Me.tab_results.Enabled = False
         Me.tab_results.Location = New System.Drawing.Point(551, 38)
         Me.tab_results.Name = "tab_results"
         Me.tab_results.SelectedIndex = 0
@@ -269,7 +273,7 @@ Partial Class frm_main
         '
         'tpg_Features
         '
-        Me.tpg_Features.Controls.Add(Me.txt_Specs)
+        Me.tpg_Features.Controls.Add(Me.txt_Features)
         Me.tpg_Features.Location = New System.Drawing.Point(4, 22)
         Me.tpg_Features.Name = "tpg_Features"
         Me.tpg_Features.Padding = New System.Windows.Forms.Padding(3)
@@ -278,13 +282,14 @@ Partial Class frm_main
         Me.tpg_Features.Text = "Features"
         Me.tpg_Features.UseVisualStyleBackColor = True
         '
-        'txt_Specs
+        'txt_Features
         '
-        Me.txt_Specs.Location = New System.Drawing.Point(7, 7)
-        Me.txt_Specs.Multiline = True
-        Me.txt_Specs.Name = "txt_Specs"
-        Me.txt_Specs.Size = New System.Drawing.Size(220, 98)
-        Me.txt_Specs.TabIndex = 0
+        Me.txt_Features.Location = New System.Drawing.Point(7, 7)
+        Me.txt_Features.Multiline = True
+        Me.txt_Features.Name = "txt_Features"
+        Me.txt_Features.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt_Features.Size = New System.Drawing.Size(220, 98)
+        Me.txt_Features.TabIndex = 0
         '
         'tpg_Notes
         '
@@ -302,6 +307,7 @@ Partial Class frm_main
         Me.txt_Notes.Location = New System.Drawing.Point(7, 7)
         Me.txt_Notes.Multiline = True
         Me.txt_Notes.Name = "txt_Notes"
+        Me.txt_Notes.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txt_Notes.Size = New System.Drawing.Size(220, 98)
         Me.txt_Notes.TabIndex = 1
         '
@@ -520,6 +526,15 @@ Partial Class frm_main
         Me.tpg_edit.TabIndex = 1
         Me.tpg_edit.Text = "Edit"
         Me.tpg_edit.UseVisualStyleBackColor = True
+        '
+        'btn_Save
+        '
+        Me.btn_Save.Location = New System.Drawing.Point(722, 160)
+        Me.btn_Save.Name = "btn_Save"
+        Me.btn_Save.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Save.TabIndex = 52
+        Me.btn_Save.Text = "Save"
+        Me.btn_Save.UseVisualStyleBackColor = True
         '
         'ComboBox1
         '
@@ -777,14 +792,14 @@ Partial Class frm_main
         '
         Me.ofd_database.Filter = "Access Database file|*.accdb"
         '
-        'btn_Save
+        'tbg_specs
         '
-        Me.btn_Save.Location = New System.Drawing.Point(722, 160)
-        Me.btn_Save.Name = "btn_Save"
-        Me.btn_Save.Size = New System.Drawing.Size(75, 23)
-        Me.btn_Save.TabIndex = 52
-        Me.btn_Save.Text = "Save"
-        Me.btn_Save.UseVisualStyleBackColor = True
+        Me.tbg_specs.Location = New System.Drawing.Point(4, 22)
+        Me.tbg_specs.Name = "tbg_specs"
+        Me.tbg_specs.Size = New System.Drawing.Size(233, 111)
+        Me.tbg_specs.TabIndex = 2
+        Me.tbg_specs.Text = "Specifications"
+        Me.tbg_specs.UseVisualStyleBackColor = True
         '
         'frm_main
         '
@@ -834,10 +849,10 @@ Partial Class frm_main
     Friend WithEvents lbl_osType As Label
     Friend WithEvents cbx_osFormat As ComboBox
     Friend WithEvents lbl_osFormat As Label
-    Friend WithEvents Label10 As Label
+    Friend WithEvents lbl_resultsHint As Label
     Friend WithEvents tab_results As TabControl
     Friend WithEvents tpg_Features As TabPage
-    Friend WithEvents txt_Specs As TextBox
+    Friend WithEvents txt_Features As TextBox
     Friend WithEvents tpg_Notes As TabPage
     Friend WithEvents txt_Notes As TextBox
     Friend WithEvents cbx_osSize As ComboBox
@@ -888,4 +903,5 @@ Partial Class frm_main
     Friend WithEvents ComboBox12 As ComboBox
     Friend WithEvents Label13 As Label
     Friend WithEvents btn_Save As Button
+    Friend WithEvents tbg_specs As TabPage
 End Class
