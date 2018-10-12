@@ -14,12 +14,10 @@
         tab_controls.Height = grp_control.Height - 30
         tab_controls.Top = 20
 
-        resizeControlsGroupboxContent(True)
-        resizeControlsGroupboxContent(False)
+        changeTab_Click()
     End Sub
 
     Private Function resizeControlsGroupboxContent(ByVal isReadPage As Boolean)
-        'TODO: make this stuff run when tabs are changed
         If isReadPage Then
             If tab_controls.Height > 370 Then
                 tab_results.Width = tab_controls.Width - 30
@@ -41,6 +39,8 @@
             txt_Notes.Height = tpg_Notes.Height - 14
             txt_Features.Width = tpg_Features.Width - 14
             txt_Notes.Width = tpg_Features.Width - 14
+            txt_specs.Width = tpg_Features.Width - 14
+            txt_specs.Height = tpg_Features.Height - 14
         Else
             If tab_controls.Height > 370 Then
                 tab_ExtrasEdit.Width = tab_controls.Width - 30
@@ -77,9 +77,18 @@
         grp_control.Enabled = True
         tab_controls.Enabled = True
         tab_results.Enabled = True
+        Me.MaximizeBox = True
+        Me.FormBorderStyle = FormBorderStyle.Sizable
     End Sub
 
     Private Sub frm_main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MinimumSize = Me.Size
+        resizeControlsGroupboxContent(True)
+        resizeControlsGroupboxContent(False)
+    End Sub
+
+    Private Sub changeTab_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles tpg_read.Click, tpg_edit.Click, tpg_Features.Click, tpg_FeaturesEdit.Click, tpg_Notes.Click, tpg_notesEdit.Click, tab_controls.Click, tab_ExtrasEdit.Click, tab_results.Click
+        resizeControlsGroupboxContent(True)
+        resizeControlsGroupboxContent(False)
     End Sub
 End Class

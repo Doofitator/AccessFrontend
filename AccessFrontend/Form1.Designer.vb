@@ -36,6 +36,7 @@ Partial Class frm_main
         Me.lbl_osFormat = New System.Windows.Forms.Label()
         Me.lbl_resultsHint = New System.Windows.Forms.Label()
         Me.tab_results = New System.Windows.Forms.TabControl()
+        Me.tbg_specs = New System.Windows.Forms.TabPage()
         Me.tpg_Features = New System.Windows.Forms.TabPage()
         Me.txt_Features = New System.Windows.Forms.TextBox()
         Me.tpg_Notes = New System.Windows.Forms.TabPage()
@@ -93,12 +94,13 @@ Partial Class frm_main
         Me.cbx_osParentEdit = New System.Windows.Forms.ComboBox()
         Me.lbl_osParentEdit = New System.Windows.Forms.Label()
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
-        Me.tbg_specs = New System.Windows.Forms.TabPage()
+        Me.txt_specs = New System.Windows.Forms.TextBox()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
         Me.tpg_read.SuspendLayout()
         Me.tab_results.SuspendLayout()
+        Me.tbg_specs.SuspendLayout()
         Me.tpg_Features.SuspendLayout()
         Me.tpg_Notes.SuspendLayout()
         Me.tpg_edit.SuspendLayout()
@@ -270,6 +272,16 @@ Partial Class frm_main
         Me.tab_results.SelectedIndex = 0
         Me.tab_results.Size = New System.Drawing.Size(241, 137)
         Me.tab_results.TabIndex = 21
+        '
+        'tbg_specs
+        '
+        Me.tbg_specs.Controls.Add(Me.txt_specs)
+        Me.tbg_specs.Location = New System.Drawing.Point(4, 22)
+        Me.tbg_specs.Name = "tbg_specs"
+        Me.tbg_specs.Size = New System.Drawing.Size(233, 111)
+        Me.tbg_specs.TabIndex = 2
+        Me.tbg_specs.Text = "Specifications"
+        Me.tbg_specs.UseVisualStyleBackColor = True
         '
         'tpg_Features
         '
@@ -596,6 +608,7 @@ Partial Class frm_main
         Me.txt_FeaturesEdit.Location = New System.Drawing.Point(7, 7)
         Me.txt_FeaturesEdit.Multiline = True
         Me.txt_FeaturesEdit.Name = "txt_FeaturesEdit"
+        Me.txt_FeaturesEdit.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txt_FeaturesEdit.Size = New System.Drawing.Size(402, 98)
         Me.txt_FeaturesEdit.TabIndex = 0
         '
@@ -615,6 +628,7 @@ Partial Class frm_main
         Me.txt_NotesEdit.Location = New System.Drawing.Point(7, 7)
         Me.txt_NotesEdit.Multiline = True
         Me.txt_NotesEdit.Name = "txt_NotesEdit"
+        Me.txt_NotesEdit.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txt_NotesEdit.Size = New System.Drawing.Size(402, 98)
         Me.txt_NotesEdit.TabIndex = 1
         '
@@ -792,14 +806,14 @@ Partial Class frm_main
         '
         Me.ofd_database.Filter = "Access Database file|*.accdb"
         '
-        'tbg_specs
+        'txt_specs
         '
-        Me.tbg_specs.Location = New System.Drawing.Point(4, 22)
-        Me.tbg_specs.Name = "tbg_specs"
-        Me.tbg_specs.Size = New System.Drawing.Size(233, 111)
-        Me.tbg_specs.TabIndex = 2
-        Me.tbg_specs.Text = "Specifications"
-        Me.tbg_specs.UseVisualStyleBackColor = True
+        Me.txt_specs.Location = New System.Drawing.Point(7, 7)
+        Me.txt_specs.Multiline = True
+        Me.txt_specs.Name = "txt_specs"
+        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt_specs.Size = New System.Drawing.Size(220, 98)
+        Me.txt_specs.TabIndex = 1
         '
         'frm_main
         '
@@ -808,6 +822,8 @@ Partial Class frm_main
         Me.ClientSize = New System.Drawing.Size(848, 355)
         Me.Controls.Add(Me.grp_control)
         Me.Controls.Add(Me.grp_connect)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frm_main"
         Me.Text = "Operating System Database Frontend"
         Me.grp_connect.ResumeLayout(False)
@@ -817,6 +833,8 @@ Partial Class frm_main
         Me.tpg_read.ResumeLayout(False)
         Me.tpg_read.PerformLayout()
         Me.tab_results.ResumeLayout(False)
+        Me.tbg_specs.ResumeLayout(False)
+        Me.tbg_specs.PerformLayout()
         Me.tpg_Features.ResumeLayout(False)
         Me.tpg_Features.PerformLayout()
         Me.tpg_Notes.ResumeLayout(False)
@@ -904,4 +922,5 @@ Partial Class frm_main
     Friend WithEvents lbl_osParentEdit As Label
     Friend WithEvents btn_Save As Button
     Friend WithEvents tbg_specs As TabPage
+    Friend WithEvents txt_specs As TextBox
 End Class
