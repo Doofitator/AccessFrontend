@@ -31,6 +31,8 @@ Partial Class frm_main
         Me.grp_control = New System.Windows.Forms.GroupBox()
         Me.tab_controls = New System.Windows.Forms.TabControl()
         Me.tpg_read = New System.Windows.Forms.TabPage()
+        Me.cbx_osFileName = New System.Windows.Forms.ComboBox()
+        Me.lbl_osfilename = New System.Windows.Forms.Label()
         Me.cbx_osType = New System.Windows.Forms.ComboBox()
         Me.lbl_osType = New System.Windows.Forms.Label()
         Me.cbx_osFormat = New System.Windows.Forms.ComboBox()
@@ -71,6 +73,10 @@ Partial Class frm_main
         Me.cbx_osFormatEdit = New System.Windows.Forms.ComboBox()
         Me.lbl_osFormatEdit = New System.Windows.Forms.Label()
         Me.tab_ExtrasEdit = New System.Windows.Forms.TabControl()
+        Me.tpg_instructionsEdit = New System.Windows.Forms.TabPage()
+        Me.lbl_dragDrop = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lbl_instruct1 = New System.Windows.Forms.Label()
         Me.tpg_FeaturesEdit = New System.Windows.Forms.TabPage()
         Me.txt_FeaturesEdit = New System.Windows.Forms.TextBox()
         Me.tpg_notesEdit = New System.Windows.Forms.TabPage()
@@ -96,10 +102,8 @@ Partial Class frm_main
         Me.cbx_osParentEdit = New System.Windows.Forms.ComboBox()
         Me.lbl_osParentEdit = New System.Windows.Forms.Label()
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.cbx_osFileName = New System.Windows.Forms.ComboBox()
-        Me.lbl_osfilename = New System.Windows.Forms.Label()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
@@ -110,9 +114,10 @@ Partial Class frm_main
         Me.tpg_Notes.SuspendLayout()
         Me.tpg_edit.SuspendLayout()
         Me.tab_ExtrasEdit.SuspendLayout()
+        Me.tpg_instructionsEdit.SuspendLayout()
         Me.tpg_FeaturesEdit.SuspendLayout()
         Me.tpg_notesEdit.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
+        Me.strp_connectionStatus.SuspendLayout()
         Me.SuspendLayout()
         '
         'grp_connect
@@ -236,6 +241,23 @@ Partial Class frm_main
         Me.tpg_read.TabIndex = 0
         Me.tpg_read.Text = "Read"
         Me.tpg_read.UseVisualStyleBackColor = True
+        '
+        'cbx_osFileName
+        '
+        Me.cbx_osFileName.FormattingEnabled = True
+        Me.cbx_osFileName.Location = New System.Drawing.Point(422, 67)
+        Me.cbx_osFileName.Name = "cbx_osFileName"
+        Me.cbx_osFileName.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osFileName.TabIndex = 28
+        '
+        'lbl_osfilename
+        '
+        Me.lbl_osfilename.AutoSize = True
+        Me.lbl_osfilename.Location = New System.Drawing.Point(373, 70)
+        Me.lbl_osfilename.Name = "lbl_osfilename"
+        Me.lbl_osfilename.Size = New System.Drawing.Size(52, 13)
+        Me.lbl_osfilename.TabIndex = 27
+        Me.lbl_osfilename.Text = "Filename:"
         '
         'cbx_osType
         '
@@ -613,6 +635,7 @@ Partial Class frm_main
         '
         'tab_ExtrasEdit
         '
+        Me.tab_ExtrasEdit.Controls.Add(Me.tpg_instructionsEdit)
         Me.tab_ExtrasEdit.Controls.Add(Me.tpg_FeaturesEdit)
         Me.tab_ExtrasEdit.Controls.Add(Me.tpg_notesEdit)
         Me.tab_ExtrasEdit.Location = New System.Drawing.Point(374, 12)
@@ -620,6 +643,47 @@ Partial Class frm_main
         Me.tab_ExtrasEdit.SelectedIndex = 0
         Me.tab_ExtrasEdit.Size = New System.Drawing.Size(423, 137)
         Me.tab_ExtrasEdit.TabIndex = 47
+        '
+        'tpg_instructionsEdit
+        '
+        Me.tpg_instructionsEdit.Controls.Add(Me.lbl_dragDrop)
+        Me.tpg_instructionsEdit.Controls.Add(Me.Label1)
+        Me.tpg_instructionsEdit.Controls.Add(Me.lbl_instruct1)
+        Me.tpg_instructionsEdit.Location = New System.Drawing.Point(4, 22)
+        Me.tpg_instructionsEdit.Name = "tpg_instructionsEdit"
+        Me.tpg_instructionsEdit.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpg_instructionsEdit.Size = New System.Drawing.Size(415, 111)
+        Me.tpg_instructionsEdit.TabIndex = 2
+        Me.tpg_instructionsEdit.Text = "Instructions"
+        Me.tpg_instructionsEdit.UseVisualStyleBackColor = True
+        '
+        'lbl_dragDrop
+        '
+        Me.lbl_dragDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_dragDrop.Location = New System.Drawing.Point(6, 74)
+        Me.lbl_dragDrop.Name = "lbl_dragDrop"
+        Me.lbl_dragDrop.Size = New System.Drawing.Size(403, 30)
+        Me.lbl_dragDrop.TabIndex = 2
+        Me.lbl_dragDrop.Text = "Drag new media here"
+        Me.lbl_dragDrop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(6, 40)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(403, 30)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "To add a new entry, drag the media into the box below, then populate the fields b" &
+    "efore clicking save."
+        '
+        'lbl_instruct1
+        '
+        Me.lbl_instruct1.Location = New System.Drawing.Point(6, 10)
+        Me.lbl_instruct1.Name = "lbl_instruct1"
+        Me.lbl_instruct1.Size = New System.Drawing.Size(403, 30)
+        Me.lbl_instruct1.TabIndex = 0
+        Me.lbl_instruct1.Text = "To edit an existing entry, narrow down the search terms to a single entity, then " &
+    "modify the required fields before clicking save."
         '
         'tpg_FeaturesEdit
         '
@@ -835,14 +899,14 @@ Partial Class frm_main
         '
         Me.ofd_database.Filter = "Access Database file|*.accdb"
         '
-        'StatusStrip1
+        'strp_connectionStatus
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssl_databaseStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 352)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(848, 22)
-        Me.StatusStrip1.TabIndex = 2
-        Me.StatusStrip1.Text = "StatusStrip1"
+        Me.strp_connectionStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssl_databaseStatus})
+        Me.strp_connectionStatus.Location = New System.Drawing.Point(0, 352)
+        Me.strp_connectionStatus.Name = "strp_connectionStatus"
+        Me.strp_connectionStatus.Size = New System.Drawing.Size(848, 22)
+        Me.strp_connectionStatus.TabIndex = 2
+        Me.strp_connectionStatus.Text = "StatusStrip1"
         '
         'tssl_databaseStatus
         '
@@ -850,29 +914,12 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
         '
-        'cbx_osFileName
-        '
-        Me.cbx_osFileName.FormattingEnabled = True
-        Me.cbx_osFileName.Location = New System.Drawing.Point(422, 67)
-        Me.cbx_osFileName.Name = "cbx_osFileName"
-        Me.cbx_osFileName.Size = New System.Drawing.Size(121, 21)
-        Me.cbx_osFileName.TabIndex = 28
-        '
-        'lbl_osfilename
-        '
-        Me.lbl_osfilename.AutoSize = True
-        Me.lbl_osfilename.Location = New System.Drawing.Point(373, 70)
-        Me.lbl_osfilename.Name = "lbl_osfilename"
-        Me.lbl_osfilename.Size = New System.Drawing.Size(52, 13)
-        Me.lbl_osfilename.TabIndex = 27
-        Me.lbl_osfilename.Text = "Filename:"
-        '
         'frm_main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(848, 374)
-        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.strp_connectionStatus)
         Me.Controls.Add(Me.grp_control)
         Me.Controls.Add(Me.grp_connect)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -895,12 +942,13 @@ Partial Class frm_main
         Me.tpg_edit.ResumeLayout(False)
         Me.tpg_edit.PerformLayout()
         Me.tab_ExtrasEdit.ResumeLayout(False)
+        Me.tpg_instructionsEdit.ResumeLayout(False)
         Me.tpg_FeaturesEdit.ResumeLayout(False)
         Me.tpg_FeaturesEdit.PerformLayout()
         Me.tpg_notesEdit.ResumeLayout(False)
         Me.tpg_notesEdit.PerformLayout()
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
+        Me.strp_connectionStatus.ResumeLayout(False)
+        Me.strp_connectionStatus.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -980,8 +1028,12 @@ Partial Class frm_main
     Friend WithEvents tpg_specs As TabPage
     Friend WithEvents txt_specs As TextBox
     Friend WithEvents btn_disconnect As Button
-    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents strp_connectionStatus As StatusStrip
     Friend WithEvents tssl_databaseStatus As ToolStripStatusLabel
     Friend WithEvents cbx_osFileName As ComboBox
     Friend WithEvents lbl_osfilename As Label
+    Friend WithEvents tpg_instructionsEdit As TabPage
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lbl_instruct1 As Label
+    Friend WithEvents lbl_dragDrop As Label
 End Class

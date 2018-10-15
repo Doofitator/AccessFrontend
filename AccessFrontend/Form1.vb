@@ -1,8 +1,30 @@
 ﻿Public Class frm_main
     Dim DatabaseConnection = New OleDb.OleDbConnection
     Dim Connected As Boolean = False
+    Dim newMedia As System.IO.FileInfo = Nothing
 
     'TODO: Make the edit page drag & drop so that it auto-fills the size, file type, filename, etc.
+
+    Private Sub lbl_dragDrop_DragDrop(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles lbl_dragDrop.DragDrop
+        Dim files() As String = e.Data.GetData(DataFormats.FileDrop)
+        Dim paths As Integer = 0
+        Dim file As String = Nothing
+        For Each path In files
+            paths = paths + 1
+            file = path
+        Next
+        If paths > 1 Then
+            MsgBox("More than one file was imported. Please try again.", vbOKOnly + vbCritical, "Error")
+        Else
+            newMedia = New System.IO.FileInfo(file)
+            'see https://stackoverflow.com/questions/27367190/how-to-return-kb-mb-and-gb-from-bytes-using-a-public-function
+            'for file size
+        End If
+    End Sub
+
+    'TODO: Make the instructions tab controls resize
+    'TODO: Make the FeaturesEdit, NotesEdit tabs greyed until the search fields have been narrowed down to one result._
+    '      Also, add a "Add new" option to all comboboxes on the edit page after there is only one result also.
 
     Private Sub frm_main_resize() Handles MyBase.Resize
         grp_connect.Width = Me.Width - 40
@@ -114,6 +136,22 @@
         populateCombobox(11, cbx_osFileName)
         populateCombobox(12, cbx_osBoot)
         populateCombobox(13, cbx_osType)
+
+        'Now we'll populate the comboboxes on the edit page, too.
+
+        populateCombobox(1, cbx_osVariantEdit)
+        populateCombobox(2, cbx_osVersionEdit)
+        populateCombobox(3, cbx_osEditionEdit)
+        populateCombobox(4, cbx_osNameEdit)
+        populateCombobox(5, cbx_osRamEdit)
+        populateCombobox(6, cbx_osSizeEdit)
+        populateCombobox(7, cbx_osFormatEdit)
+        populateCombobox(8, cbx_osBuildEdit)
+        populateCombobox(9, cbx_osParentEdit)
+        populateCombobox(10, cbx_osPlatformEdit)
+        'populateCombobox(11, cbx_osFileNameEdit) 'This one doesn't exist on the edit page.
+        populateCombobox(12, cbx_osBootEdit)
+        populateCombobox(13, cbx_osTypeEdit)
 
         With Me
             .Cursor = Cursors.Default
