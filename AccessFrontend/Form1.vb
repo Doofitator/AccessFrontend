@@ -1,11 +1,17 @@
 ﻿Public Class frm_main
+    Dim DatabaseConnection = New OleDb.OleDbConnection
+    Dim Connected As Boolean = False
+
+    'TODO: Make the edit page drag & drop so that it auto-fills the size, file type, filename, etc.
+
     Private Sub frm_main_resize() Handles MyBase.Resize
         grp_connect.Width = Me.Width - 40
         grp_control.Top = grp_connect.Top + grp_connect.Height
-        grp_control.Height = Me.Height - 20 - grp_connect.Height - 40
+        grp_control.Height = Me.Height - 20 - grp_connect.Height - 40 - 22
         grp_control.Width = Me.Width - 40
 
         btn_connect.Left = grp_connect.Width - btn_connect.Width - 5
+        btn_disconnect.Left = btn_connect.Left - btn_disconnect.Width - 1
         btn_openOFD.Left = grp_connect.Width - btn_openOFD.Width - 5
         txt_filename.Width = grp_connect.Width - btn_openOFD.Width - 5 - lbl_hint1.Width - 7 - 5
 
@@ -67,6 +73,7 @@
 
     Private Sub ofd_database_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ofd_database.FileOk
         txt_filename.Text = ofd_database.FileName
+        btn_connect.Enabled = True
     End Sub
 
     Private Sub btn_openOFD_Click(sender As Object, e As EventArgs) Handles btn_openOFD.Click
@@ -74,11 +81,44 @@
     End Sub
 
     Private Sub btn_connect_Click(sender As Object, e As EventArgs) Handles btn_connect.Click
+        With Me
+            .Cursor = Cursors.WaitCursor
+            .Refresh()
+        End With
+
         grp_control.Enabled = True
         tab_controls.Enabled = True
         tab_results.Enabled = True
         Me.MaximizeBox = True
         Me.FormBorderStyle = FormBorderStyle.Sizable
+        tssl_databaseStatus.Text = "Connecting... Please wait."
+        DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & txt_filename.Text
+        DatabaseConnection.Open()
+        Connected = True
+        tssl_databaseStatus.Text = "Connected to Access Database " & txt_filename.Text
+        btn_disconnect.Enabled = True
+        btn_connect.Enabled = False
+
+        'We're connected now. Let's do stuff.
+
+        populateCombobox(1, cbx_osVariant)
+        populateCombobox(2, cbx_osVersion)
+        populateCombobox(3, cbx_osEdition)
+        populateCombobox(4, cbx_osName)
+        populateCombobox(5, cbx_osRAM)
+        populateCombobox(6, cbx_osSize)
+        populateCombobox(7, cbx_osFormat)
+        populateCombobox(8, cbx_osBuild)
+        populateCombobox(9, cbx_osParent)     'No idea why the order is like this. Not like
+        populateCombobox(10, cbx_osPlatform)  'it's alphabetical or anything. Just is this way :/
+        populateCombobox(11, cbx_osFileName)
+        populateCombobox(12, cbx_osBoot)
+        populateCombobox(13, cbx_osType)
+
+        With Me
+            .Cursor = Cursors.Default
+            .Refresh()
+        End With
     End Sub
 
     Private Sub frm_main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -87,8 +127,58 @@
         resizeControlsGroupboxContent(False)
     End Sub
 
-    Private Sub changeTab_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles tpg_read.Click, tpg_edit.Click, tpg_Features.Click, tpg_FeaturesEdit.Click, tpg_Notes.Click, tpg_notesEdit.Click, tab_controls.Click, tab_ExtrasEdit.Click, tab_results.Click
+    Private Sub frm_main_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        If Connected Then
+            e.Cancel = True
+            MsgBox("You are still connected to the database. Please disconnect before closing.", vbOKOnly, vbObjectError)
+        End If
+    End Sub
+
+    Private Sub changeTab_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles tpg_read.Click, tpg_edit.Click, tpg_Features.Click, tpg_FeaturesEdit.Click, tpg_Notes.Click, tpg_notesEdit.Click, tab_controls.Click, tab_ExtrasEdit.Click, tab_results.Click, tpg_edit.Click, tpg_Features.Click, tpg_FeaturesEdit.Click, tpg_Notes.Click, tpg_notesEdit.Click, tpg_read.Click, tpg_specs.Click
         resizeControlsGroupboxContent(True)
         resizeControlsGroupboxContent(False)
+    End Sub
+
+    Private Function populateCombobox(ByVal rowNumber As Integer, ByVal theCombobox As ComboBox)
+        Dim Table_ As String = "tbl_os"
+        Dim query As String = "SELECT * FROM " & Table_
+        Dim MDBConnString_ As String = DatabaseConnection.connectionstring
+        Dim ds As New DataSet
+        Dim cmd As New OleDb.OleDbCommand(query, DatabaseConnection)
+        Dim da As New OleDb.OleDbDataAdapter(cmd)
+        da.Fill(ds, Table_)
+        Dim t1 As DataTable = ds.Tables(Table_)
+        Dim row As DataRow
+        Dim Item(2) As String
+
+        For Each row In t1.Rows
+            Try
+                Item(0) = row(rowNumber)
+            Catch
+                Item(0) = "Undefined"
+            End Try
+            Dim NextListItem As New ListViewItem(Item)
+            If Not theCombobox.Items.Contains(NextListItem.Text) Then
+                theCombobox.Items.Add(NextListItem.Text)
+            End If
+        Next
+    End Function
+
+    Private Sub btn_disconnect_Click(sender As Object, e As EventArgs) Handles btn_disconnect.Click
+        tssl_databaseStatus.Text = "Disconnecting... Please wait"
+        With Me
+            .Cursor = Cursors.WaitCursor
+            .Refresh()
+        End With
+        DatabaseConnection.close()
+        tssl_databaseStatus.Text = "Disconnected"
+        Connected = False
+        With Me
+            .Cursor = Cursors.Default
+            .Refresh()
+        End With
+        btn_connect.Enabled = True
+        btn_disconnect.Enabled = False
+        grp_control.Enabled = False
     End Sub
 End Class

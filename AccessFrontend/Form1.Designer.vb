@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frm_main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,10 @@ Partial Class frm_main
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grp_connect = New System.Windows.Forms.GroupBox()
+        Me.btn_disconnect = New System.Windows.Forms.Button()
         Me.btn_connect = New System.Windows.Forms.Button()
         Me.lbl_hint1 = New System.Windows.Forms.Label()
         Me.txt_filename = New System.Windows.Forms.TextBox()
@@ -36,7 +37,8 @@ Partial Class frm_main
         Me.lbl_osFormat = New System.Windows.Forms.Label()
         Me.lbl_resultsHint = New System.Windows.Forms.Label()
         Me.tab_results = New System.Windows.Forms.TabControl()
-        Me.tbg_specs = New System.Windows.Forms.TabPage()
+        Me.tpg_specs = New System.Windows.Forms.TabPage()
+        Me.txt_specs = New System.Windows.Forms.TextBox()
         Me.tpg_Features = New System.Windows.Forms.TabPage()
         Me.txt_Features = New System.Windows.Forms.TextBox()
         Me.tpg_Notes = New System.Windows.Forms.TabPage()
@@ -94,24 +96,29 @@ Partial Class frm_main
         Me.cbx_osParentEdit = New System.Windows.Forms.ComboBox()
         Me.lbl_osParentEdit = New System.Windows.Forms.Label()
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
-        Me.txt_specs = New System.Windows.Forms.TextBox()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.cbx_osFileName = New System.Windows.Forms.ComboBox()
+        Me.lbl_osfilename = New System.Windows.Forms.Label()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
         Me.tpg_read.SuspendLayout()
         Me.tab_results.SuspendLayout()
-        Me.tbg_specs.SuspendLayout()
+        Me.tpg_specs.SuspendLayout()
         Me.tpg_Features.SuspendLayout()
         Me.tpg_Notes.SuspendLayout()
         Me.tpg_edit.SuspendLayout()
         Me.tab_ExtrasEdit.SuspendLayout()
         Me.tpg_FeaturesEdit.SuspendLayout()
         Me.tpg_notesEdit.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'grp_connect
         '
         Me.grp_connect.BackColor = System.Drawing.SystemColors.Control
+        Me.grp_connect.Controls.Add(Me.btn_disconnect)
         Me.grp_connect.Controls.Add(Me.btn_connect)
         Me.grp_connect.Controls.Add(Me.lbl_hint1)
         Me.grp_connect.Controls.Add(Me.txt_filename)
@@ -123,8 +130,19 @@ Partial Class frm_main
         Me.grp_connect.TabStop = False
         Me.grp_connect.Text = "Connection"
         '
+        'btn_disconnect
+        '
+        Me.btn_disconnect.Enabled = False
+        Me.btn_disconnect.Location = New System.Drawing.Point(664, 51)
+        Me.btn_disconnect.Name = "btn_disconnect"
+        Me.btn_disconnect.Size = New System.Drawing.Size(75, 23)
+        Me.btn_disconnect.TabIndex = 4
+        Me.btn_disconnect.Text = "Disconnect"
+        Me.btn_disconnect.UseVisualStyleBackColor = True
+        '
         'btn_connect
         '
+        Me.btn_connect.Enabled = False
         Me.btn_connect.Location = New System.Drawing.Point(745, 51)
         Me.btn_connect.Name = "btn_connect"
         Me.btn_connect.Size = New System.Drawing.Size(75, 23)
@@ -182,6 +200,8 @@ Partial Class frm_main
         '
         'tpg_read
         '
+        Me.tpg_read.Controls.Add(Me.cbx_osFileName)
+        Me.tpg_read.Controls.Add(Me.lbl_osfilename)
         Me.tpg_read.Controls.Add(Me.cbx_osType)
         Me.tpg_read.Controls.Add(Me.lbl_osType)
         Me.tpg_read.Controls.Add(Me.cbx_osFormat)
@@ -228,7 +248,7 @@ Partial Class frm_main
         'lbl_osType
         '
         Me.lbl_osType.AutoSize = True
-        Me.lbl_osType.Location = New System.Drawing.Point(375, 41)
+        Me.lbl_osType.Location = New System.Drawing.Point(373, 41)
         Me.lbl_osType.Name = "lbl_osType"
         Me.lbl_osType.Size = New System.Drawing.Size(34, 13)
         Me.lbl_osType.TabIndex = 25
@@ -263,7 +283,7 @@ Partial Class frm_main
         '
         'tab_results
         '
-        Me.tab_results.Controls.Add(Me.tbg_specs)
+        Me.tab_results.Controls.Add(Me.tpg_specs)
         Me.tab_results.Controls.Add(Me.tpg_Features)
         Me.tab_results.Controls.Add(Me.tpg_Notes)
         Me.tab_results.Enabled = False
@@ -273,15 +293,24 @@ Partial Class frm_main
         Me.tab_results.Size = New System.Drawing.Size(241, 137)
         Me.tab_results.TabIndex = 21
         '
-        'tbg_specs
+        'tpg_specs
         '
-        Me.tbg_specs.Controls.Add(Me.txt_specs)
-        Me.tbg_specs.Location = New System.Drawing.Point(4, 22)
-        Me.tbg_specs.Name = "tbg_specs"
-        Me.tbg_specs.Size = New System.Drawing.Size(233, 111)
-        Me.tbg_specs.TabIndex = 2
-        Me.tbg_specs.Text = "Specifications"
-        Me.tbg_specs.UseVisualStyleBackColor = True
+        Me.tpg_specs.Controls.Add(Me.txt_specs)
+        Me.tpg_specs.Location = New System.Drawing.Point(4, 22)
+        Me.tpg_specs.Name = "tpg_specs"
+        Me.tpg_specs.Size = New System.Drawing.Size(233, 111)
+        Me.tpg_specs.TabIndex = 2
+        Me.tpg_specs.Text = "Specifications"
+        Me.tpg_specs.UseVisualStyleBackColor = True
+        '
+        'txt_specs
+        '
+        Me.txt_specs.Location = New System.Drawing.Point(7, 7)
+        Me.txt_specs.Multiline = True
+        Me.txt_specs.Name = "txt_specs"
+        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txt_specs.Size = New System.Drawing.Size(220, 98)
+        Me.txt_specs.TabIndex = 1
         '
         'tpg_Features
         '
@@ -806,20 +835,44 @@ Partial Class frm_main
         '
         Me.ofd_database.Filter = "Access Database file|*.accdb"
         '
-        'txt_specs
+        'StatusStrip1
         '
-        Me.txt_specs.Location = New System.Drawing.Point(7, 7)
-        Me.txt_specs.Multiline = True
-        Me.txt_specs.Name = "txt_specs"
-        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_specs.Size = New System.Drawing.Size(220, 98)
-        Me.txt_specs.TabIndex = 1
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssl_databaseStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 352)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(848, 22)
+        Me.StatusStrip1.TabIndex = 2
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'tssl_databaseStatus
+        '
+        Me.tssl_databaseStatus.Name = "tssl_databaseStatus"
+        Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
+        Me.tssl_databaseStatus.Text = "Disconnected"
+        '
+        'cbx_osFileName
+        '
+        Me.cbx_osFileName.FormattingEnabled = True
+        Me.cbx_osFileName.Location = New System.Drawing.Point(422, 67)
+        Me.cbx_osFileName.Name = "cbx_osFileName"
+        Me.cbx_osFileName.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_osFileName.TabIndex = 28
+        '
+        'lbl_osfilename
+        '
+        Me.lbl_osfilename.AutoSize = True
+        Me.lbl_osfilename.Location = New System.Drawing.Point(373, 70)
+        Me.lbl_osfilename.Name = "lbl_osfilename"
+        Me.lbl_osfilename.Size = New System.Drawing.Size(52, 13)
+        Me.lbl_osfilename.TabIndex = 27
+        Me.lbl_osfilename.Text = "Filename:"
         '
         'frm_main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(848, 355)
+        Me.ClientSize = New System.Drawing.Size(848, 374)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.grp_control)
         Me.Controls.Add(Me.grp_connect)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -833,8 +886,8 @@ Partial Class frm_main
         Me.tpg_read.ResumeLayout(False)
         Me.tpg_read.PerformLayout()
         Me.tab_results.ResumeLayout(False)
-        Me.tbg_specs.ResumeLayout(False)
-        Me.tbg_specs.PerformLayout()
+        Me.tpg_specs.ResumeLayout(False)
+        Me.tpg_specs.PerformLayout()
         Me.tpg_Features.ResumeLayout(False)
         Me.tpg_Features.PerformLayout()
         Me.tpg_Notes.ResumeLayout(False)
@@ -846,7 +899,10 @@ Partial Class frm_main
         Me.tpg_FeaturesEdit.PerformLayout()
         Me.tpg_notesEdit.ResumeLayout(False)
         Me.tpg_notesEdit.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -921,6 +977,11 @@ Partial Class frm_main
     Friend WithEvents cbx_osParentEdit As ComboBox
     Friend WithEvents lbl_osParentEdit As Label
     Friend WithEvents btn_Save As Button
-    Friend WithEvents tbg_specs As TabPage
+    Friend WithEvents tpg_specs As TabPage
     Friend WithEvents txt_specs As TextBox
+    Friend WithEvents btn_disconnect As Button
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents tssl_databaseStatus As ToolStripStatusLabel
+    Friend WithEvents cbx_osFileName As ComboBox
+    Friend WithEvents lbl_osfilename As Label
 End Class
