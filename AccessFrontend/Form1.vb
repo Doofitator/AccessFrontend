@@ -3,7 +3,13 @@
     Dim Connected As Boolean = False
     Dim newMedia As System.IO.FileInfo = Nothing
 
-    'TODO: Make the edit page drag & drop so that it auto-fills the size, file type, filename, etc.
+    Private Sub lbl_dragDrop_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lbl_dragDrop.DragEnter
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
 
     Private Sub lbl_dragDrop_DragDrop(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles lbl_dragDrop.DragDrop
         Dim files() As String = e.Data.GetData(DataFormats.FileDrop)
@@ -17,10 +23,38 @@
             MsgBox("More than one file was imported. Please try again.", vbOKOnly + vbCritical, "Error")
         Else
             newMedia = New System.IO.FileInfo(file)
-            'see https://stackoverflow.com/questions/27367190/how-to-return-kb-mb-and-gb-from-bytes-using-a-public-function
-            'for file size
+
         End If
+
+        If Not cbx_osFormatEdit.Items.Contains(newMedia.Extension.Replace(".", "")) Then
+            cbx_osFormatEdit.Items.Add(newMedia.Extension.Replace(".", ""))
+            cbx_osFormatEdit.SelectedItem = newMedia.Extension.Replace(".", "")
+        Else
+            cbx_osFormatEdit.SelectedItem = newMedia.Extension
+        End If
+        If Not cbx_osSizeEdit.Items.Contains(GetFileSizeInMBs(newMedia.FullName)) Then
+            cbx_osSizeEdit.Items.Add(GetFileSizeInMBs(newMedia.FullName))
+            cbx_osSizeEdit.SelectedItem = GetFileSizeInMBs(newMedia.FullName)
+        Else
+            cbx_osSizeEdit.SelectedItem = GetFileSizeInMBs(newMedia.FullName)
+        End If
+
+
     End Sub
+
+    Public Function GetFileSizeInMBs(ByVal TheFile As String) As String
+        'Modified from https://stackoverflow.com/questions/27367190/how-to-return-kb-mb-and-gb-from-bytes-using-a-public-function
+        Dim DoubleBytes As Double = Nothing
+        If TheFile.Length = 0 Then Return "Null"
+        If Not System.IO.File.Exists(TheFile) Then Return "Null"
+        Dim TheSize As ULong = My.Computer.FileSystem.GetFileInfo(TheFile).Length
+        Try
+            DoubleBytes = CDbl(TheSize / 1048576) 'MB
+            Return FormatNumber(DoubleBytes, 2)
+        Catch
+            Return "Null"
+        End Try
+    End Function
 
     'TODO: Make the instructions tab controls resize
     'TODO: Make the FeaturesEdit, NotesEdit tabs greyed until the search fields have been narrowed down to one result._
@@ -168,7 +202,7 @@
     Private Sub frm_main_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         If Connected Then
             e.Cancel = True
-            MsgBox("You are still connected to the database. Please disconnect before closing.", vbOKOnly, vbObjectError)
+            MsgBox("You are still connected to the database. Please disconnect before closing.", vbOKOnly + vbCritical, "Still Connected!")
         End If
     End Sub
 
@@ -181,11 +215,11 @@
         Dim Table_ As String = "tbl_os"
         Dim query As String = "SELECT * FROM " & Table_
         Dim MDBConnString_ As String = DatabaseConnection.connectionstring
-        Dim ds As New DataSet
-        Dim cmd As New OleDb.OleDbCommand(query, DatabaseConnection)
-        Dim da As New OleDb.OleDbDataAdapter(cmd)
-        da.Fill(ds, Table_)
-        Dim t1 As DataTable = ds.Tables(Table_)
+        Dim DataSet As New DataSet
+        Dim Command As New OleDb.OleDbCommand(query, DatabaseConnection)
+        Dim DataAdapter As New OleDb.OleDbDataAdapter(Command)
+        DataAdapter.Fill(DataSet, Table_)
+        Dim t1 As DataTable = DataSet.Tables(Table_)
         Dim row As DataRow
         Dim Item(2) As String
 

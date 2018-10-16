@@ -556,6 +556,7 @@ Partial Class frm_main
         '
         'tpg_edit
         '
+        Me.tpg_edit.AllowDrop = True
         Me.tpg_edit.Controls.Add(Me.btn_Save)
         Me.tpg_edit.Controls.Add(Me.cbx_osTypeEdit)
         Me.tpg_edit.Controls.Add(Me.lbl_osTypeEdit)
@@ -646,6 +647,7 @@ Partial Class frm_main
         '
         'tpg_instructionsEdit
         '
+        Me.tpg_instructionsEdit.AllowDrop = True
         Me.tpg_instructionsEdit.Controls.Add(Me.lbl_dragDrop)
         Me.tpg_instructionsEdit.Controls.Add(Me.Label1)
         Me.tpg_instructionsEdit.Controls.Add(Me.lbl_instruct1)
@@ -659,6 +661,7 @@ Partial Class frm_main
         '
         'lbl_dragDrop
         '
+        Me.lbl_dragDrop.AllowDrop = True
         Me.lbl_dragDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_dragDrop.Location = New System.Drawing.Point(6, 74)
         Me.lbl_dragDrop.Name = "lbl_dragDrop"
@@ -916,6 +919,7 @@ Partial Class frm_main
         '
         'frm_main
         '
+        Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(848, 374)
