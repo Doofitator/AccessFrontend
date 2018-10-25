@@ -60,6 +60,41 @@ Public Class frm_main
         End Try
     End Function
 
+    Public Function NarrowResultsAndRePopulate(ByVal field As String)
+        Select Case field
+            Case "parent"
+
+            Case "variant"
+
+            Case "edition"
+
+            Case "platform"
+
+            Case "ram"
+
+            Case "boot"
+
+            Case "version"
+
+            Case "build"
+
+            Case "name"
+
+            Case "size"
+
+            Case "format"
+
+            Case "type"
+
+            Case "filename"
+
+            Case Else
+                MsgBox("Fatal Error: Cannot narrow down fields", vbAbort + vbOKOnly, "Error")
+                End
+        End Select
+
+    End Function
+
     'TODO: Make the instructions tab controls resize
     'TODO: Make the FeaturesEdit, NotesEdit tabs greyed until the search fields have been narrowed down to one result._
     '      Also, add a "Add new" option to all comboboxes on the edit page after there is only one result also.
