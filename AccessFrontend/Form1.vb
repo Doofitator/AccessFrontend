@@ -1,4 +1,7 @@
-﻿Public Class frm_main
+﻿Imports System.Drawing.Printing
+Imports System.IO
+
+Public Class frm_main
     Dim DatabaseConnection = New OleDb.OleDbConnection
     Dim Connected As Boolean = False
     Dim newMedia As System.IO.FileInfo = Nothing
@@ -10,6 +13,7 @@
             e.Effect = DragDropEffects.None
         End If
     End Sub
+
 
     Private Sub lbl_dragDrop_DragDrop(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles lbl_dragDrop.DragDrop
         Dim files() As String = e.Data.GetData(DataFormats.FileDrop)
@@ -156,42 +160,55 @@
         btn_connect.Enabled = False
 
         'We're connected now. Let's do stuff.
-
-        populateCombobox(1, cbx_osVariant)
-        populateCombobox(2, cbx_osVersion)
-        populateCombobox(3, cbx_osEdition)
-        populateCombobox(4, cbx_osName)
-        populateCombobox(5, cbx_osRAM)
-        populateCombobox(6, cbx_osSize)
-        populateCombobox(7, cbx_osFormat)
-        populateCombobox(8, cbx_osBuild)
-        populateCombobox(9, cbx_osParent)     'No idea why the order is like this. Not like
-        populateCombobox(10, cbx_osPlatform)  'it's alphabetical or anything. Just is this way :/
-        populateCombobox(11, cbx_osFileName)
-        populateCombobox(12, cbx_osBoot)
-        populateCombobox(13, cbx_osType)
-
-        'Now we'll populate the comboboxes on the edit page, too.
-
-        populateCombobox(1, cbx_osVariantEdit)
-        populateCombobox(2, cbx_osVersionEdit)
-        populateCombobox(3, cbx_osEditionEdit)
-        populateCombobox(4, cbx_osNameEdit)
-        populateCombobox(5, cbx_osRamEdit)
-        populateCombobox(6, cbx_osSizeEdit)
-        populateCombobox(7, cbx_osFormatEdit)
-        populateCombobox(8, cbx_osBuildEdit)
-        populateCombobox(9, cbx_osParentEdit)
-        populateCombobox(10, cbx_osPlatformEdit)
-        'populateCombobox(11, cbx_osFileNameEdit) 'This one doesn't exist on the edit page.
-        populateCombobox(12, cbx_osBootEdit)
-        populateCombobox(13, cbx_osTypeEdit)
+        populateComboBoxes()
 
         With Me
             .Cursor = Cursors.Default
             .Refresh()
         End With
     End Sub
+
+    Private Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing)
+        With Me
+            .Cursor = Cursors.WaitCursor
+            .Refresh()
+        End With
+
+        If Not exclude Is cbx_osVariant Then populateCombobox(1, cbx_osVariant, whitelist, exclude)
+        If Not exclude Is cbx_osVersion Then populateCombobox(2, cbx_osVersion, whitelist, exclude)
+        If Not exclude Is cbx_osEdition Then populateCombobox(3, cbx_osEdition, whitelist, exclude)
+        If Not exclude Is cbx_osName Then populateCombobox(4, cbx_osName, whitelist, exclude)
+        If Not exclude Is cbx_osRAM Then populateCombobox(5, cbx_osRAM, whitelist, exclude)
+        If Not exclude Is cbx_osSize Then populateCombobox(6, cbx_osSize, whitelist, exclude)
+        If Not exclude Is cbx_osFormat Then populateCombobox(7, cbx_osFormat, whitelist, exclude)
+        If Not exclude Is cbx_osBuild Then populateCombobox(8, cbx_osBuild, whitelist, exclude)
+        If Not exclude Is cbx_osParent Then populateCombobox(9, cbx_osParent, whitelist, exclude)     'No idea why the order is like this. Not like
+        If Not exclude Is cbx_osPlatform Then populateCombobox(10, cbx_osPlatform, whitelist, exclude)  'it's alphabetical or anything. Just is this way :/
+        If Not exclude Is cbx_osFileName Then populateCombobox(11, cbx_osFileName, whitelist, exclude)
+        If Not exclude Is cbx_osBoot Then populateCombobox(12, cbx_osBoot, whitelist, exclude)
+        If Not exclude Is cbx_osType Then populateCombobox(13, cbx_osType, whitelist, exclude)
+
+        'Now we'll populate the comboboxes on the edit page, too.
+
+        If Not exclude Is cbx_osVariantEdit Then populateCombobox(1, cbx_osVariantEdit, whitelist, exclude)
+        If Not exclude Is cbx_osVersionEdit Then populateCombobox(2, cbx_osVersionEdit, whitelist, exclude)
+        If Not exclude Is cbx_osEditionEdit Then populateCombobox(3, cbx_osEditionEdit, whitelist, exclude)
+        If Not exclude Is cbx_osNameEdit Then populateCombobox(4, cbx_osNameEdit, whitelist, exclude)
+        If Not exclude Is cbx_osRamEdit Then populateCombobox(5, cbx_osRamEdit, whitelist, exclude)
+        If Not exclude Is cbx_osSizeEdit Then populateCombobox(6, cbx_osSizeEdit, whitelist, exclude)
+        If Not exclude Is cbx_osFormatEdit Then populateCombobox(7, cbx_osFormatEdit, whitelist, exclude)
+        If Not exclude Is cbx_osBuildEdit Then populateCombobox(8, cbx_osBuildEdit, whitelist, exclude)
+        If Not exclude Is cbx_osParentEdit Then populateCombobox(9, cbx_osParentEdit, whitelist, exclude)
+        If Not exclude Is cbx_osPlatformEdit Then populateCombobox(10, cbx_osPlatformEdit, whitelist, exclude)
+        'If Not exclude Is cbx_osFileNameEdit Then populateCombobox(11, cbx_osFileNameEdit) 'This one doesn't exist
+        If Not exclude Is cbx_osBootEdit Then populateCombobox(12, cbx_osBootEdit, whitelist, exclude)
+        If Not exclude Is cbx_osTypeEdit Then populateCombobox(13, cbx_osTypeEdit, whitelist, exclude)
+
+        With Me
+            .Cursor = Cursors.Default
+            .Refresh()
+        End With
+    End Function
 
     Private Sub frm_main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MinimumSize = Me.Size
@@ -211,29 +228,92 @@
         resizeControlsGroupboxContent(False)
     End Sub
 
-    Private Function populateCombobox(ByVal rowNumber As Integer, ByVal theCombobox As ComboBox)
-        Dim Table_ As String = "tbl_os"
-        Dim query As String = "SELECT * FROM " & Table_
-        Dim MDBConnString_ As String = DatabaseConnection.connectionstring
-        Dim DataSet As New DataSet
-        Dim Command As New OleDb.OleDbCommand(query, DatabaseConnection)
-        Dim DataAdapter As New OleDb.OleDbDataAdapter(Command)
-        DataAdapter.Fill(DataSet, Table_)
-        Dim t1 As DataTable = DataSet.Tables(Table_)
-        Dim row As DataRow
-        Dim Item(2) As String
+    Private Function populateCombobox(ByVal rowNumber As Integer, ByVal theCombobox As ComboBox, Optional whitelist As Array = Nothing, Optional excluded As ComboBox = Nothing)
+        If whitelist Is Nothing Then
+            Dim Table_ As String = "tbl_os"
+            Dim query As String = "SELECT * FROM " & Table_
+            Dim MDBConnString_ As String = DatabaseConnection.connectionstring
+            Dim DataSet As New DataSet
+            Dim Command As New OleDb.OleDbCommand(query, DatabaseConnection)
+            Dim DataAdapter As New OleDb.OleDbDataAdapter(Command)
+            DataAdapter.Fill(DataSet, Table_)
+            Dim t1 As DataTable = DataSet.Tables(Table_)
+            Dim row As DataRow
+            Dim Item(2) As String
 
-        For Each row In t1.Rows
-            Try
-                Item(0) = row(rowNumber)
-            Catch
-                Item(0) = "Undefined"
-            End Try
-            Dim NextListItem As New ListViewItem(Item)
-            If Not theCombobox.Items.Contains(NextListItem.Text) Then
-                theCombobox.Items.Add(NextListItem.Text)
-            End If
-        Next
+            For Each row In t1.Rows
+                Try
+                    Item(0) = row(rowNumber)
+                Catch
+                    Item(0) = "Undefined"
+                End Try
+                Dim NextListItem As New ListViewItem(Item)
+                If Not theCombobox.Items.Contains(NextListItem.Text) Then
+                    theCombobox.Items.Add(NextListItem.Text)
+                End If
+            Next
+        Else
+            If Not excluded Is cbx_osBoot Then cbx_osBoot.Items.Clear()
+            If Not excluded Is cbx_osBootEdit Then cbx_osBootEdit.Items.Clear()
+            If Not excluded Is cbx_osBuild Then cbx_osBuild.Items.Clear()
+            If Not excluded Is cbx_osBuildEdit Then cbx_osBuildEdit.Items.Clear()
+            If Not excluded Is cbx_osEdition Then cbx_osEdition.Items.Clear()
+            If Not excluded Is cbx_osEditionEdit Then cbx_osEditionEdit.Items.Clear()
+            If Not excluded Is cbx_osFileName Then cbx_osFileName.Items.Clear()
+            If Not excluded Is cbx_osFormat Then cbx_osFormat.Items.Clear()
+            If Not excluded Is cbx_osFormatEdit Then cbx_osFormatEdit.Items.Clear()
+            If Not excluded Is cbx_osName Then cbx_osName.Items.Clear()
+            If Not excluded Is cbx_osNameEdit Then cbx_osNameEdit.Items.Clear()
+            If Not excluded Is cbx_osParent Then cbx_osParent.Items.Clear()
+            If Not excluded Is cbx_osParentEdit Then cbx_osParentEdit.Items.Clear()
+            If Not excluded Is cbx_osPlatform Then cbx_osPlatform.Items.Clear()
+            If Not excluded Is cbx_osPlatformEdit Then cbx_osPlatformEdit.Items.Clear()
+            If Not excluded Is cbx_osRAM Then cbx_osRAM.Items.Clear()
+            If Not excluded Is cbx_osRamEdit Then cbx_osRamEdit.Items.Clear()
+            If Not excluded Is cbx_osSize Then cbx_osSize.Items.Clear()
+            If Not excluded Is cbx_osSizeEdit Then cbx_osSizeEdit.Items.Clear()
+            If Not excluded Is cbx_osType Then cbx_osType.Items.Clear()
+            If Not excluded Is cbx_osTypeEdit Then cbx_osTypeEdit.Items.Clear()
+            If Not excluded Is cbx_osVariant Then cbx_osVariant.Items.Clear()
+            If Not excluded Is cbx_osVariantEdit Then cbx_osVariantEdit.Items.Clear()
+            If Not excluded Is cbx_osVersion Then cbx_osVersion.Items.Clear()
+            If Not excluded Is cbx_osVersionEdit Then cbx_osVersionEdit.Items.Clear()
+
+            Dim field As String
+
+            If excluded Is cbx_osBoot Then field = "boot"
+            If excluded Is cbx_osBuild Then field = "buildType"
+            If excluded Is cbx_osBuildEdit Then field = "buildType"
+            If excluded Is cbx_osEdition Then field = "edition"
+            If excluded Is cbx_osEditionEdit Then field = "edition"
+            If excluded Is cbx_osFileName Then field = "filename"
+            If excluded Is cbx_osFormat Then field = "mediaFormat"
+            If excluded Is cbx_osFormatEdit Then field = "mediaFormat"
+            If excluded Is cbx_osName Then field = "friendlyName"
+            If excluded Is cbx_osNameEdit Then field = "friendlyName"
+            If excluded Is cbx_osParent Then field = "parent"
+            If excluded Is cbx_osParentEdit Then field = "parent"
+            If excluded Is cbx_osPlatform Then field = "platform"
+            If excluded Is cbx_osPlatformEdit Then field = "platform"
+            If excluded Is cbx_osRAM Then field = "ram"
+            If excluded Is cbx_osRamEdit Then field = "ram"
+            If excluded Is cbx_osSize Then field = "mediaSize"
+            If excluded Is cbx_osSizeEdit Then field = "mediaSize"
+            If excluded Is cbx_osType Then field = "mediaType"
+            If excluded Is cbx_osTypeEdit Then field = "mediaType"
+            If excluded Is cbx_osVariant Then field = "variant"
+            If excluded Is cbx_osVariantEdit Then field = "variant"
+            If excluded Is cbx_osVersion Then field = "version"
+            If excluded Is cbx_osVersionEdit Then field = "version"
+
+
+
+            Dim Table_ As String = "tbl_os"
+
+            Dim query As String = "SELECT " & field & " FROM " & Table_
+
+            'MsgBox(query)
+        End If
     End Function
 
     Private Sub btn_disconnect_Click(sender As Object, e As EventArgs) Handles btn_disconnect.Click
@@ -252,5 +332,64 @@
         btn_connect.Enabled = True
         btn_disconnect.Enabled = False
         grp_control.Enabled = False
+    End Sub
+
+    Dim stringToPrint As String 'this is what gets printed when u hit the button
+
+    'TODO: Rename printDocument1 to something hungarian
+
+    Private Sub btn_print_Click(sender As Object, e As EventArgs) Handles btn_print.Click
+        PrintDocument1.Print()
+    End Sub
+
+    Private Sub printDocument1_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Dim charactersOnPage As Integer = 0
+        Dim linesPerPage As Integer = 0
+        e.Graphics.MeasureString(stringToPrint, Me.Font, e.MarginBounds.Size, StringFormat.GenericTypographic, charactersOnPage, linesPerPage)
+        e.Graphics.DrawString(stringToPrint, Me.Font, Brushes.Black, e.MarginBounds, StringFormat.GenericTypographic)
+        stringToPrint = stringToPrint.Substring(charactersOnPage)
+        e.HasMorePages = (stringToPrint.Length > 0)
+    End Sub
+
+    Dim DatabaseWhiteList As String
+
+    Private Sub SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_osBoot.SelectedIndexChanged, cbx_osBuild.SelectedIndexChanged, cbx_osEdition.SelectedIndexChanged, cbx_osFileName.SelectedIndexChanged, cbx_osFormat.SelectedIndexChanged, cbx_osName.SelectedIndexChanged, cbx_osParent.SelectedIndexChanged, cbx_osPlatform.SelectedIndexChanged, cbx_osRAM.SelectedIndexChanged, cbx_osSize.SelectedIndexChanged, cbx_osType.SelectedIndexChanged, cbx_osVariant.SelectedIndexChanged, cbx_osVersion.SelectedIndexChanged
+        Dim name As ComboBox = CType(sender, ComboBox)
+        Dim x As String = name.SelectedItem
+        DatabaseWhiteList += x & ","
+        Dim whitelistArray As String() = DatabaseWhiteList.Split(",")
+        populateComboBoxes(whitelistArray, name)
+    End Sub
+
+    Private Function insertData()
+        Dim x
+        If newMedia Is Nothing Then
+            x = ""
+        Else
+            x = newMedia.Name
+        End If
+        Dim Sqlstr = "INSERT INTO [tbl_os] ([parent], [variant], [edition], [platform]" &
+                ", [ram], [boot], [version], [buildType], [friendlyName], " &
+                "[mediaSize], [mediaFormat], [mediaType], [filename]) VALUES (@a, @b, @c, @d, @e, @f, @g, @h, @i, @k, @j @l, @m)"
+        Dim Command = New OleDb.OleDbCommand(Sqlstr, DatabaseConnection)
+        Command.CommandText = Sqlstr
+        Command.Parameters.AddWithValue("@a", cbx_osParentEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@b", cbx_osVariantEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@c", cbx_osEditionEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@d", cbx_osPlatformEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@e", cbx_osRamEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@f", cbx_osBootEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@g", cbx_osVersionEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@h", cbx_osBuildEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@i", cbx_osNameEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@j", cbx_osSizeEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@k", cbx_osFormatEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@l", cbx_osTypeEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@m", x)
+        Command.ExecuteNonQuery()
+    End Function
+
+    Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
+        insertData()
     End Sub
 End Class

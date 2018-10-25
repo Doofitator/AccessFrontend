@@ -31,6 +31,7 @@ Partial Class frm_main
         Me.grp_control = New System.Windows.Forms.GroupBox()
         Me.tab_controls = New System.Windows.Forms.TabControl()
         Me.tpg_read = New System.Windows.Forms.TabPage()
+        Me.btn_print = New System.Windows.Forms.Button()
         Me.cbx_osFileName = New System.Windows.Forms.ComboBox()
         Me.lbl_osfilename = New System.Windows.Forms.Label()
         Me.cbx_osType = New System.Windows.Forms.ComboBox()
@@ -104,6 +105,7 @@ Partial Class frm_main
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
         Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
@@ -205,6 +207,7 @@ Partial Class frm_main
         '
         'tpg_read
         '
+        Me.tpg_read.Controls.Add(Me.btn_print)
         Me.tpg_read.Controls.Add(Me.cbx_osFileName)
         Me.tpg_read.Controls.Add(Me.lbl_osfilename)
         Me.tpg_read.Controls.Add(Me.cbx_osType)
@@ -241,6 +244,15 @@ Partial Class frm_main
         Me.tpg_read.TabIndex = 0
         Me.tpg_read.Text = "Read"
         Me.tpg_read.UseVisualStyleBackColor = True
+        '
+        'btn_print
+        '
+        Me.btn_print.Location = New System.Drawing.Point(422, 152)
+        Me.btn_print.Name = "btn_print"
+        Me.btn_print.Size = New System.Drawing.Size(121, 23)
+        Me.btn_print.TabIndex = 29
+        Me.btn_print.Text = "Print search results"
+        Me.btn_print.UseVisualStyleBackColor = True
         '
         'cbx_osFileName
         '
@@ -394,7 +406,7 @@ Partial Class frm_main
         'cbx_osName
         '
         Me.cbx_osName.FormattingEnabled = True
-        Me.cbx_osName.Location = New System.Drawing.Point(422, 154)
+        Me.cbx_osName.Location = New System.Drawing.Point(422, 125)
         Me.cbx_osName.Name = "cbx_osName"
         Me.cbx_osName.Size = New System.Drawing.Size(121, 21)
         Me.cbx_osName.TabIndex = 18
@@ -402,7 +414,7 @@ Partial Class frm_main
         'lbl_osName
         '
         Me.lbl_osName.AutoSize = True
-        Me.lbl_osName.Location = New System.Drawing.Point(375, 157)
+        Me.lbl_osName.Location = New System.Drawing.Point(375, 128)
         Me.lbl_osName.Name = "lbl_osName"
         Me.lbl_osName.Size = New System.Drawing.Size(38, 13)
         Me.lbl_osName.TabIndex = 17
@@ -917,6 +929,9 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
         '
+        'PrintDocument1
+        '
+        '
         'frm_main
         '
         Me.AllowDrop = True
@@ -1040,4 +1055,6 @@ Partial Class frm_main
     Friend WithEvents Label1 As Label
     Friend WithEvents lbl_instruct1 As Label
     Friend WithEvents lbl_dragDrop As Label
+    Friend WithEvents btn_print As Button
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class
