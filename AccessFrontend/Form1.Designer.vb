@@ -105,7 +105,7 @@ Partial Class frm_main
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
         Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.pdc_Report = New System.Drawing.Printing.PrintDocument()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
@@ -144,7 +144,7 @@ Partial Class frm_main
         Me.btn_disconnect.Name = "btn_disconnect"
         Me.btn_disconnect.Size = New System.Drawing.Size(75, 23)
         Me.btn_disconnect.TabIndex = 4
-        Me.btn_disconnect.Text = "Disconnect"
+        Me.btn_disconnect.Text = "Close"
         Me.btn_disconnect.UseVisualStyleBackColor = True
         '
         'btn_connect
@@ -154,7 +154,7 @@ Partial Class frm_main
         Me.btn_connect.Name = "btn_connect"
         Me.btn_connect.Size = New System.Drawing.Size(75, 23)
         Me.btn_connect.TabIndex = 3
-        Me.btn_connect.Text = "Connect"
+        Me.btn_connect.Text = "Open"
         Me.btn_connect.UseVisualStyleBackColor = True
         '
         'lbl_hint1
@@ -929,9 +929,6 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
         '
-        'PrintDocument1
-        '
-        '
         'frm_main
         '
         Me.AllowDrop = True
@@ -1056,5 +1053,5 @@ Partial Class frm_main
     Friend WithEvents lbl_instruct1 As Label
     Friend WithEvents lbl_dragDrop As Label
     Friend WithEvents btn_print As Button
-    Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents pdc_Report As Printing.PrintDocument
 End Class
