@@ -403,23 +403,22 @@ Public Class frm_main
         Else
             x = newMedia.Name
         End If
-        Dim Sqlstr = "INSERT INTO [tbl_os] ([parent], [variant], [edition], [platform]" &
-                ", [ram], [boot], [version], [buildType], [friendlyName], " &
-                "[mediaSize], [mediaFormat], [mediaType], [filename]) VALUES (@a, @b, @c, @d, @e, @f, @g, @h, @i, @k, @j @l, @m)"
+        Dim Sqlstr = "INSERT INTO [tbl_os] ([parent], [variant], [edition], [platform], [ram], [boot], [version], [buildType], [friendlyName], [mediaSize], [mediaFormat], [mediaType], [filename]) VALUES (@a, @b, @c, @d, @e, @f, @g, @h, @i, @k, @j, @l, @m)"
+
         Dim Command = New OleDb.OleDbCommand(Sqlstr, DatabaseConnection)
         Command.CommandText = Sqlstr
-        Command.Parameters.AddWithValue("@a", cbx_osParentEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@b", cbx_osVariantEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@c", cbx_osEditionEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@d", cbx_osPlatformEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@e", cbx_osRamEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@f", cbx_osBootEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@g", cbx_osVersionEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@h", cbx_osBuildEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@i", cbx_osNameEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@j", cbx_osSizeEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@k", cbx_osFormatEdit.SelectedValue)
-        Command.Parameters.AddWithValue("@l", cbx_osTypeEdit.SelectedValue)
+        Command.Parameters.AddWithValue("@a", cbx_osParentEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@b", cbx_osVariantEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@c", cbx_osEditionEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@d", cbx_osPlatformEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@e", cbx_osRamEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@f", cbx_osBootEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@g", cbx_osVersionEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@h", cbx_osBuildEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@i", cbx_osNameEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@j", cbx_osSizeEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@k", cbx_osFormatEdit.SelectedItem)
+        Command.Parameters.AddWithValue("@l", cbx_osTypeEdit.SelectedItem)
         Command.Parameters.AddWithValue("@m", x)
         Command.ExecuteNonQuery()
     End Function
