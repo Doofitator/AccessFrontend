@@ -43,8 +43,6 @@ Public Class frm_main
 
     End Sub
 
-
-    'TODO: Make the instructions tab controls resize
     'TODO: Make the FeaturesEdit, NotesEdit tabs greyed until the search fields have been narrowed down to one result._
     '      Also, add a "Add new" option to all comboboxes on the edit page after there is only one result also.
 
@@ -91,6 +89,9 @@ Public Class frm_main
         btn_connect.Enabled = False
         txt_filename.Enabled = False
 
+        tpg_FeaturesEdit.Enabled = False
+        tpg_notesEdit.Enabled = False
+
         populateComboBoxes()
 
         With Me
@@ -98,49 +99,6 @@ Public Class frm_main
             .Refresh()
         End With
     End Sub
-
-    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False)
-        With Me
-            .Cursor = Cursors.WaitCursor
-            .Refresh()
-        End With
-
-        If Not exclude Is cbx_osVariant Then populateCombobox(1, cbx_osVariant, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osVersion Then populateCombobox(2, cbx_osVersion, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osEdition Then populateCombobox(3, cbx_osEdition, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osName Then populateCombobox(4, cbx_osName, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osRAM Then populateCombobox(5, cbx_osRAM, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osSize Then populateCombobox(6, cbx_osSize, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osFormat Then populateCombobox(7, cbx_osFormat, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osBuild Then populateCombobox(8, cbx_osBuild, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osParent Then populateCombobox(9, cbx_osParent, whitelist, exclude, isconnected)     'No idea why the order is like this. Not like
-        If Not exclude Is cbx_osPlatform Then populateCombobox(10, cbx_osPlatform, whitelist, exclude, isconnected)  'it's alphabetical or anything. Just is this way :/
-        If Not exclude Is cbx_osFileName Then populateCombobox(11, cbx_osFileName, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osBoot Then populateCombobox(12, cbx_osBoot, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osType Then populateCombobox(13, cbx_osType, whitelist, exclude, isconnected)
-
-        'Now we'll populate the comboboxes on the edit page, too.
-
-        If Not exclude Is cbx_osVariantEdit Then populateCombobox(1, cbx_osVariantEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osVersionEdit Then populateCombobox(2, cbx_osVersionEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osEditionEdit Then populateCombobox(3, cbx_osEditionEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osNameEdit Then populateCombobox(4, cbx_osNameEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osRamEdit Then populateCombobox(5, cbx_osRamEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osSizeEdit Then populateCombobox(6, cbx_osSizeEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osFormatEdit Then populateCombobox(7, cbx_osFormatEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osBuildEdit Then populateCombobox(8, cbx_osBuildEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osParentEdit Then populateCombobox(9, cbx_osParentEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osPlatformEdit Then populateCombobox(10, cbx_osPlatformEdit, whitelist, exclude, isconnected)
-        'If Not exclude Is cbx_osFileNameEdit Then populateCombobox(11, cbx_osFileNameEdit) 'This one doesn't exist
-        If Not exclude Is cbx_osBootEdit Then populateCombobox(12, cbx_osBootEdit, whitelist, exclude, isconnected)
-        If Not exclude Is cbx_osTypeEdit Then populateCombobox(13, cbx_osTypeEdit, whitelist, exclude, isconnected)
-
-        With Me
-            .Cursor = Cursors.Default
-            .tssl_databaseStatus.Text = "Data populated. Disconnected."
-            .Refresh()
-        End With
-    End Function
 
     Private Sub frm_main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MinimumSize = Me.Size
@@ -165,8 +123,6 @@ Public Class frm_main
 
     Dim stringToPrint As String 'this is what gets printed when u hit the button
 
-    'TODO: Rename pdc_report to something hungarian
-
     Private Sub btn_print_Click(sender As Object, e As EventArgs) Handles btn_print.Click
         pdc_report.Print()
     End Sub
@@ -183,11 +139,12 @@ Public Class frm_main
     Dim DatabaseWhiteList As String
 
     Private Sub SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_osBoot.SelectedIndexChanged, cbx_osBuild.SelectedIndexChanged, cbx_osEdition.SelectedIndexChanged, cbx_osFileName.SelectedIndexChanged, cbx_osFormat.SelectedIndexChanged, cbx_osName.SelectedIndexChanged, cbx_osParent.SelectedIndexChanged, cbx_osPlatform.SelectedIndexChanged, cbx_osRAM.SelectedIndexChanged, cbx_osSize.SelectedIndexChanged, cbx_osType.SelectedIndexChanged, cbx_osVariant.SelectedIndexChanged, cbx_osVersion.SelectedIndexChanged
-        Dim name As ComboBox = CType(sender, ComboBox)
-        Dim x As String = name.SelectedItem
-        DatabaseWhiteList += x & ","
-        Dim whitelistArray As String() = DatabaseWhiteList.Split(",")
-        populateComboBoxes(whitelistArray, name)
+        Dim name As ComboBox = CType(sender, ComboBox) 'Get combobox
+        Dim x As String = name.SelectedItem 'Get combobox name
+        DatabaseWhiteList += x & "," 'add it's name to the whitelist
+        Dim whitelistArray As String() = DatabaseWhiteList.Split(",") 'make the whitelist an array
+        populateComboBoxes(whitelistArray, name) 'run function with whitelistarray (everything whitelisted thus far) and name (the current modified combobox)
+        'TODO: What if you set a combobox to a different value from the initial? Also, what if you set it to blank again? Will it un-whitelist?
     End Sub
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click

@@ -66,7 +66,7 @@
             If Not excluded Is frm_main.cbx_osVersion Then frm_main.cbx_osVersion.Items.Clear()
             If Not excluded Is frm_main.cbx_osVersionEdit Then frm_main.cbx_osVersionEdit.Items.Clear()
 
-            Dim field As String
+            Dim field As String = "*"
 
             If excluded Is frm_main.cbx_osBoot Then field = "boot"
             If excluded Is frm_main.cbx_osBuild Then field = "buildType"
@@ -106,7 +106,9 @@
             .Cursor = Cursors.Default
             .Refresh()
         End With
+#Disable Warning BC42105 ' Function doesn't return a value on all code paths
     End Function
+#Enable Warning BC42105 ' Function doesn't return a value on all code paths
 
     Public Function insertData()
         DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
@@ -141,7 +143,7 @@
         Command.Parameters.AddWithValue("@l", frm_main.cbx_osTypeEdit.SelectedItem)
         Command.Parameters.AddWithValue("@m", x)
         Command.ExecuteNonQuery()
-        frm_main.populateComboBoxes(, , True)
+        populateComboBoxes(, , True)
         frm_main.tssl_databaseStatus.Text = "Disconnecting..."
         DatabaseConnection.close()
         With frm_main
@@ -149,5 +151,7 @@
             .tssl_databaseStatus.Text = "Completed upload and repopulation. Disconnected."
             .Refresh()
         End With
+#Disable Warning BC42105 ' Function doesn't return a value on all code paths
     End Function
+#Enable Warning BC42105 ' Function doesn't return a value on all code paths
 End Module
