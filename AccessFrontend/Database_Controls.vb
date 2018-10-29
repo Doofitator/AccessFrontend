@@ -155,7 +155,7 @@
     End Function
 #Enable Warning BC42105 ' Function doesn't return a value on all code paths
 
-    Public Function getRecordByField(ByVal field As String, ByVal value As String, ByVal Table As String)
+    Public Function getRecordByField(ByVal field As String, ByVal value As String, ByVal Table As String) 'returns array of all records that match criteria
         'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
         DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
         DatabaseConnection.Open()
@@ -165,16 +165,67 @@
         Dim reader As OleDb.OleDbDataReader
 
         Dim sql = "SELECT * FROM " & Table & " WHERE " & Table & "." & field & " = '" & value & "'"
+        Dim lst_ID As List(Of Integer) = New List(Of Integer)()
+        Dim lst_variant As List(Of String) = New List(Of String)()
+        Dim lst_version As List(Of String) = New List(Of String)()
+        Dim lst_edition As List(Of String) = New List(Of String)()
+        Dim lst_friendlyName As List(Of String) = New List(Of String)()
+        Dim lst_ram As List(Of String) = New List(Of String)()
+        Dim lst_mediaSize As List(Of String) = New List(Of String)()
+        Dim lst_mediaFormat As List(Of String) = New List(Of String)()
+        Dim lst_buildType As List(Of String) = New List(Of String)()
+        Dim lst_parent As List(Of String) = New List(Of String)()
+        Dim lst_platform As List(Of String) = New List(Of String)()
+        Dim lst_filename As List(Of String) = New List(Of String)()
+        Dim lst_boot As List(Of String) = New List(Of String)()
+        Dim lst_mediaType As List(Of String) = New List(Of String)()
         Try
             cmd = New OleDb.OleDbCommand(sql, DatabaseConnection)
             reader = cmd.ExecuteReader()
-
-            While reader.Read
-                MessageBox.Show(reader.GetString(0).ToString)
+            While (reader.Read())
+                lst_ID.Add(reader.GetInt32(0))
+                lst_variant.Add(reader.GetString(1))
+                lst_version.Add(reader.GetString(2))
+                lst_edition.Add(reader.GetString(3))
+                lst_friendlyName.Add(reader.GetString(4))
+                lst_ram.Add(reader.GetString(5))
+                lst_mediaSize.Add(reader.GetString(6))
+                lst_mediaFormat.Add(reader.GetString(7))
+                lst_buildType.Add(reader.GetString(8))
+                lst_parent.Add(reader.GetString(9))
+                lst_platform.Add(reader.GetString(10))
+                lst_filename.Add(reader.GetString(11))
+                lst_boot.Add(reader.GetString(12))
+                lst_mediaType.Add(reader.GetString(13))
             End While
+            reader.Close()
         Finally
             If reader IsNot Nothing Then reader.Close()
         End Try
         DatabaseConnection.close()
+        Dim arr_ID As Array = lst_ID.ToArray()
+        Dim arr_variant As Array = lst_variant.ToArray()
+        Dim arr_version As Array = lst_version.ToArray()
+        Dim arr_edition As Array = lst_edition.ToArray()
+        Dim arr_friendlyName As Array = lst_friendlyName.ToArray()
+        Dim arr_ram As Array = lst_ram.ToArray()
+        Dim arr_mediaSize As Array = lst_mediaSize.ToArray()
+        Dim arr_mediaFormat As Array = lst_mediaFormat.ToArray()
+        Dim arr_buildType As Array = lst_buildType.ToArray()
+        Dim arr_parent As Array = lst_parent.ToArray()
+        Dim arr_platform As Array = lst_platform.ToArray()
+        Dim arr_filename As Array = lst_filename.ToArray()
+        Dim arr_boot As Array = lst_boot.ToArray()
+        Dim arr_mediatype As Array = lst_mediaType.ToArray()
+
+        Dim records(arr_ID.Length) As String 'Each value is a csv - "ID,variant,version,edition,friendlyname,ram,mediasize,mediaformat,buildtype,parent,platform,filename,boot,mediatype"
+
+        Dim i = arr_ID.Length - 1
+        While i >= 0
+            records(i) = arr_ID(i) & "," & arr_variant(i) & "," & arr_version(i) & "," & arr_edition(i) & "," & arr_friendlyName(i) & "," & arr_ram(i) & "," & arr_mediaSize(i) & "," & arr_mediaFormat(i) & "," & arr_buildType(i) & "," & arr_parent(i) & "," & arr_platform(i) & "," & arr_filename(i) & "," & arr_boot(i) & "," & arr_mediatype(i)
+            i -= 1
+        End While
+
+        Return records
     End Function
 End Module
