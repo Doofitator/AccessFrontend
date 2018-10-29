@@ -150,7 +150,7 @@ Public Class frm_main
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_printSpecs.Click
-        'stringToPrint = txt_specs.text
-        getRecordByField("parent", "Unix", "tbl_os")
+        stringToPrint = txt_specs.Text
+        'getRecordByField("parent", "Unix", "tbl_os")
     End Sub
 End Class

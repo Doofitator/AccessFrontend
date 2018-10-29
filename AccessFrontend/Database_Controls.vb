@@ -92,16 +92,17 @@
             If excluded Is frm_main.cbx_osVariantEdit Then field = "variant"
             If excluded Is frm_main.cbx_osVersion Then field = "version"
             If excluded Is frm_main.cbx_osVersionEdit Then field = "version"
+            DatabaseConnection.close()
+
+            'TODO: Somehow get all the arr_mediaType, arr_etc. from getRecordByField and for each string in each array, add it to it's respective combobox.
 
 
-
-            Dim Table_ As String = "tbl_os"
-
-            Dim query As String = "SELECT " & field & " FROM " & Table_
-
-            'MsgBox(query)
         End If
-        DatabaseConnection.Close()
+        Try
+            DatabaseConnection.Close()
+        Catch
+            Console.WriteLine("already closed")
+        End Try
         With frm_main
             .Cursor = Cursors.Default
             .Refresh()
