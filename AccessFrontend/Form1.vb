@@ -89,8 +89,6 @@ Public Class frm_main
         btn_connect.Enabled = False
         txt_filename.Enabled = False
 
-        tpg_FeaturesEdit.Enabled = False
-        tpg_notesEdit.Enabled = False
 
         populateComboBoxes()
 
@@ -106,7 +104,7 @@ Public Class frm_main
         resizeControlsGroupboxContent(False)
     End Sub
 
-    Private Sub changeTab_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles tpg_read.Click, tpg_edit.Click, tpg_Features.Click, tpg_FeaturesEdit.Click, tpg_Notes.Click, tpg_notesEdit.Click, tab_controls.Click, tab_ExtrasEdit.Click, tab_results.Click, tpg_edit.Click, tpg_Features.Click, tpg_FeaturesEdit.Click, tpg_Notes.Click, tpg_notesEdit.Click, tpg_read.Click, tpg_specs.Click
+    Private Sub changeTab_Click(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles tpg_read.Click, tpg_edit.Click, tab_controls.Click, tab_ExtrasEdit.Click, tab_results.Click, tpg_edit.Click, tpg_read.Click, tpg_specs.Click
         resizeControlsGroupboxContent(True)
         resizeControlsGroupboxContent(False)
     End Sub
@@ -123,8 +121,8 @@ Public Class frm_main
 
     Dim stringToPrint As String 'this is what gets printed when u hit the button
 
-    Private Sub btn_print_Click(sender As Object, e As EventArgs) Handles btn_print.Click
-        pdc_report.Print()
+    Private Sub btn_print_Click(sender As Object, e As EventArgs) Handles btn_printSearch.Click
+        pdc_Report.Print()
     End Sub
 
     Private Sub pdc_report_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs) Handles pdc_report.PrintPage
@@ -149,5 +147,10 @@ Public Class frm_main
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
         insertData()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_printSpecs.Click
+        'stringToPrint = txt_specs.text
+        getRecordByField("parent", "Unix", "tbl_os")
     End Sub
 End Class

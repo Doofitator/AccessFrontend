@@ -154,4 +154,27 @@
 #Disable Warning BC42105 ' Function doesn't return a value on all code paths
     End Function
 #Enable Warning BC42105 ' Function doesn't return a value on all code paths
+
+    Public Function getRecordByField(ByVal field As String, ByVal value As String, ByVal Table As String)
+        'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
+        DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
+        DatabaseConnection.Open()
+        Dim t As New DataTable
+        Dim adapter As OleDb.OleDbDataAdapter()
+        Dim cmd As OleDb.OleDbCommand
+        Dim reader As OleDb.OleDbDataReader
+
+        Dim sql = "SELECT * FROM " & Table & " WHERE " & Table & "." & field & " = '" & value & "'"
+        Try
+            cmd = New OleDb.OleDbCommand(sql, DatabaseConnection)
+            reader = cmd.ExecuteReader()
+
+            While reader.Read
+                MessageBox.Show(reader.GetString(0).ToString)
+            End While
+        Finally
+            If reader IsNot Nothing Then reader.Close()
+        End Try
+        DatabaseConnection.close()
+    End Function
 End Module

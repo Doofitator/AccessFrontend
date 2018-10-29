@@ -31,7 +31,7 @@ Partial Class frm_main
         Me.grp_control = New System.Windows.Forms.GroupBox()
         Me.tab_controls = New System.Windows.Forms.TabControl()
         Me.tpg_read = New System.Windows.Forms.TabPage()
-        Me.btn_print = New System.Windows.Forms.Button()
+        Me.btn_printSearch = New System.Windows.Forms.Button()
         Me.cbx_osFileName = New System.Windows.Forms.ComboBox()
         Me.lbl_osfilename = New System.Windows.Forms.Label()
         Me.cbx_osType = New System.Windows.Forms.ComboBox()
@@ -42,10 +42,6 @@ Partial Class frm_main
         Me.tab_results = New System.Windows.Forms.TabControl()
         Me.tpg_specs = New System.Windows.Forms.TabPage()
         Me.txt_specs = New System.Windows.Forms.TextBox()
-        Me.tpg_Features = New System.Windows.Forms.TabPage()
-        Me.txt_Features = New System.Windows.Forms.TextBox()
-        Me.tpg_Notes = New System.Windows.Forms.TabPage()
-        Me.txt_Notes = New System.Windows.Forms.TextBox()
         Me.cbx_osSize = New System.Windows.Forms.ComboBox()
         Me.lbl_osSize = New System.Windows.Forms.Label()
         Me.cbx_osName = New System.Windows.Forms.ComboBox()
@@ -78,10 +74,6 @@ Partial Class frm_main
         Me.lbl_dragDrop = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbl_instruct1 = New System.Windows.Forms.Label()
-        Me.tpg_FeaturesEdit = New System.Windows.Forms.TabPage()
-        Me.txt_FeaturesEdit = New System.Windows.Forms.TextBox()
-        Me.tpg_notesEdit = New System.Windows.Forms.TabPage()
-        Me.txt_NotesEdit = New System.Windows.Forms.TextBox()
         Me.cbx_osSizeEdit = New System.Windows.Forms.ComboBox()
         Me.lbl_osSizeEdit = New System.Windows.Forms.Label()
         Me.cbx_osNameEdit = New System.Windows.Forms.ComboBox()
@@ -106,19 +98,16 @@ Partial Class frm_main
         Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.pdc_Report = New System.Drawing.Printing.PrintDocument()
+        Me.btn_printSpecs = New System.Windows.Forms.Button()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
         Me.tpg_read.SuspendLayout()
         Me.tab_results.SuspendLayout()
         Me.tpg_specs.SuspendLayout()
-        Me.tpg_Features.SuspendLayout()
-        Me.tpg_Notes.SuspendLayout()
         Me.tpg_edit.SuspendLayout()
         Me.tab_ExtrasEdit.SuspendLayout()
         Me.tpg_instructionsEdit.SuspendLayout()
-        Me.tpg_FeaturesEdit.SuspendLayout()
-        Me.tpg_notesEdit.SuspendLayout()
         Me.strp_connectionStatus.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -207,7 +196,8 @@ Partial Class frm_main
         '
         'tpg_read
         '
-        Me.tpg_read.Controls.Add(Me.btn_print)
+        Me.tpg_read.Controls.Add(Me.btn_printSpecs)
+        Me.tpg_read.Controls.Add(Me.btn_printSearch)
         Me.tpg_read.Controls.Add(Me.cbx_osFileName)
         Me.tpg_read.Controls.Add(Me.lbl_osfilename)
         Me.tpg_read.Controls.Add(Me.cbx_osType)
@@ -245,14 +235,14 @@ Partial Class frm_main
         Me.tpg_read.Text = "Read"
         Me.tpg_read.UseVisualStyleBackColor = True
         '
-        'btn_print
+        'btn_printSearch
         '
-        Me.btn_print.Location = New System.Drawing.Point(422, 152)
-        Me.btn_print.Name = "btn_print"
-        Me.btn_print.Size = New System.Drawing.Size(121, 23)
-        Me.btn_print.TabIndex = 29
-        Me.btn_print.Text = "Print search results"
-        Me.btn_print.UseVisualStyleBackColor = True
+        Me.btn_printSearch.Location = New System.Drawing.Point(422, 123)
+        Me.btn_printSearch.Name = "btn_printSearch"
+        Me.btn_printSearch.Size = New System.Drawing.Size(121, 23)
+        Me.btn_printSearch.TabIndex = 29
+        Me.btn_printSearch.Text = "Print search results"
+        Me.btn_printSearch.UseVisualStyleBackColor = True
         '
         'cbx_osFileName
         '
@@ -318,8 +308,6 @@ Partial Class frm_main
         'tab_results
         '
         Me.tab_results.Controls.Add(Me.tpg_specs)
-        Me.tab_results.Controls.Add(Me.tpg_Features)
-        Me.tab_results.Controls.Add(Me.tpg_Notes)
         Me.tab_results.Enabled = False
         Me.tab_results.Location = New System.Drawing.Point(551, 38)
         Me.tab_results.Name = "tab_results"
@@ -346,46 +334,6 @@ Partial Class frm_main
         Me.txt_specs.Size = New System.Drawing.Size(220, 98)
         Me.txt_specs.TabIndex = 1
         '
-        'tpg_Features
-        '
-        Me.tpg_Features.Controls.Add(Me.txt_Features)
-        Me.tpg_Features.Location = New System.Drawing.Point(4, 22)
-        Me.tpg_Features.Name = "tpg_Features"
-        Me.tpg_Features.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpg_Features.Size = New System.Drawing.Size(233, 111)
-        Me.tpg_Features.TabIndex = 0
-        Me.tpg_Features.Text = "Features"
-        Me.tpg_Features.UseVisualStyleBackColor = True
-        '
-        'txt_Features
-        '
-        Me.txt_Features.Location = New System.Drawing.Point(7, 7)
-        Me.txt_Features.Multiline = True
-        Me.txt_Features.Name = "txt_Features"
-        Me.txt_Features.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_Features.Size = New System.Drawing.Size(220, 98)
-        Me.txt_Features.TabIndex = 0
-        '
-        'tpg_Notes
-        '
-        Me.tpg_Notes.Controls.Add(Me.txt_Notes)
-        Me.tpg_Notes.Location = New System.Drawing.Point(4, 22)
-        Me.tpg_Notes.Name = "tpg_Notes"
-        Me.tpg_Notes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpg_Notes.Size = New System.Drawing.Size(233, 111)
-        Me.tpg_Notes.TabIndex = 1
-        Me.tpg_Notes.Text = "Install Notes"
-        Me.tpg_Notes.UseVisualStyleBackColor = True
-        '
-        'txt_Notes
-        '
-        Me.txt_Notes.Location = New System.Drawing.Point(7, 7)
-        Me.txt_Notes.Multiline = True
-        Me.txt_Notes.Name = "txt_Notes"
-        Me.txt_Notes.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_Notes.Size = New System.Drawing.Size(220, 98)
-        Me.txt_Notes.TabIndex = 1
-        '
         'cbx_osSize
         '
         Me.cbx_osSize.FormattingEnabled = True
@@ -406,7 +354,7 @@ Partial Class frm_main
         'cbx_osName
         '
         Me.cbx_osName.FormattingEnabled = True
-        Me.cbx_osName.Location = New System.Drawing.Point(422, 125)
+        Me.cbx_osName.Location = New System.Drawing.Point(422, 96)
         Me.cbx_osName.Name = "cbx_osName"
         Me.cbx_osName.Size = New System.Drawing.Size(121, 21)
         Me.cbx_osName.TabIndex = 18
@@ -414,7 +362,7 @@ Partial Class frm_main
         'lbl_osName
         '
         Me.lbl_osName.AutoSize = True
-        Me.lbl_osName.Location = New System.Drawing.Point(375, 128)
+        Me.lbl_osName.Location = New System.Drawing.Point(375, 99)
         Me.lbl_osName.Name = "lbl_osName"
         Me.lbl_osName.Size = New System.Drawing.Size(38, 13)
         Me.lbl_osName.TabIndex = 17
@@ -649,8 +597,6 @@ Partial Class frm_main
         'tab_ExtrasEdit
         '
         Me.tab_ExtrasEdit.Controls.Add(Me.tpg_instructionsEdit)
-        Me.tab_ExtrasEdit.Controls.Add(Me.tpg_FeaturesEdit)
-        Me.tab_ExtrasEdit.Controls.Add(Me.tpg_notesEdit)
         Me.tab_ExtrasEdit.Location = New System.Drawing.Point(374, 12)
         Me.tab_ExtrasEdit.Name = "tab_ExtrasEdit"
         Me.tab_ExtrasEdit.SelectedIndex = 0
@@ -699,46 +645,6 @@ Partial Class frm_main
         Me.lbl_instruct1.TabIndex = 0
         Me.lbl_instruct1.Text = "To edit an existing entry, narrow down the search terms to a single entity, then " &
     "modify the required fields before clicking save."
-        '
-        'tpg_FeaturesEdit
-        '
-        Me.tpg_FeaturesEdit.Controls.Add(Me.txt_FeaturesEdit)
-        Me.tpg_FeaturesEdit.Location = New System.Drawing.Point(4, 22)
-        Me.tpg_FeaturesEdit.Name = "tpg_FeaturesEdit"
-        Me.tpg_FeaturesEdit.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpg_FeaturesEdit.Size = New System.Drawing.Size(415, 111)
-        Me.tpg_FeaturesEdit.TabIndex = 0
-        Me.tpg_FeaturesEdit.Text = "Features"
-        Me.tpg_FeaturesEdit.UseVisualStyleBackColor = True
-        '
-        'txt_FeaturesEdit
-        '
-        Me.txt_FeaturesEdit.Location = New System.Drawing.Point(7, 7)
-        Me.txt_FeaturesEdit.Multiline = True
-        Me.txt_FeaturesEdit.Name = "txt_FeaturesEdit"
-        Me.txt_FeaturesEdit.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_FeaturesEdit.Size = New System.Drawing.Size(402, 98)
-        Me.txt_FeaturesEdit.TabIndex = 0
-        '
-        'tpg_notesEdit
-        '
-        Me.tpg_notesEdit.Controls.Add(Me.txt_NotesEdit)
-        Me.tpg_notesEdit.Location = New System.Drawing.Point(4, 22)
-        Me.tpg_notesEdit.Name = "tpg_notesEdit"
-        Me.tpg_notesEdit.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpg_notesEdit.Size = New System.Drawing.Size(415, 111)
-        Me.tpg_notesEdit.TabIndex = 1
-        Me.tpg_notesEdit.Text = "Install Notes"
-        Me.tpg_notesEdit.UseVisualStyleBackColor = True
-        '
-        'txt_NotesEdit
-        '
-        Me.txt_NotesEdit.Location = New System.Drawing.Point(7, 7)
-        Me.txt_NotesEdit.Multiline = True
-        Me.txt_NotesEdit.Name = "txt_NotesEdit"
-        Me.txt_NotesEdit.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_NotesEdit.Size = New System.Drawing.Size(402, 98)
-        Me.txt_NotesEdit.TabIndex = 1
         '
         'cbx_osSizeEdit
         '
@@ -929,6 +835,15 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
         '
+        'btn_printSpecs
+        '
+        Me.btn_printSpecs.Location = New System.Drawing.Point(422, 152)
+        Me.btn_printSpecs.Name = "btn_printSpecs"
+        Me.btn_printSpecs.Size = New System.Drawing.Size(121, 23)
+        Me.btn_printSpecs.TabIndex = 30
+        Me.btn_printSpecs.Text = "Print specifications"
+        Me.btn_printSpecs.UseVisualStyleBackColor = True
+        '
         'frm_main
         '
         Me.AllowDrop = True
@@ -951,18 +866,10 @@ Partial Class frm_main
         Me.tab_results.ResumeLayout(False)
         Me.tpg_specs.ResumeLayout(False)
         Me.tpg_specs.PerformLayout()
-        Me.tpg_Features.ResumeLayout(False)
-        Me.tpg_Features.PerformLayout()
-        Me.tpg_Notes.ResumeLayout(False)
-        Me.tpg_Notes.PerformLayout()
         Me.tpg_edit.ResumeLayout(False)
         Me.tpg_edit.PerformLayout()
         Me.tab_ExtrasEdit.ResumeLayout(False)
         Me.tpg_instructionsEdit.ResumeLayout(False)
-        Me.tpg_FeaturesEdit.ResumeLayout(False)
-        Me.tpg_FeaturesEdit.PerformLayout()
-        Me.tpg_notesEdit.ResumeLayout(False)
-        Me.tpg_notesEdit.PerformLayout()
         Me.strp_connectionStatus.ResumeLayout(False)
         Me.strp_connectionStatus.PerformLayout()
         Me.ResumeLayout(False)
@@ -989,10 +896,6 @@ Partial Class frm_main
     Friend WithEvents lbl_osFormat As Label
     Friend WithEvents lbl_resultsHint As Label
     Friend WithEvents tab_results As TabControl
-    Friend WithEvents tpg_Features As TabPage
-    Friend WithEvents txt_Features As TextBox
-    Friend WithEvents tpg_Notes As TabPage
-    Friend WithEvents txt_Notes As TextBox
     Friend WithEvents cbx_osSize As ComboBox
     Friend WithEvents lbl_osSize As Label
     Friend WithEvents cbx_osName As ComboBox
@@ -1016,10 +919,6 @@ Partial Class frm_main
     Friend WithEvents cbx_osFormatEdit As ComboBox
     Friend WithEvents lbl_osFormatEdit As Label
     Friend WithEvents tab_ExtrasEdit As TabControl
-    Friend WithEvents tpg_FeaturesEdit As TabPage
-    Friend WithEvents txt_FeaturesEdit As TextBox
-    Friend WithEvents tpg_notesEdit As TabPage
-    Friend WithEvents txt_NotesEdit As TextBox
     Friend WithEvents cbx_osSizeEdit As ComboBox
     Friend WithEvents lbl_osSizeEdit As Label
     Friend WithEvents cbx_osNameEdit As ComboBox
@@ -1052,6 +951,7 @@ Partial Class frm_main
     Friend WithEvents Label1 As Label
     Friend WithEvents lbl_instruct1 As Label
     Friend WithEvents lbl_dragDrop As Label
-    Friend WithEvents btn_print As Button
+    Friend WithEvents btn_printSearch As Button
     Friend WithEvents pdc_Report As Printing.PrintDocument
+    Friend WithEvents btn_printSpecs As Button
 End Class

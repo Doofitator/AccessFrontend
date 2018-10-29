@@ -80,12 +80,9 @@
                     frm_main.lbl_resultsHint.Top = 7
                 End If
 
-                frm_main.txt_Features.Height = frm_main.tpg_Features.Height - 14
-                frm_main.txt_Notes.Height = frm_main.tpg_Notes.Height - 14
-                frm_main.txt_Features.Width = frm_main.tpg_Features.Width - 14
-                frm_main.txt_Notes.Width = frm_main.tpg_Features.Width - 14
-                frm_main.txt_specs.Width = frm_main.tpg_Features.Width - 14
-                frm_main.txt_specs.Height = frm_main.tpg_Features.Height - 14
+
+                frm_main.txt_specs.Width = frm_main.tpg_specs.Width - 14
+                frm_main.txt_specs.Height = frm_main.tpg_specs.Height - 14
             Else
                 If frm_main.tab_controls.Height > 370 Then
                     frm_main.tab_ExtrasEdit.Width = frm_main.tab_controls.Width - 30
@@ -99,10 +96,7 @@
                     frm_main.tab_ExtrasEdit.Height = 137
                 End If
 
-                frm_main.txt_FeaturesEdit.Height = frm_main.tpg_FeaturesEdit.Height - 14
-                frm_main.txt_NotesEdit.Height = frm_main.tpg_notesEdit.Height - 14
-                frm_main.txt_FeaturesEdit.Width = frm_main.tpg_FeaturesEdit.Width - 14
-                frm_main.txt_NotesEdit.Width = frm_main.tpg_FeaturesEdit.Width - 14
+
                 frm_main.btn_Save.Left = frm_main.tpg_edit.Width - frm_main.btn_Save.Width - 10
                 frm_main.btn_Save.Top = frm_main.tab_ExtrasEdit.Height + frm_main.tab_ExtrasEdit.Top + 10
             End If
