@@ -94,16 +94,68 @@
             If excluded Is frm_main.cbx_osVersionEdit Then field = "version"
             DatabaseConnection.close()
 
-            'TODO: Somehow get all the arr_mediaType, arr_etc. from getRecordByField and for each string in each array, add it to it's respective combobox.
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "variant")
+                If Not frm_main.cbx_osVariant.Items.Contains(record) Then frm_main.cbx_osVariant.Items.Add(record)
+            Next
 
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "version")
+                If Not frm_main.cbx_osVersion.Items.Contains(record) Then frm_main.cbx_osVersion.Items.Add(record)
+            Next
 
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "edition")
+                If Not frm_main.cbx_osEdition.Items.Contains(record) Then frm_main.cbx_osEdition.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "friendlyName")
+                If Not frm_main.cbx_osName.Items.Contains(record) Then frm_main.cbx_osName.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "ram")
+                If Not frm_main.cbx_osRAM.Items.Contains(record) Then frm_main.cbx_osRAM.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaSize")
+                If Not frm_main.cbx_osSize.Items.Contains(record) Then frm_main.cbx_osSize.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaFormat")
+                If Not frm_main.cbx_osFormat.Items.Contains(record) Then frm_main.cbx_osFormat.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "buildType")
+                If Not frm_main.cbx_osBuild.Items.Contains(record) Then frm_main.cbx_osBuild.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "parent")
+                If Not frm_main.cbx_osParent.Items.Contains(record) Then frm_main.cbx_osParent.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "platform")
+                If Not frm_main.cbx_osPlatform.Items.Contains(record) Then frm_main.cbx_osPlatform.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "filename")
+                If Not frm_main.cbx_osFileName.Items.Contains(record) Then frm_main.cbx_osFileName.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "boot")
+                If Not frm_main.cbx_osBoot.Items.Contains(record) Then frm_main.cbx_osBoot.Items.Add(record)
+            Next
+
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType")
+                If Not frm_main.cbx_osType.Items.Contains(record) Then frm_main.cbx_osType.Items.Add(record)
+            Next
+
+            'TODO: Make this for edit page
+            'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why?
         End If
         Try
-            DatabaseConnection.Close()
-        Catch
-            Console.WriteLine("already closed")
-        End Try
-        With frm_main
+                DatabaseConnection.Close()
+            Catch
+                Console.WriteLine("already closed")
+            End Try
+
+            With frm_main
             .Cursor = Cursors.Default
             .Refresh()
         End With
@@ -228,5 +280,85 @@
         End While
 
         Return records
+    End Function
+
+    Public Function getRecordByFieldAsField(ByVal field As String, ByVal value As String, ByVal Table As String, ByVal fieldToReturn As String) 'returns array of all records that match criteria
+        'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
+        DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
+        DatabaseConnection.Open()
+        Dim t As New DataTable
+        Dim adapter As OleDb.OleDbDataAdapter()
+        Dim cmd As OleDb.OleDbCommand
+        Dim reader As OleDb.OleDbDataReader
+
+        Dim sql = "SELECT * FROM " & Table & " WHERE " & Table & "." & field & " = '" & value & "'"
+        Dim lst_ID As List(Of Integer) = New List(Of Integer)()
+        Dim lst_variant As List(Of String) = New List(Of String)()
+        Dim lst_version As List(Of String) = New List(Of String)()
+        Dim lst_edition As List(Of String) = New List(Of String)()
+        Dim lst_friendlyName As List(Of String) = New List(Of String)()
+        Dim lst_ram As List(Of String) = New List(Of String)()
+        Dim lst_mediaSize As List(Of String) = New List(Of String)()
+        Dim lst_mediaFormat As List(Of String) = New List(Of String)()
+        Dim lst_buildType As List(Of String) = New List(Of String)()
+        Dim lst_parent As List(Of String) = New List(Of String)()
+        Dim lst_platform As List(Of String) = New List(Of String)()
+        Dim lst_filename As List(Of String) = New List(Of String)()
+        Dim lst_boot As List(Of String) = New List(Of String)()
+        Dim lst_mediaType As List(Of String) = New List(Of String)()
+        Try
+            cmd = New OleDb.OleDbCommand(sql, DatabaseConnection)
+            reader = cmd.ExecuteReader()
+            While (reader.Read())
+                lst_ID.Add(reader.GetInt32(0))
+                lst_variant.Add(reader.GetString(1))
+                lst_version.Add(reader.GetString(2))
+                lst_edition.Add(reader.GetString(3))
+                lst_friendlyName.Add(reader.GetString(4))
+                lst_ram.Add(reader.GetString(5))
+                lst_mediaSize.Add(reader.GetString(6))
+                lst_mediaFormat.Add(reader.GetString(7))
+                lst_buildType.Add(reader.GetString(8))
+                lst_parent.Add(reader.GetString(9))
+                lst_platform.Add(reader.GetString(10))
+                lst_filename.Add(reader.GetString(11))
+                lst_boot.Add(reader.GetString(12))
+                lst_mediaType.Add(reader.GetString(13))
+            End While
+            reader.Close()
+        Finally
+            If reader IsNot Nothing Then reader.Close()
+        End Try
+        DatabaseConnection.close()
+        Dim arr_ID As Array = lst_ID.ToArray()
+        Dim arr_variant As Array = lst_variant.ToArray()
+        Dim arr_version As Array = lst_version.ToArray()
+        Dim arr_edition As Array = lst_edition.ToArray()
+        Dim arr_friendlyName As Array = lst_friendlyName.ToArray()
+        Dim arr_ram As Array = lst_ram.ToArray()
+        Dim arr_mediaSize As Array = lst_mediaSize.ToArray()
+        Dim arr_mediaFormat As Array = lst_mediaFormat.ToArray()
+        Dim arr_buildType As Array = lst_buildType.ToArray()
+        Dim arr_parent As Array = lst_parent.ToArray()
+        Dim arr_platform As Array = lst_platform.ToArray()
+        Dim arr_filename As Array = lst_filename.ToArray()
+        Dim arr_boot As Array = lst_boot.ToArray()
+        Dim arr_mediatype As Array = lst_mediaType.ToArray()
+
+        If fieldToReturn = "ID" Then Return arr_ID
+        If fieldToReturn = "variant" Then Return arr_variant
+        If fieldToReturn = "version" Then Return arr_version
+        If fieldToReturn = "edition" Then Return arr_edition
+        If fieldToReturn = "friendlyName" Then Return arr_friendlyName
+        If fieldToReturn = "ram" Then Return arr_ram
+        If fieldToReturn = "mediaSize" Then Return arr_mediaSize
+        If fieldToReturn = "mediaFormat" Then Return arr_mediaFormat
+        If fieldToReturn = "buildType" Then Return arr_buildType
+        If fieldToReturn = "parent" Then Return arr_parent
+        If fieldToReturn = "platform" Then Return arr_platform
+        If fieldToReturn = "filename" Then Return arr_filename
+        If fieldToReturn = "boot" Then Return arr_boot
+        If fieldToReturn = "mediaType" Then Return arr_mediatype
+
     End Function
 End Module
