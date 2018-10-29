@@ -311,12 +311,7 @@
             reader = cmd.ExecuteReader()
             While (reader.Read())
                 lst_ID.Add(reader.GetInt32(0))
-                Try
-                    lst_variant.Add(reader.GetString(1))
-                Catch
-                    lst_variant.Add(reader.GetValue(1)) 'An unhandled exception of type 'System.InvalidCastException' occurred in Microsoft.VisualBasic.dll Conversion from type 'DBNull' to type 'String' is not valid. <-- TODO: This means the database has a null value in the variant column, and it shouldn't. This is not a VB error, it's a access error.
-
-                End Try
+                lst_variant.Add(reader.GetString(1))
                 lst_version.Add(reader.GetString(2))
                 lst_edition.Add(reader.GetString(3))
                 lst_friendlyName.Add(reader.GetString(4))

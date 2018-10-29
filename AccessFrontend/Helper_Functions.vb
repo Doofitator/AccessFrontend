@@ -13,7 +13,17 @@
         End Try
     End Function
 
-    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False)
+    Function CheckIfOneRecord()
+        If frm_main.cbx_osFileName.Items.Count = 1 Then
+            Dim specString As String
+            Dim x = getRecordByField("filename", theonlyvaluepossiblefromcbx_osfilename, "tbl_os")
+            'specString = variant & " - " & friendlyname & vbcrlf & "Parent: " & Parent & vbcrlf & "Edition: " & Edition & vbcrlf & "Version: " & Version & vbcrlf & so on & so forth
+
+            frm_main.txt_specs.Text = specString
+        End If
+    End Function
+
+    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False) 'TODO: Make this not literally use up 26% CPU
         With frm_main
             .Cursor = Cursors.WaitCursor
             .Refresh()
