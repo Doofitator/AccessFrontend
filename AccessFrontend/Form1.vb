@@ -137,13 +137,13 @@ Public Class frm_main
     Dim DatabaseWhiteList As String
 
     Private Sub SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_osBoot.SelectedIndexChanged, cbx_osBuild.SelectedIndexChanged, cbx_osEdition.SelectedIndexChanged, cbx_osFileName.SelectedIndexChanged, cbx_osFormat.SelectedIndexChanged, cbx_osName.SelectedIndexChanged, cbx_osParent.SelectedIndexChanged, cbx_osPlatform.SelectedIndexChanged, cbx_osRAM.SelectedIndexChanged, cbx_osSize.SelectedIndexChanged, cbx_osType.SelectedIndexChanged, cbx_osVariant.SelectedIndexChanged, cbx_osVersion.SelectedIndexChanged
-        Dim name As ComboBox = CType(sender, ComboBox) 'Get combobox
-        Dim x As String = name.SelectedItem 'Get combobox name
+        Dim control As ComboBox = CType(sender, ComboBox) 'Get combobox
+        Dim x As String = control.SelectedItem
         DatabaseWhiteList += x & "," 'add it's name to the whitelist
         Dim whitelistArray As String() = DatabaseWhiteList.Split(",") 'make the whitelist an array
-        populateComboBoxes(whitelistArray, name) 'run function with whitelistarray (everything whitelisted thus far) and name (the current modified combobox)
+        populateComboBoxes(whitelistArray, control) 'run function with whitelistarray (everything whitelisted thus far) and name (the current modified combobox)
         'TODO: What if you set a combobox to a different value from the initial? Also, what if you set it to blank again? Will it un-whitelist? <-- maybe once a combobox is changed, disable it? add another button that says to reset and we will start over?
-        checkIfOneRecord()
+        CheckIfOneRecord()
     End Sub
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click

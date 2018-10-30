@@ -16,9 +16,10 @@
     Function CheckIfOneRecord()
         If frm_main.cbx_osFileName.Items.Count = 1 Then
             Dim specString As String
-            Dim x = getRecordByField("filename", theonlyvaluepossiblefromcbx_osfilename, "tbl_os")
+            Dim y = getRecordByField("filename", frm_main.cbx_osFileName.Items(0).ToString, "tbl_os")
+            Dim x = y(0).split(",")
             'specString = variant & " - " & friendlyname & vbcrlf & "Parent: " & Parent & vbcrlf & "Edition: " & Edition & vbcrlf & "Version: " & Version & vbcrlf & so on & so forth
-
+            specString = x(1) & "   -   " & x(4) & vbCrLf & "Parent: " & x(9) & vbCrLf & "Edition: " & x(3) & vbCrLf & "Version: " & x(2) & vbCrLf & "Minimum RAM (megabytes): " & x(5) & vbCrLf & "Media format: " & x(7) & vbCrLf & "Media type: " & x(13) & vbCrLf & "Media size: " & x(6) & vbCrLf & "Build type: " & x(8) & vbCrLf & "Boot / BIOS type: " & x(12) & vbCrLf & "Platform: " & x(10) & vbCrLf & vbCrLf & "Filename: " & x(11) & "." & x(7)
             frm_main.txt_specs.Text = specString
         End If
     End Function
