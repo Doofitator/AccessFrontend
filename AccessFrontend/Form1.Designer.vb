@@ -31,6 +31,7 @@ Partial Class frm_main
         Me.grp_control = New System.Windows.Forms.GroupBox()
         Me.tab_controls = New System.Windows.Forms.TabControl()
         Me.tpg_read = New System.Windows.Forms.TabPage()
+        Me.btn_printSpecs = New System.Windows.Forms.Button()
         Me.btn_printSearch = New System.Windows.Forms.Button()
         Me.cbx_osFileName = New System.Windows.Forms.ComboBox()
         Me.lbl_osfilename = New System.Windows.Forms.Label()
@@ -41,7 +42,6 @@ Partial Class frm_main
         Me.lbl_resultsHint = New System.Windows.Forms.Label()
         Me.tab_results = New System.Windows.Forms.TabControl()
         Me.tpg_specs = New System.Windows.Forms.TabPage()
-        Me.txt_specs = New System.Windows.Forms.TextBox()
         Me.cbx_osSize = New System.Windows.Forms.ComboBox()
         Me.lbl_osSize = New System.Windows.Forms.Label()
         Me.cbx_osName = New System.Windows.Forms.ComboBox()
@@ -98,7 +98,7 @@ Partial Class frm_main
         Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.pdc_Report = New System.Drawing.Printing.PrintDocument()
-        Me.btn_printSpecs = New System.Windows.Forms.Button()
+        Me.txt_specs = New System.Windows.Forms.TextBox()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
@@ -235,6 +235,15 @@ Partial Class frm_main
         Me.tpg_read.Text = "Read"
         Me.tpg_read.UseVisualStyleBackColor = True
         '
+        'btn_printSpecs
+        '
+        Me.btn_printSpecs.Location = New System.Drawing.Point(422, 152)
+        Me.btn_printSpecs.Name = "btn_printSpecs"
+        Me.btn_printSpecs.Size = New System.Drawing.Size(121, 23)
+        Me.btn_printSpecs.TabIndex = 30
+        Me.btn_printSpecs.Text = "Print specifications"
+        Me.btn_printSpecs.UseVisualStyleBackColor = True
+        '
         'btn_printSearch
         '
         Me.btn_printSearch.Location = New System.Drawing.Point(422, 123)
@@ -324,15 +333,6 @@ Partial Class frm_main
         Me.tpg_specs.TabIndex = 2
         Me.tpg_specs.Text = "Specifications"
         Me.tpg_specs.UseVisualStyleBackColor = True
-        '
-        'txt_specs
-        '
-        Me.txt_specs.Location = New System.Drawing.Point(7, 7)
-        Me.txt_specs.Multiline = True
-        Me.txt_specs.Name = "txt_specs"
-        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txt_specs.Size = New System.Drawing.Size(220, 98)
-        Me.txt_specs.TabIndex = 1
         '
         'cbx_osSize
         '
@@ -835,14 +835,14 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
         '
-        'btn_printSpecs
+        'txt_specs
         '
-        Me.btn_printSpecs.Location = New System.Drawing.Point(422, 152)
-        Me.btn_printSpecs.Name = "btn_printSpecs"
-        Me.btn_printSpecs.Size = New System.Drawing.Size(121, 23)
-        Me.btn_printSpecs.TabIndex = 30
-        Me.btn_printSpecs.Text = "Print specifications"
-        Me.btn_printSpecs.UseVisualStyleBackColor = True
+        Me.txt_specs.Location = New System.Drawing.Point(3, 3)
+        Me.txt_specs.Multiline = True
+        Me.txt_specs.Name = "txt_specs"
+        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txt_specs.Size = New System.Drawing.Size(227, 105)
+        Me.txt_specs.TabIndex = 0
         '
         'frm_main
         '
@@ -941,7 +941,6 @@ Partial Class frm_main
     Friend WithEvents lbl_osParentEdit As Label
     Friend WithEvents btn_Save As Button
     Friend WithEvents tpg_specs As TabPage
-    Friend WithEvents txt_specs As TextBox
     Friend WithEvents btn_disconnect As Button
     Friend WithEvents strp_connectionStatus As StatusStrip
     Friend WithEvents tssl_databaseStatus As ToolStripStatusLabel
@@ -954,4 +953,5 @@ Partial Class frm_main
     Friend WithEvents btn_printSearch As Button
     Friend WithEvents pdc_Report As Printing.PrintDocument
     Friend WithEvents btn_printSpecs As Button
+    Friend WithEvents txt_specs As TextBox
 End Class

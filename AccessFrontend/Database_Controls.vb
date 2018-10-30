@@ -1,5 +1,5 @@
 ﻿Module Database_Controls
-    Dim DatabaseConnection = New OleDb.OleDbConnection
+    Public DatabaseConnection = New OleDb.OleDbConnection
     Public newMedia As System.IO.FileInfo = Nothing
 
 
@@ -29,11 +29,7 @@
             Dim Item(2) As String
 
             For Each row In t1.Rows
-                Try
-                    Item(0) = row(rowNumber)
-                Catch
-                    Item(0) = "Undefined"
-                End Try
+                Item(0) = row(rowNumber)
                 Dim NextListItem As New ListViewItem(Item)
                 If Not theCombobox.Items.Contains(NextListItem.Text) Then
                     theCombobox.Items.Add(NextListItem.Text)
@@ -150,12 +146,12 @@
             'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why? <-- put that in testing table, too.
         End If
         Try
-                DatabaseConnection.Close()
-            Catch
-                Console.WriteLine("already closed")
-            End Try
+            If Not isConnected Then DatabaseConnection.Close()
+        Catch
+            Console.WriteLine("already closed")
+        End Try
 
-            With frm_main
+        With frm_main
             .Cursor = Cursors.Default
             .Refresh()
         End With
