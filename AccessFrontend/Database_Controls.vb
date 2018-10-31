@@ -14,6 +14,8 @@
                 .Refresh()
             End With
             DatabaseConnection.Open()
+            Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
         End If
         frm_main.tssl_databaseStatus.Text = "Connected to database. Please wait for data to populate..."
         If whitelist Is Nothing Then
@@ -88,68 +90,73 @@
             If excluded Is frm_main.cbx_osVariantEdit Then field = "variant"
             If excluded Is frm_main.cbx_osVersion Then field = "version"
             If excluded Is frm_main.cbx_osVersionEdit Then field = "version"
-            DatabaseConnection.close()
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "variant")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "variant", True)
                 If Not frm_main.cbx_osVariant.Items.Contains(record) Then frm_main.cbx_osVariant.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "version")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "version", True)
                 If Not frm_main.cbx_osVersion.Items.Contains(record) Then frm_main.cbx_osVersion.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "edition")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "edition", True)
                 If Not frm_main.cbx_osEdition.Items.Contains(record) Then frm_main.cbx_osEdition.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "friendlyName")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "friendlyName", True)
                 If Not frm_main.cbx_osName.Items.Contains(record) Then frm_main.cbx_osName.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "ram")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "ram", True)
                 If Not frm_main.cbx_osRAM.Items.Contains(record) Then frm_main.cbx_osRAM.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaSize")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaSize", True)
                 If Not frm_main.cbx_osSize.Items.Contains(record) Then frm_main.cbx_osSize.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaFormat")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaFormat", True)
                 If Not frm_main.cbx_osFormat.Items.Contains(record) Then frm_main.cbx_osFormat.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "buildType")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "buildType", True)
                 If Not frm_main.cbx_osBuild.Items.Contains(record) Then frm_main.cbx_osBuild.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "parent")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "parent", True)
                 If Not frm_main.cbx_osParent.Items.Contains(record) Then frm_main.cbx_osParent.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "platform")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "platform", True)
                 If Not frm_main.cbx_osPlatform.Items.Contains(record) Then frm_main.cbx_osPlatform.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "filename")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "filename", True)
                 If Not frm_main.cbx_osFileName.Items.Contains(record) Then frm_main.cbx_osFileName.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "boot")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "boot", True)
                 If Not frm_main.cbx_osBoot.Items.Contains(record) Then frm_main.cbx_osBoot.Items.Add(record)
             Next
 
-            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType")
+            For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType", True)
                 If Not frm_main.cbx_osType.Items.Contains(record) Then frm_main.cbx_osType.Items.Add(record)
             Next
 
+
             'TODO: Make this for edit page
             'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why? <-- put that in testing table, too.
+            'TODO: While on the subject of teesting tables, put in that I changed the order of the server connections in regards to the populate functinos.
+            'TODO: Still while on that subject, add that I removed all unnessasary reconnections and disconnections to speed stuff up from taking two minutes to two seconds
         End If
-        Try
-            If Not isConnected Then DatabaseConnection.Close()
-        Catch
-            Console.WriteLine("already closed")
-        End Try
+
+        If Not isConnected Then
+
+            DatabaseConnection.Close()
+            Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+        End If
+
+
 
         With frm_main
             .Cursor = Cursors.Default
@@ -167,6 +174,8 @@
             .Refresh()
         End With
         DatabaseConnection.Open()
+        Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
         frm_main.tssl_databaseStatus.Text = "Connected to database. Please wait for data to be uploaded..."
         Dim x
         If newMedia Is Nothing Then
@@ -194,7 +203,9 @@
         Command.ExecuteNonQuery()
         populateComboBoxes(, , True)
         frm_main.tssl_databaseStatus.Text = "Disconnecting..."
-        DatabaseConnection.close()
+        DatabaseConnection.Close()
+        Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
         With frm_main
             .Cursor = Cursors.Default
             .tssl_databaseStatus.Text = "Completed upload and repopulation. Disconnected."
@@ -208,6 +219,8 @@
         'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
         DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
         DatabaseConnection.Open()
+        Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
         Dim t As New DataTable
         Dim adapter As OleDb.OleDbDataAdapter()
         Dim cmd As OleDb.OleDbCommand
@@ -251,7 +264,9 @@
         Finally
             If reader IsNot Nothing Then reader.Close()
         End Try
-        DatabaseConnection.close()
+        DatabaseConnection.Close()
+        Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
         Dim arr_ID As Array = lst_ID.ToArray()
         Dim arr_variant As Array = lst_variant.ToArray()
         Dim arr_version As Array = lst_version.ToArray()
@@ -278,12 +293,15 @@
         Return records
     End Function
 
-    Public Function getRecordByFieldAsField(ByVal field As String, ByVal value As String, ByVal Table As String, ByVal fieldToReturn As String) 'returns array of all records that match criteria
+    Public Function getRecordByFieldAsField(ByVal field As String, ByVal value As String, ByVal Table As String, ByVal fieldToReturn As String, Optional isconnected As Boolean = False) 'returns array of all records that match criteria
         'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
-        DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
-        DatabaseConnection.Open()
+        If Not isconnected Then
+            DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
+            DatabaseConnection.Open()
+            Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+        End If
         Dim t As New DataTable
-        Dim adapter As OleDb.OleDbDataAdapter()
+            Dim adapter As OleDb.OleDbDataAdapter()
         Dim cmd As OleDb.OleDbCommand
         Dim reader As OleDb.OleDbDataReader
 
@@ -325,7 +343,10 @@
         Finally
             If reader IsNot Nothing Then reader.Close()
         End Try
-        DatabaseConnection.close()
+        If Not isconnected Then
+            DatabaseConnection.Close()
+            Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+        End If
         Dim arr_ID As Array = lst_ID.ToArray()
         Dim arr_variant As Array = lst_variant.ToArray()
         Dim arr_version As Array = lst_version.ToArray()
