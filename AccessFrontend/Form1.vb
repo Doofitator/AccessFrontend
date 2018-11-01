@@ -141,7 +141,7 @@ Public Class frm_main
         Dim control As ComboBox = CType(sender, ComboBox) 'Get combobox
         Dim x As String = control.SelectedItem
         Console.WriteLine("Control: " & control.Name & " modified.")
-        DatabaseWhiteList += x & "," 'add it's name to the whitelist
+        If Not x = "" Then DatabaseWhiteList += x & "," 'add it's name to the whitelist
         Dim whitelistArray As String() = DatabaseWhiteList.Split(",") 'make the whitelist an array
         populateComboBoxes(whitelistArray, control) 'run function with whitelistarray (everything whitelisted thus far) and name (the current modified combobox)
         'TODO: What if you set a combobox to a different value from the initial? Also, what if you set it to blank again? Will it un-whitelist? <-- maybe once a combobox is changed, disable it? add another button that says to reset and we will start over?

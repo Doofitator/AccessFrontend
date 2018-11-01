@@ -391,12 +391,9 @@
     End Function
 
     Function passesWhiteList(ByVal value As String, ByVal whitelist As Array)
-        'if value in whitelist
-        'return false
-        For Each memberOfWhitelist As String In whitelist
-            Console.WriteLine("Whitelist failed at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
-            If value = memberOfWhitelist Then Return False
-        Next
+        If whitelist.Length <= 1 Then
+            Return True
+        End If
 
 
         'okay so I can't say "SELECT * FORM tbl_os where * = value", so I'm going to have to go the long, slow, inneffictient way :(
@@ -430,13 +427,15 @@
             For Each record As String In x
                 Try
                     If record.Contains(value) Then 'Object reference not set to an instance of an object --> Record was nothing
+                        'Console.WriteLine("Whitelist failed for " & record & " at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
                         Return False
                     End If
                 Catch
                     If record Is Nothing Then
+                        Console.WriteLine("whitelist pass by default for nothing")
                         Return True
                     Else
-                        Console.WriteLine("Whitelist failed at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+                        'Console.WriteLine("Whitelist failed for " & record & " at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
                         End
                     End If
                 End Try
@@ -446,7 +445,7 @@
 
 
         'else
-
+        Console.WriteLine("whitelist pass for" & value)
         Return True
     End Function
 End Module
