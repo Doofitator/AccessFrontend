@@ -154,8 +154,6 @@
             End While
             Console.WriteLine("")
 
-            'TODO: While on the subject of teesting tables, put in that I changed the order of the server connections in regards to the populate functinos.
-            'TODO: Still while on that subject, add that I removed all unnessasary reconnections and disconnections to speed stuff up from taking two minutes to two seconds
         End If
 
         If Not isConnected Then
@@ -397,23 +395,8 @@
 
 
         'okay so I can't say "SELECT * FORM tbl_os where * = value", so I'm going to have to go the long, slow, inneffictient way :(
-        'TODO: Testing table ^
 
-        Dim fields As String
-
-        fields += "Variant,"
-        fields += "Version,"
-        fields += "edition,"
-        fields += "friendlyName,"
-        fields += "ram,"
-        fields += "mediaSize,"
-        fields += "mediaFormat,"
-        fields += "buildType,"
-        fields += "parent,"
-        fields += "platform,"
-        fields += "filename,"
-        fields += "boot,"
-        fields += "mediaType"
+        Dim fields As String = "Variant,Version,edition,friendlyName,ram,mediaSize,mediaFormat,buildType,parent,platform,filename,boot,mediaType"
 
         Dim arr_fields As Array = fields.Split(",")
 
@@ -431,7 +414,7 @@
                         Return False
                     End If
                 Catch
-                    If record Is Nothing Then
+                    If record Is Nothing Then 'I Think this is happening far too much.
                         Console.WriteLine("whitelist pass by default for nothing")
                         Return True
                     Else
