@@ -427,15 +427,12 @@
             'return false
 
             'IF ANY FIELD OF THE RECORDS IN X IS IN THE WHITELIST, THEN FAIL!
-            Dim i As Integer = x.Length - 1
-            While i >= 0
-                If x(i).contains(value) Then 'object variable or with block variable not set. :(
+            For Each record As String In x
+                If record.Contains(value) Then 'Object reference not set to an instance of an object
                     Return False
                 End If
-                i -= 1
-            End While
+            Next
         Next
-
 
 
 
