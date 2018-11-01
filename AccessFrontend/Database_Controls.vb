@@ -388,9 +388,10 @@
 
     End Function
 
-    Function passesWhiteList(ByVal value As String, ByVal whitelist As Array)
+    Function passesWhiteList(ByVal value As String, ByVal whitelist As Array) As Boolean
         If whitelist.Length <= 1 Then
             Return True
+            Exit Function
         End If
 
 
@@ -400,35 +401,34 @@
 
         Dim arr_fields As Array = fields.Split(",")
 
-        For Each field As String In arr_fields
-            'search the database for all records that contain thet value
-            Dim x As Array = getRecordByField(field, value, "tbl_os", True)
-            'if those records also contain anything from whitelist
-            'return false
+        Dim Bool_return As Boolean = Nothing
 
-            'IF ANY FIELD OF THE RECORDS IN X IS IN THE WHITELIST, THEN FAIL!
-            For Each record As String In x
-                Try
-                    If record.Contains(value) Then 'Object reference not set to an instance of an object --> Record was nothing
-                        'Console.WriteLine("Whitelist failed for " & record & " at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
-                        Return False
+        For Each field As String In arr_fields
+            For Each whitelistMember As String In whitelist
+                Dim x As Array = getRecordByField(field, value, "tbl_os", True)
+                If x Is Nothing Then
+                    Console.WriteLine("x is nothing. Pass.")
+                    Bool_return = True
+                    GoTo done
+                End If
+                For Each y As String In x
+                    If y Is Nothing Then
+                        'Console.WriteLine("y is nothing. Pass.")
+                        Bool_return = True
+                        GoTo done
                     End If
-                Catch
-                    If record Is Nothing Then 'I Think this is happening far too much.
-                        Console.WriteLine("whitelist pass by default for nothing")
-                        Return True
-                    Else
-                        'Console.WriteLine("Whitelist failed for " & record & " at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
-                        End
+                    If y.Contains(value) Then
+                        Console.WriteLine("y contains " & value)
+                        Bool_return = False
+                        GoTo done
                     End If
-                End Try
+                Next
             Next
         Next
 
-
-
         'else
-        Console.WriteLine("whitelist pass for" & value)
-        Return True
+        If Bool_return = Nothing Then Bool_return = True
+done:
+        Return Bool_return
     End Function
 End Module
