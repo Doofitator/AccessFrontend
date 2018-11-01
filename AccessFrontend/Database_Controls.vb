@@ -394,7 +394,7 @@
         'if value in whitelist
         'return false
         For Each memberOfWhitelist As String In whitelist
-            Console.WriteLine("Whitelist test failed at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+            Console.WriteLine("Whitelist failed at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
             If value = memberOfWhitelist Then Return False
         Next
 
@@ -428,9 +428,18 @@
 
             'IF ANY FIELD OF THE RECORDS IN X IS IN THE WHITELIST, THEN FAIL!
             For Each record As String In x
-                If record.Contains(value) Then 'Object reference not set to an instance of an object
-                    Return False
-                End If
+                Try
+                    If record.Contains(value) Then 'Object reference not set to an instance of an object --> Record was nothing
+                        Return False
+                    End If
+                Catch
+                    If record Is Nothing Then
+                        Return True
+                    Else
+                        Console.WriteLine("Whitelist failed at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+                        End
+                    End If
+                End Try
             Next
         Next
 
