@@ -21,10 +21,13 @@
             'specString = variant & " - " & friendlyname & vbcrlf & "Parent: " & Parent & vbcrlf & "Edition: " & Edition & vbcrlf & "Version: " & Version & vbcrlf & so on & so forth
             specString = x(1) & "   -   " & x(4) & vbCrLf & "Parent: " & x(9) & vbCrLf & "Edition: " & x(3) & vbCrLf & "Version: " & x(2) & vbCrLf & "Minimum RAM (megabytes): " & x(5) & vbCrLf & "Media format: " & x(7) & vbCrLf & "Media type: " & x(13) & vbCrLf & "Media size: " & x(6) & vbCrLf & "Build type: " & x(8) & vbCrLf & "Boot / BIOS type: " & x(12) & vbCrLf & "Platform: " & x(10) & vbCrLf & vbCrLf & "Filename: " & x(11) & "." & x(7)
             frm_main.txt_specs.Text = specString
+
+            'TODO: What if frm_main.cbx_osFileName has been selected a value? In that case, it will not have been cleared of software that doesn't meet the search terms and will fail this function.
         End If
     End Function
 
     Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False)
+
         If Not isconnected Then
             DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
 
@@ -32,6 +35,7 @@
                 .Cursor = Cursors.WaitCursor
                 .Refresh()
             End With
+
             DatabaseConnection.Open()
             Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
 

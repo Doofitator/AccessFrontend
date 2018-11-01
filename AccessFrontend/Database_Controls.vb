@@ -15,7 +15,6 @@
             End With
             DatabaseConnection.Open()
             Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
-
         End If
         frm_main.tssl_databaseStatus.Text = "Connected to database. Please wait for data to populate..."
         If whitelist Is Nothing Then
@@ -92,60 +91,69 @@
             If excluded Is frm_main.cbx_osVersionEdit Then field = "version"
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "variant", True)
-                If Not frm_main.cbx_osVariant.Items.Contains(record) Then frm_main.cbx_osVariant.Items.Add(record)
+                If Not frm_main.cbx_osVariant.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osVariant.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "version", True)
-                If Not frm_main.cbx_osVersion.Items.Contains(record) Then frm_main.cbx_osVersion.Items.Add(record)
+                If Not frm_main.cbx_osVersion.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osVersion.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "edition", True)
-                If Not frm_main.cbx_osEdition.Items.Contains(record) Then frm_main.cbx_osEdition.Items.Add(record)
+                If Not frm_main.cbx_osEdition.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osEdition.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "friendlyName", True)
-                If Not frm_main.cbx_osName.Items.Contains(record) Then frm_main.cbx_osName.Items.Add(record)
+                If Not frm_main.cbx_osName.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osName.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "ram", True)
-                If Not frm_main.cbx_osRAM.Items.Contains(record) Then frm_main.cbx_osRAM.Items.Add(record)
+                If Not frm_main.cbx_osRAM.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osRAM.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaSize", True)
-                If Not frm_main.cbx_osSize.Items.Contains(record) Then frm_main.cbx_osSize.Items.Add(record)
+                If Not frm_main.cbx_osSize.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osSize.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaFormat", True)
-                If Not frm_main.cbx_osFormat.Items.Contains(record) Then frm_main.cbx_osFormat.Items.Add(record)
+                If Not frm_main.cbx_osFormat.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osFormat.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "buildType", True)
-                If Not frm_main.cbx_osBuild.Items.Contains(record) Then frm_main.cbx_osBuild.Items.Add(record)
+                If Not frm_main.cbx_osBuild.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osBuild.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "parent", True)
-                If Not frm_main.cbx_osParent.Items.Contains(record) Then frm_main.cbx_osParent.Items.Add(record)
+                If Not frm_main.cbx_osParent.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osParent.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "platform", True)
-                If Not frm_main.cbx_osPlatform.Items.Contains(record) Then frm_main.cbx_osPlatform.Items.Add(record)
+                If Not frm_main.cbx_osPlatform.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osPlatform.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "filename", True)
-                If Not frm_main.cbx_osFileName.Items.Contains(record) Then frm_main.cbx_osFileName.Items.Add(record)
+                If Not frm_main.cbx_osFileName.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osFileName.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "boot", True)
-                If Not frm_main.cbx_osBoot.Items.Contains(record) Then frm_main.cbx_osBoot.Items.Add(record)
+                If Not frm_main.cbx_osBoot.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osBoot.Items.Add(record)
             Next
 
             For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType", True)
-                If Not frm_main.cbx_osType.Items.Contains(record) Then frm_main.cbx_osType.Items.Add(record)
+                If Not frm_main.cbx_osType.Items.Contains(record) Then If passesWhiteList(record, whitelist) Then frm_main.cbx_osType.Items.Add(record)
             Next
 
 
             'TODO: Make this for edit page
             'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why? <-- put that in testing table, too.
+            'TODO: In regards to the above line, it's because I'm not using the whitelist var I made. Gotta do something about that.
+            Dim x = whitelist.Length - 1
+            Console.WriteLine("Whitelist string: ")
+            While x > -1
+                Console.Write(whitelist(x) & ", ")
+                x -= 1
+            End While
+            Console.WriteLine("")
+
             'TODO: While on the subject of teesting tables, put in that I changed the order of the server connections in regards to the populate functinos.
             'TODO: Still while on that subject, add that I removed all unnessasary reconnections and disconnections to speed stuff up from taking two minutes to two seconds
         End If
@@ -215,12 +223,13 @@
     End Function
 #Enable Warning BC42105 ' Function doesn't return a value on all code paths
 
-    Public Function getRecordByField(ByVal field As String, ByVal value As String, ByVal Table As String) 'returns array of all records that match criteria
+    Public Function getRecordByField(ByVal field As String, ByVal value As String, ByVal Table As String, Optional isconnected As Boolean = False) 'returns array of all records that match criteria
         'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
-        DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
-        DatabaseConnection.Open()
-        Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
-
+        If Not isconnected Then
+            DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
+            DatabaseConnection.Open()
+            Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+        End If
         Dim t As New DataTable
         Dim adapter As OleDb.OleDbDataAdapter()
         Dim cmd As OleDb.OleDbCommand
@@ -264,9 +273,11 @@
         Finally
             If reader IsNot Nothing Then reader.Close()
         End Try
-        DatabaseConnection.Close()
-        Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
 
+        If Not isconnected Then
+            DatabaseConnection.Close()
+            Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+        End If
         Dim arr_ID As Array = lst_ID.ToArray()
         Dim arr_variant As Array = lst_variant.ToArray()
         Dim arr_version As Array = lst_version.ToArray()
@@ -301,7 +312,7 @@
             Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
         End If
         Dim t As New DataTable
-            Dim adapter As OleDb.OleDbDataAdapter()
+        Dim adapter As OleDb.OleDbDataAdapter()
         Dim cmd As OleDb.OleDbCommand
         Dim reader As OleDb.OleDbDataReader
 
@@ -377,5 +388,59 @@
         If fieldToReturn = "boot" Then Return arr_boot
         If fieldToReturn = "mediaType" Then Return arr_mediatype
 
+    End Function
+
+    Function passesWhiteList(ByVal value As String, ByVal whitelist As Array)
+        'if value in whitelist
+        'return false
+        For Each memberOfWhitelist As String In whitelist
+            Console.WriteLine("Whitelist test failed at line {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+            If value = memberOfWhitelist Then Return False
+        Next
+
+
+        'okay so I can't say "SELECT * FORM tbl_os where * = value", so I'm going to have to go the long, slow, inneffictient way :(
+        'TODO: Testing table ^
+
+        Dim fields As String
+
+        fields += "Variant,"
+        fields += "Version,"
+        fields += "edition,"
+        fields += "friendlyName,"
+        fields += "ram,"
+        fields += "mediaSize,"
+        fields += "mediaFormat,"
+        fields += "buildType,"
+        fields += "parent,"
+        fields += "platform,"
+        fields += "filename,"
+        fields += "boot,"
+        fields += "mediaType"
+
+        Dim arr_fields As Array = fields.Split(",")
+
+        For Each field As String In arr_fields
+            'search the database for all records that contain thet value
+            Dim x As Array = getRecordByField(field, value, "tbl_os", True)
+            'if those records also contain anything from whitelist
+            'return false
+
+            'IF ANY FIELD OF THE RECORDS IN X IS IN THE WHITELIST, THEN FAIL!
+            Dim i As Integer = x.Length - 1
+            While i >= 0
+                If x(i).contains(value) Then 'object variable or with block variable not set. :(
+                    Return False
+                End If
+                i -= 1
+            End While
+        Next
+
+
+
+
+        'else
+
+        Return True
     End Function
 End Module

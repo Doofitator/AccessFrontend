@@ -137,6 +137,7 @@ Public Class frm_main
     Dim DatabaseWhiteList As String
 
     Private Sub SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_osBoot.SelectedIndexChanged, cbx_osBuild.SelectedIndexChanged, cbx_osEdition.SelectedIndexChanged, cbx_osFileName.SelectedIndexChanged, cbx_osFormat.SelectedIndexChanged, cbx_osName.SelectedIndexChanged, cbx_osParent.SelectedIndexChanged, cbx_osPlatform.SelectedIndexChanged, cbx_osRAM.SelectedIndexChanged, cbx_osSize.SelectedIndexChanged, cbx_osType.SelectedIndexChanged, cbx_osVariant.SelectedIndexChanged, cbx_osVersion.SelectedIndexChanged
+        Me.Cursor = Cursors.WaitCursor
         Dim control As ComboBox = CType(sender, ComboBox) 'Get combobox
         Dim x As String = control.SelectedItem
         Console.WriteLine("Control: " & control.Name & " modified.")
@@ -145,6 +146,8 @@ Public Class frm_main
         populateComboBoxes(whitelistArray, control) 'run function with whitelistarray (everything whitelisted thus far) and name (the current modified combobox)
         'TODO: What if you set a combobox to a different value from the initial? Also, what if you set it to blank again? Will it un-whitelist? <-- maybe once a combobox is changed, disable it? add another button that says to reset and we will start over?
         CheckIfOneRecord()
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
