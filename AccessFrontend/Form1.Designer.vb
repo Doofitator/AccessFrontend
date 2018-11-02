@@ -654,8 +654,8 @@ Partial Class frm_main
         Me.lbl_instruct1.Name = "lbl_instruct1"
         Me.lbl_instruct1.Size = New System.Drawing.Size(403, 30)
         Me.lbl_instruct1.TabIndex = 0
-        Me.lbl_instruct1.Text = "To edit an existing entry, narrow down the search terms to a single entity, then " &
-    "modify the required fields before clicking save."
+        Me.lbl_instruct1.Text = "To edit an existing entry, narrow down the search terms to a single record using " &
+    "the 'Name' combobox, then modify the required fields before clicking save."
         '
         'cbx_osSizeEdit
         '

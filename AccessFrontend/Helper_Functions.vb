@@ -13,7 +13,7 @@
         End Try
     End Function
 
-    Function CheckIfOneRecord() 'TODO: Make a function like this work for cbx_osNameEdit so that it will auto-populate every other field based on the name and allow you to edit some fields
+    Function CheckIfOneRecord()
         Dim specString As String = ""
         If frm_main.cbx_osFileName.Items.Count = 1 Then
             Dim y = getRecordByField("filename", frm_main.cbx_osFileName.Items(0).ToString, "tbl_os")
@@ -33,7 +33,7 @@
         frm_main.txt_specs.Text = specString
     End Function
 
-    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False)
+    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False, Optional isItReallyThough As Boolean = False)
 
         If Not isconnected Then
             DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
@@ -50,35 +50,35 @@
 
         If whitelist Is Nothing Then
             'If the combobox that was just edited is not x, then repopulate x with new whitelists and stuff
-            If Not exclude Is frm_main.cbx_osVariant Then populateCombobox(1, frm_main.cbx_osVariant, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osVersion Then populateCombobox(2, frm_main.cbx_osVersion, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osEdition Then populateCombobox(3, frm_main.cbx_osEdition, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osName Then populateCombobox(4, frm_main.cbx_osName, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osRAM Then populateCombobox(5, frm_main.cbx_osRAM, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osSize Then populateCombobox(6, frm_main.cbx_osSize, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osFormat Then populateCombobox(7, frm_main.cbx_osFormat, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osBuild Then populateCombobox(8, frm_main.cbx_osBuild, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osParent Then populateCombobox(9, frm_main.cbx_osParent, Not (isconnected))     'No idea why the order is like this. Not like
-            If Not exclude Is frm_main.cbx_osPlatform Then populateCombobox(10, frm_main.cbx_osPlatform, Not (isconnected))  'it's alphabetical or anything. Just is this way :/
-            If Not exclude Is frm_main.cbx_osFileName Then populateCombobox(11, frm_main.cbx_osFileName, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osBoot Then populateCombobox(12, frm_main.cbx_osBoot, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osType Then populateCombobox(13, frm_main.cbx_osType, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osVariant Then populateCombobox(1, frm_main.cbx_osVariant, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osVersion Then populateCombobox(2, frm_main.cbx_osVersion, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osEdition Then populateCombobox(3, frm_main.cbx_osEdition, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osName Then populateCombobox(4, frm_main.cbx_osName, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osRAM Then populateCombobox(5, frm_main.cbx_osRAM, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osSize Then populateCombobox(6, frm_main.cbx_osSize, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osFormat Then populateCombobox(7, frm_main.cbx_osFormat, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osBuild Then populateCombobox(8, frm_main.cbx_osBuild, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osParent Then populateCombobox(9, frm_main.cbx_osParent, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osPlatform Then populateCombobox(10, frm_main.cbx_osPlatform, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osFileName Then populateCombobox(11, frm_main.cbx_osFileName, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osBoot Then populateCombobox(12, frm_main.cbx_osBoot, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osType Then populateCombobox(13, frm_main.cbx_osType, Not (isconnected), isItReallyThough)
 
             'Now we'll populate the comboboxes on the edit page, too.
 
-            If Not exclude Is frm_main.cbx_osVariantEdit Then populateCombobox(1, frm_main.cbx_osVariantEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osVersionEdit Then populateCombobox(2, frm_main.cbx_osVersionEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osEditionEdit Then populateCombobox(3, frm_main.cbx_osEditionEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osNameEdit Then populateCombobox(4, frm_main.cbx_osNameEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osRamEdit Then populateCombobox(5, frm_main.cbx_osRamEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osSizeEdit Then populateCombobox(6, frm_main.cbx_osSizeEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osFormatEdit Then populateCombobox(7, frm_main.cbx_osFormatEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osBuildEdit Then populateCombobox(8, frm_main.cbx_osBuildEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osParentEdit Then populateCombobox(9, frm_main.cbx_osParentEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osPlatformEdit Then populateCombobox(10, frm_main.cbx_osPlatformEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osVariantEdit Then populateCombobox(1, frm_main.cbx_osVariantEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osVersionEdit Then populateCombobox(2, frm_main.cbx_osVersionEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osEditionEdit Then populateCombobox(3, frm_main.cbx_osEditionEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osNameEdit Then populateCombobox(4, frm_main.cbx_osNameEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osRamEdit Then populateCombobox(5, frm_main.cbx_osRamEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osSizeEdit Then populateCombobox(6, frm_main.cbx_osSizeEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osFormatEdit Then populateCombobox(7, frm_main.cbx_osFormatEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osBuildEdit Then populateCombobox(8, frm_main.cbx_osBuildEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osParentEdit Then populateCombobox(9, frm_main.cbx_osParentEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osPlatformEdit Then populateCombobox(10, frm_main.cbx_osPlatformEdit, Not (isconnected), isItReallyThough)
             'If Not exclude Is frm_main.cbx_osFileNameEdit Then populateCombobox(11, frm_main.cbx_osFileNameEdit) 'This one doesn't exist
-            If Not exclude Is frm_main.cbx_osBootEdit Then populateCombobox(12, frm_main.cbx_osBootEdit, Not (isconnected))
-            If Not exclude Is frm_main.cbx_osTypeEdit Then populateCombobox(13, frm_main.cbx_osTypeEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osBootEdit Then populateCombobox(12, frm_main.cbx_osBootEdit, Not (isconnected), isItReallyThough)
+            If Not exclude Is frm_main.cbx_osTypeEdit Then populateCombobox(13, frm_main.cbx_osTypeEdit, Not (isconnected), isItReallyThough)
         Else
             populateComboBoxesWithNoWhitelist(exclude)
         End If
@@ -148,5 +148,11 @@
             Return False
             MsgBox("Resize error. Please try again.", vbInformation + vbOKOnly, "Whoops")
         End Try
+    End Function
+
+    Public Function populateComboBoxWithManualData(ByVal data As Array, ByVal cbx As ComboBox)
+        For Each dataPoint In data
+            cbx.SelectedIndex = cbx.Items.IndexOf(dataPoint)
+        Next
     End Function
 End Module

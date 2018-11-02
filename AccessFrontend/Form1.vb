@@ -109,6 +109,15 @@ Public Class frm_main
 
 
     Private Sub btn_disconnect_Click(sender As Object, e As EventArgs) Handles btn_disconnect.Click
+        For Each cbx As ComboBox In tpg_edit.Controls.OfType(Of ComboBox)
+            cbx.Items.Clear()
+            cbx.SelectedText = ""
+        Next
+        For Each cbx As ComboBox In tpg_read.Controls.OfType(Of ComboBox)
+            cbx.Items.Clear()
+            cbx.SelectedText = ""
+        Next
+        txt_specs.Text = ""
         txt_filename.Enabled = True
         btn_connect.Enabled = True
         btn_disconnect.Enabled = False
@@ -148,7 +157,49 @@ Public Class frm_main
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub EditSelectedIndexChanged(sender As Object, e As EventArgs) Handles cbx_osBootEdit.SelectedIndexChanged, cbx_osBuildEdit.SelectedIndexChanged, cbx_osEditionEdit.SelectedIndexChanged, cbx_osFormatEdit.SelectedIndexChanged, cbx_osNameEdit.SelectedIndexChanged, cbx_osParentEdit.SelectedIndexChanged, cbx_osPlatformEdit.SelectedIndexChanged, cbx_osRamEdit.SelectedIndexChanged, cbx_osSizeEdit.SelectedIndexChanged, cbx_osTypeEdit.SelectedIndexChanged, cbx_osVariantEdit.SelectedIndexChanged, cbx_osVersionEdit.SelectedIndexChanged
+        Dim control As ComboBox = CType(sender, ComboBox) 'Get combobox
+        Dim item As String = control.SelectedItem
+        If control Is cbx_osNameEdit Then
+            If Not cbx_osNameEdit.SelectedItem = "Add new..." Then
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "variant"), cbx_osVariantEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "version"), cbx_osVersionEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "edition"), cbx_osEditionEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "ram"), cbx_osRamEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "mediaSize"), cbx_osSizeEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "mediaFormat"), cbx_osFormatEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "buildType"), cbx_osBuildEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "parent"), cbx_osParentEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "platform"), cbx_osPlatformEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "boot"), cbx_osBootEdit)
+                populateComboBoxWithManualData(getRecordByFieldAsField("friendlyName", item, "tbl_os", "mediaType"), cbx_osTypeEdit)
+            End If
+        End If
+
+        If control.SelectedItem = "Add new..." Then
+whoopsies:
+            Dim input As String = InputBox("Please enter new value:")
+            If control Is cbx_osRamEdit Or control Is cbx_osVersionEdit Or control Is cbx_osSizeEdit Then
+                If Not System.Text.RegularExpressions.Regex.IsMatch(input, "^\d+(\.\d+)*$") Then
+                    MsgBox("The value had to be numeric with only full-stops (points) and numbers allowed.")
+                    GoTo whoopsies
+                End If
+            End If
+            If control.Items.Contains(input) Then
+                MsgBox("The value entered already exists")
+                GoTo whoopsies
+            End If
+            control.Items.Add(input)
+            control.SelectedIndex = control.Items.IndexOf(input)
+        End If
+    End Sub
+
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
+        If newMedia Is Nothing Then
+            updateData()
+            MsgBox("Please close and open the connection again to see your changes.")
+            Exit Sub
+        End If
         insertData()
     End Sub
 

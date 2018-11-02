@@ -4,9 +4,9 @@
 
 
 
-    Public Function populateCombobox(ByVal rowNumber As Integer, ByVal theCombobox As ComboBox, Optional isConnected As Boolean = False)
+    Public Function populateCombobox(ByVal rowNumber As Integer, ByVal theCombobox As ComboBox, Optional isConnected As Boolean = False, Optional isitreallytho As Boolean = False)
 
-        If Not isConnected Then
+        If Not isConnected And Not isitreallytho Then
             DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
 
             With frm_main
@@ -246,7 +246,7 @@
         Command.Parameters.AddWithValue("@l", frm_main.cbx_osTypeEdit.SelectedItem)
         Command.Parameters.AddWithValue("@m", x)
         Command.ExecuteNonQuery()
-        populateComboBoxes(, , True)
+        populateComboBoxes(, , True, True)
         frm_main.tssl_databaseStatus.Text = "Disconnecting..."
         DatabaseConnection.Close()
         Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
@@ -259,6 +259,33 @@
 #Disable Warning BC42105 ' Function doesn't return a value on all code paths
     End Function
 #Enable Warning BC42105 ' Function doesn't return a value on all code paths
+
+    Public Function updateData()
+        Dim sqlstr = "UPDATE tbl_os SET variant = '" & frm_main.cbx_osVariantEdit.SelectedItem & "', version = '" & frm_main.cbx_osVersionEdit.SelectedItem & "', edition = '" & frm_main.cbx_osEditionEdit.SelectedItem & "', ram = '" & frm_main.cbx_osRamEdit.SelectedItem & "', mediaSize = '" & frm_main.cbx_osSizeEdit.SelectedItem & "', mediaFormat = '" & frm_main.cbx_osFormatEdit.SelectedItem & "', buildType = '" & frm_main.cbx_osBuildEdit.SelectedItem & "',  parent = '" & frm_main.cbx_osParentEdit.SelectedItem & "', platform = '" & frm_main.cbx_osPlatformEdit.SelectedItem & "', boot = '" & frm_main.cbx_osBootEdit.SelectedItem & "', mediaType = '" & frm_main.cbx_osTypeEdit.SelectedItem & "' WHERE friendlyName = '" & frm_main.cbx_osNameEdit.SelectedItem & "'"
+        DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
+        With frm_main
+            .Cursor = Cursors.WaitCursor
+            .tssl_databaseStatus.Text = "Please wait...Connecting to database"
+            .Refresh()
+        End With
+        DatabaseConnection.Open()
+        Console.WriteLine("Opened Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
+        frm_main.tssl_databaseStatus.Text = "Connected to database. Please wait for data to be uploaded..."
+        Dim Command = New OleDb.OleDbCommand(Sqlstr, DatabaseConnection)
+        Command.CommandText = Sqlstr
+        Command.ExecuteNonQuery()
+
+        frm_main.tssl_databaseStatus.Text = "Disconnecting..."
+        DatabaseConnection.Close()
+        Console.WriteLine("Closed Connection {0}", (New StackTrace(New StackFrame(True))).GetFrame(0).GetFileLineNumber())
+
+        With frm_main
+            .Cursor = Cursors.Default
+            .tssl_databaseStatus.Text = "Completed upload and repopulation. Disconnected."
+            .Refresh()
+        End With
+    End Function
 
     Public Function getRecordByField(ByVal field As String, ByVal value As String, ByVal Table As String, Optional isconnected As Boolean = False) 'returns array of all records that match criteria
         'SELECT * FROM tbl_os WHERE tbl_os.parent = "Unix";
