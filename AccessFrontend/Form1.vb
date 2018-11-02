@@ -43,9 +43,6 @@ Public Class frm_main
 
     End Sub
 
-    'TODO: Make the FeaturesEdit, NotesEdit tabs greyed until the search fields have been narrowed down to one result._
-    '      Also, add a "Add new" option to all comboboxes on the edit page after there is only one result also.
-
     Private Sub frm_main_resize() Handles MyBase.Resize
         grp_connect.Width = Me.Width - 40
         grp_control.Top = grp_connect.Top + grp_connect.Height
@@ -144,7 +141,9 @@ Public Class frm_main
         If Not x = "" Then DatabaseWhiteList += x & "," 'add it's name to the whitelist
         Dim whitelistArray As String() = DatabaseWhiteList.Split(",") 'make the whitelist an array
         populateComboBoxes(whitelistArray, control) 'run function with whitelistarray (everything whitelisted thus far) and name (the current modified combobox)
-        'TODO: What if you set a combobox to a different value from the initial? Also, what if you set it to blank again? Will it un-whitelist? <-- maybe once a combobox is changed, disable it? add another button that says to reset and we will start over?
+        'WasOnceATODO: What if you set a combobox to a different value from the initial? Also, what if you set it to blank again? Will it un-whitelist?
+        '^ maybe once a combobox Is changed, disable it? add another button that says to reset And we will start over?
+        '^ Whitelist really doesn't matter anyway. It's not used because I never worked out the function :(
         CheckIfOneRecord()
         Me.Cursor = Cursors.Default
 

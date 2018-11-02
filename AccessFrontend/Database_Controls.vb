@@ -208,8 +208,6 @@
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType", True)
             If Not frm_main.cbx_osTypeEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osTypeEdit.Items.Add(record)
         Next
-        'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why? <-- put that in testing table, too.
-        'TODO: In regards to the above line, it's because I'm not using the whitelist var I made. Gotta do something about that.
 
     End Function
 
