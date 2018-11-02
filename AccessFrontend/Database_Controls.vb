@@ -19,23 +19,23 @@
         frm_main.tssl_databaseStatus.Text = "Connected to database. Please wait for data to populate..."
 
         Dim Table_ As String = "tbl_os"
-            Dim query As String = "SELECT * FROM " & Table_
-            Dim MDBConnString_ As String = DatabaseConnection.connectionstring
-            Dim DataSet As New DataSet
-            Dim Command As New OleDb.OleDbCommand(query, DatabaseConnection)
-            Dim DataAdapter As New OleDb.OleDbDataAdapter(Command)
-            DataAdapter.Fill(DataSet, Table_)
-            Dim t1 As DataTable = DataSet.Tables(Table_)
-            Dim row As DataRow
-            Dim Item(2) As String
+        Dim query As String = "SELECT * FROM " & Table_
+        Dim MDBConnString_ As String = DatabaseConnection.connectionstring
+        Dim DataSet As New DataSet
+        Dim Command As New OleDb.OleDbCommand(query, DatabaseConnection)
+        Dim DataAdapter As New OleDb.OleDbDataAdapter(Command)
+        DataAdapter.Fill(DataSet, Table_)
+        Dim t1 As DataTable = DataSet.Tables(Table_)
+        Dim row As DataRow
+        Dim Item(2) As String
 
-            For Each row In t1.Rows
-                Item(0) = row(rowNumber)
-                Dim NextListItem As New ListViewItem(Item)
-                If Not theCombobox.Items.Contains(NextListItem.Text) Then
-                    theCombobox.Items.Add(NextListItem.Text)
-                End If
-            Next
+        For Each row In t1.Rows
+            Item(0) = row(rowNumber)
+            Dim NextListItem As New ListViewItem(Item)
+            If Not theCombobox.Items.Contains(NextListItem.Text) Then
+                theCombobox.Items.Add(NextListItem.Text)
+            End If
+        Next
 
         If Not isConnected Then
 
@@ -111,55 +111,55 @@
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "variant", True)
             If Not frm_main.cbx_osVariant.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osVariant.Items.Add(record)
         Next
-        Console.WriteLine(1)
+        'Console.WriteLine(1)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "version", True)
             If Not frm_main.cbx_osVersion.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osVersion.Items.Add(record)
         Next
-        Console.WriteLine(2)
+        'Console.WriteLine(2)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "edition", True)
             If Not frm_main.cbx_osEdition.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osEdition.Items.Add(record)
         Next
-        Console.WriteLine(3)
+        'Console.WriteLine(3)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "friendlyName", True)
             If Not frm_main.cbx_osName.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osName.Items.Add(record)
         Next
-        Console.WriteLine(4)
+        'Console.WriteLine(4)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "ram", True)
             If Not frm_main.cbx_osRAM.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osRAM.Items.Add(record)
         Next
-        Console.WriteLine(5)
+        'Console.WriteLine(5)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaSize", True)
             If Not frm_main.cbx_osSize.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osSize.Items.Add(record)
         Next
-        Console.WriteLine(6)
+        'Console.WriteLine(6)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaFormat", True)
             If Not frm_main.cbx_osFormat.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osFormat.Items.Add(record)
         Next
-        Console.WriteLine(7)
+        'Console.WriteLine(7)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "buildType", True)
             If Not frm_main.cbx_osBuild.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osBuild.Items.Add(record)
         Next
-        Console.WriteLine(8)
+        'Console.WriteLine(8)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "parent", True)
             If Not frm_main.cbx_osParent.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osParent.Items.Add(record)
         Next
-        Console.WriteLine(9)
+        'Console.WriteLine(9)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "platform", True)
             If Not frm_main.cbx_osPlatform.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osPlatform.Items.Add(record)
         Next
-        Console.WriteLine(10)
+        'Console.WriteLine(10)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "filename", True)
             If Not frm_main.cbx_osFileName.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osFileName.Items.Add(record)
         Next
-        Console.WriteLine(11)
+        '  Console.WriteLine(11)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "boot", True)
             If Not frm_main.cbx_osBoot.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osBoot.Items.Add(record)
         Next
-        Console.WriteLine(12)
+        '  Console.WriteLine(12)
         For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType", True)
             If Not frm_main.cbx_osType.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osType.Items.Add(record)
         Next
-        Console.WriteLine(13)
+        '   Console.WriteLine(13)
 
         'TODO: Make this for edit page
         'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why? <-- put that in testing table, too.
@@ -382,107 +382,60 @@
         If fieldToReturn = "mediaType" Then Return arr_mediatype
 
     End Function
-    Dim s As String = ""
+    Dim selections As String = ""
     Function passesWhiteList(ByVal whatTheProgramWantsToPutInToTheCombobox As String) As Boolean
+
+        'for every possible record
+        'for every selected value
+        'dim x
+        'if we split the record by ","
+        'for every split bit
+        'if it equals the selected value
+        'x += 1
+        'next
+        'next
+        'if x = selectedvalues.len
+        'pass
+        'else fail
+        'next
+        Dim ToReturn = False
+
 
         For Each cbx As ComboBox In frm_main.tpg_read.Controls.OfType(Of ComboBox)
             If Not cbx.SelectedItem = "" Or Nothing Then
 
-                If Not s.Contains(cbx.SelectedItem) Then s += cbx.SelectedItem & " "
-
+                If Not selections.Contains(cbx.SelectedItem) Then selections += cbx.SelectedItem & " "
             End If
         Next
-        'Console.WriteLine(s)
-        Dim allCurrentSelectedItems As Array = s.Split(" ")
 
+        Dim allCurrentSelectedItems As Array = selections.Split(" ")
 
         Dim fields As String = "Variant,Version,edition,friendlyName,ram,mediaSize,mediaFormat,buildType,parent,platform,filename,boot,mediaType"
         Dim arr_fields As Array = fields.Split(",")
-
-        Dim arr_imAPirate As Array 'lol im too tired for this 
-        Dim allRecordsThatPassPhaseOne As List(Of String) = New List(Of String)
-        For Each selectedItem As String In allCurrentSelectedItems
-            'Okay. We've got everything that's currently selected in the comboboxes. Now,
-            'we want to see if whatTheProgramWantsToPutInToTheCombobox (which is a great name for a variable)
-            'is part of a record that contains selecteditem.
-            'If it is, we go to the next selecteditem and see if it still matches up. If it does, we go to the next,
-            'and so on, and so forth, until we know after going through every selecteditem whether or not the record
-            'is going to be allowed in.
-
-            If selectedItem = Nothing Or selectedItem = "" Then GoTo theFarFarAwayFuture
-            For Each field As String In arr_fields
-
-                Dim records As Array = getRecordByField(field, whatTheProgramWantsToPutInToTheCombobox, "tbl_os", True)
-                For Each record As String In records
-                    If record Is Nothing Then GoTo theFuture
-                    If record.Contains(selectedItem) Then
-                        'Console.WriteLine(record & " CONTAINS " & selectedItem)
-
-                        If Not allRecordsThatPassPhaseOne.Contains(record) Then
-                            allRecordsThatPassPhaseOne.Add(record)
-                        End If
-
-                    Else
-                        'Console.WriteLine(record & " DOESN'T CONTAIN " & selectedItem)
-                        If allRecordsThatPassPhaseOne.Contains(record) Then
-                            allRecordsThatPassPhaseOne.Remove(record)
-                        End If
-                    End If
-theFuture:
-                Next
-
-            Next
-theFarFarAwayFuture:
-        Next
-
-        Dim arr_allRecordsThatPassPhaseOne As Array = allRecordsThatPassPhaseOne.ToArray()
-
-
-        'Yo probs this stuff (below) needs to be up around line 424?
-        For Each record As String In arr_allRecordsThatPassPhaseOne
-            Dim splitRecord As Array = record.Split(",")
-            For Each field As String In splitRecord
-                If field = whatTheProgramWantsToPutInToTheCombobox Then
-                    Console.WriteLine(field & " [=] " & whatTheProgramWantsToPutInToTheCombobox)
-                    Return True
+        For Each field As String In arr_fields
+            'Console.WriteLine(field)
+            For Each record As String In getRecordByField(field, whatTheProgramWantsToPutInToTheCombobox, "tbl_os", True)
+                Dim i As Integer = 0
+                If Not record Is Nothing Then
+                    Dim arr_recordFields As Array = record.Split(",")
+                    For Each selection As String In allCurrentSelectedItems
+                        For Each recordField As String In arr_recordFields
+                            If recordField = selection Then
+                                Console.WriteLine(recordField & " = " & selection)
+                                Console.WriteLine(record)
+                                i += 1
+                            End If
+                        Next
+                    Next
                 Else
-                    'Console.WriteLine(field & " [<>] " & whatTheProgramWantsToPutInToTheCombobox)
-                    GoTo theFutureAgain
+                    'Console.WriteLine("Record is nothing.")
+                    ToReturn = True
                 End If
-theFutureAgain:
+                If i = allCurrentSelectedItems.Length Then
+                    ToReturn = True
+                End If
             Next
-
         Next
-
-        Return false
-    End Function
-
-    Function getFieldFromCbx(cbx As ComboBox) As String
-        Dim field As String
-        If cbx Is frm_main.cbx_osBoot Then field = "boot"
-        If cbx Is frm_main.cbx_osBuild Then field = "buildType"
-        If cbx Is frm_main.cbx_osBuildEdit Then field = "buildType"
-        If cbx Is frm_main.cbx_osEdition Then field = "edition"
-        If cbx Is frm_main.cbx_osEditionEdit Then field = "edition"
-        If cbx Is frm_main.cbx_osFileName Then field = "filename"
-        If cbx Is frm_main.cbx_osFormat Then field = "mediaFormat"
-        If cbx Is frm_main.cbx_osFormatEdit Then field = "mediaFormat"
-        If cbx Is frm_main.cbx_osName Then field = "friendlyName"
-        If cbx Is frm_main.cbx_osNameEdit Then field = "friendlyName"
-        If cbx Is frm_main.cbx_osParent Then field = "parent"
-        If cbx Is frm_main.cbx_osParentEdit Then field = "parent"
-        If cbx Is frm_main.cbx_osPlatform Then field = "platform"
-        If cbx Is frm_main.cbx_osPlatformEdit Then field = "platform"
-        If cbx Is frm_main.cbx_osRAM Then field = "ram"
-        If cbx Is frm_main.cbx_osRamEdit Then field = "ram"
-        If cbx Is frm_main.cbx_osSize Then field = "mediaSize"
-        If cbx Is frm_main.cbx_osSizeEdit Then field = "mediaSize"
-        If cbx Is frm_main.cbx_osType Then field = "mediaType"
-        If cbx Is frm_main.cbx_osTypeEdit Then field = "mediaType"
-        If cbx Is frm_main.cbx_osVariant Then field = "variant"
-        If cbx Is frm_main.cbx_osVariantEdit Then field = "variant"
-        If cbx Is frm_main.cbx_osVersion Then field = "version"
-        If cbx Is frm_main.cbx_osVersionEdit Then field = "version"
-        Return field
+        Return ToReturn
     End Function
 End Module
