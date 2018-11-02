@@ -393,26 +393,66 @@
             End If
         Next
         'Console.WriteLine(s)
-        Dim x As Array = s.Split(" ")
-        Dim toReturn As Boolean = True
-        For Each cbx As ComboBox In frm_main.tpg_read.Controls.OfType(Of ComboBox)
-            For Each selectedItem In x
-                Dim y As Array = getRecordByField(getFieldFromCbx(cbx), whatTheProgramWantsToPutInToTheCombobox, "tbl_os", True)
-                For Each z As String In y
-                    If Not z Is Nothing Then
-                        If z.Contains(selectedItem) Then
-                            'Console.WriteLine("Fail: " & z)
-                            ToReturn = False
-                        Else
-                            'Console.WriteLine("Pass: " & z)
-                            toReturn = True
+        Dim allCurrentSelectedItems As Array = s.Split(" ")
+
+
+        Dim fields As String = "Variant,Version,edition,friendlyName,ram,mediaSize,mediaFormat,buildType,parent,platform,filename,boot,mediaType"
+        Dim arr_fields As Array = fields.Split(",")
+
+        Dim arr_imAPirate As Array 'lol im too tired for this 
+        Dim allRecordsThatPassPhaseOne As List(Of String) = New List(Of String)
+        For Each selectedItem As String In allCurrentSelectedItems
+            'Okay. We've got everything that's currently selected in the comboboxes. Now,
+            'we want to see if whatTheProgramWantsToPutInToTheCombobox (which is a great name for a variable)
+            'is part of a record that contains selecteditem.
+            'If it is, we go to the next selecteditem and see if it still matches up. If it does, we go to the next,
+            'and so on, and so forth, until we know after going through every selecteditem whether or not the record
+            'is going to be allowed in.
+
+            If selectedItem = Nothing Or selectedItem = "" Then GoTo theFarFarAwayFuture
+            For Each field As String In arr_fields
+
+                Dim records As Array = getRecordByField(field, whatTheProgramWantsToPutInToTheCombobox, "tbl_os", True)
+                For Each record As String In records
+                    If record Is Nothing Then GoTo theFuture
+                    If record.Contains(selectedItem) Then
+                        'Console.WriteLine(record & " CONTAINS " & selectedItem)
+
+                        If Not allRecordsThatPassPhaseOne.Contains(record) Then
+                            allRecordsThatPassPhaseOne.Add(record)
+                        End If
+
+                    Else
+                        'Console.WriteLine(record & " DOESN'T CONTAIN " & selectedItem)
+                        If allRecordsThatPassPhaseOne.Contains(record) Then
+                            allRecordsThatPassPhaseOne.Remove(record)
                         End If
                     End If
+theFuture:
                 Next
+
             Next
+theFarFarAwayFuture:
         Next
 
-        Return toReturn
+        Dim arr_allRecordsThatPassPhaseOne As Array = allRecordsThatPassPhaseOne.ToArray()
+
+        For Each record As String In arr_allRecordsThatPassPhaseOne
+            Dim splitRecord As Array = record.Split(",")
+            For Each field As String In splitRecord
+                If field = whatTheProgramWantsToPutInToTheCombobox Then
+                    Console.WriteLine(field & " [=] " & whatTheProgramWantsToPutInToTheCombobox)
+                    Return True
+                Else
+                    'Console.WriteLine(field & " [<>] " & whatTheProgramWantsToPutInToTheCombobox)
+                    GoTo theFutureAgain
+                End If
+theFutureAgain:
+            Next
+
+        Next
+
+        Return false
     End Function
 
     Function getFieldFromCbx(cbx As ComboBox) As String
