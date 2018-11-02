@@ -41,37 +41,40 @@
 
         End If
 
-        'If the combobox that was just edited is not x, then repopulate x with new whitelists and stuff
-        If Not exclude Is frm_main.cbx_osVariant Then populateCombobox(1, frm_main.cbx_osVariant, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osVersion Then populateCombobox(2, frm_main.cbx_osVersion, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osEdition Then populateCombobox(3, frm_main.cbx_osEdition, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osName Then populateCombobox(4, frm_main.cbx_osName, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osRAM Then populateCombobox(5, frm_main.cbx_osRAM, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osSize Then populateCombobox(6, frm_main.cbx_osSize, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osFormat Then populateCombobox(7, frm_main.cbx_osFormat, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osBuild Then populateCombobox(8, frm_main.cbx_osBuild, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osParent Then populateCombobox(9, frm_main.cbx_osParent, whitelist, exclude, Not (isconnected))     'No idea why the order is like this. Not like
-        If Not exclude Is frm_main.cbx_osPlatform Then populateCombobox(10, frm_main.cbx_osPlatform, whitelist, exclude, Not (isconnected))  'it's alphabetical or anything. Just is this way :/
-        If Not exclude Is frm_main.cbx_osFileName Then populateCombobox(11, frm_main.cbx_osFileName, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osBoot Then populateCombobox(12, frm_main.cbx_osBoot, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osType Then populateCombobox(13, frm_main.cbx_osType, whitelist, exclude, Not (isconnected))
+        If whitelist Is Nothing Then
+            'If the combobox that was just edited is not x, then repopulate x with new whitelists and stuff
+            If Not exclude Is frm_main.cbx_osVariant Then populateCombobox(1, frm_main.cbx_osVariant, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osVersion Then populateCombobox(2, frm_main.cbx_osVersion, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osEdition Then populateCombobox(3, frm_main.cbx_osEdition, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osName Then populateCombobox(4, frm_main.cbx_osName, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osRAM Then populateCombobox(5, frm_main.cbx_osRAM, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osSize Then populateCombobox(6, frm_main.cbx_osSize, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osFormat Then populateCombobox(7, frm_main.cbx_osFormat, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osBuild Then populateCombobox(8, frm_main.cbx_osBuild, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osParent Then populateCombobox(9, frm_main.cbx_osParent, Not (isconnected))     'No idea why the order is like this. Not like
+            If Not exclude Is frm_main.cbx_osPlatform Then populateCombobox(10, frm_main.cbx_osPlatform, Not (isconnected))  'it's alphabetical or anything. Just is this way :/
+            If Not exclude Is frm_main.cbx_osFileName Then populateCombobox(11, frm_main.cbx_osFileName, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osBoot Then populateCombobox(12, frm_main.cbx_osBoot, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osType Then populateCombobox(13, frm_main.cbx_osType, Not (isconnected))
 
-        'Now we'll populate the comboboxes on the edit page, too.
+            'Now we'll populate the comboboxes on the edit page, too.
 
-        If Not exclude Is frm_main.cbx_osVariantEdit Then populateCombobox(1, frm_main.cbx_osVariantEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osVersionEdit Then populateCombobox(2, frm_main.cbx_osVersionEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osEditionEdit Then populateCombobox(3, frm_main.cbx_osEditionEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osNameEdit Then populateCombobox(4, frm_main.cbx_osNameEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osRamEdit Then populateCombobox(5, frm_main.cbx_osRamEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osSizeEdit Then populateCombobox(6, frm_main.cbx_osSizeEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osFormatEdit Then populateCombobox(7, frm_main.cbx_osFormatEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osBuildEdit Then populateCombobox(8, frm_main.cbx_osBuildEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osParentEdit Then populateCombobox(9, frm_main.cbx_osParentEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osPlatformEdit Then populateCombobox(10, frm_main.cbx_osPlatformEdit, whitelist, exclude, Not (isconnected))
-        'If Not exclude Is frm_main.cbx_osFileNameEdit Then populateCombobox(11, frm_main.cbx_osFileNameEdit) 'This one doesn't exist
-        If Not exclude Is frm_main.cbx_osBootEdit Then populateCombobox(12, frm_main.cbx_osBootEdit, whitelist, exclude, Not (isconnected))
-        If Not exclude Is frm_main.cbx_osTypeEdit Then populateCombobox(13, frm_main.cbx_osTypeEdit, whitelist, exclude, Not (isconnected))
-
+            If Not exclude Is frm_main.cbx_osVariantEdit Then populateCombobox(1, frm_main.cbx_osVariantEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osVersionEdit Then populateCombobox(2, frm_main.cbx_osVersionEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osEditionEdit Then populateCombobox(3, frm_main.cbx_osEditionEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osNameEdit Then populateCombobox(4, frm_main.cbx_osNameEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osRamEdit Then populateCombobox(5, frm_main.cbx_osRamEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osSizeEdit Then populateCombobox(6, frm_main.cbx_osSizeEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osFormatEdit Then populateCombobox(7, frm_main.cbx_osFormatEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osBuildEdit Then populateCombobox(8, frm_main.cbx_osBuildEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osParentEdit Then populateCombobox(9, frm_main.cbx_osParentEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osPlatformEdit Then populateCombobox(10, frm_main.cbx_osPlatformEdit, Not (isconnected))
+            'If Not exclude Is frm_main.cbx_osFileNameEdit Then populateCombobox(11, frm_main.cbx_osFileNameEdit) 'This one doesn't exist
+            If Not exclude Is frm_main.cbx_osBootEdit Then populateCombobox(12, frm_main.cbx_osBootEdit, Not (isconnected))
+            If Not exclude Is frm_main.cbx_osTypeEdit Then populateCombobox(13, frm_main.cbx_osTypeEdit, Not (isconnected))
+        Else
+            populateComboBoxesWithNoWhitelist(exclude)
+        End If
         With frm_main
             .Cursor = Cursors.Default
             .tssl_databaseStatus.Text = "Data populated. Disconnected."
