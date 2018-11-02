@@ -437,6 +437,8 @@ theFarFarAwayFuture:
 
         Dim arr_allRecordsThatPassPhaseOne As Array = allRecordsThatPassPhaseOne.ToArray()
 
+
+        'Yo probs this stuff (below) needs to be up around line 424?
         For Each record As String In arr_allRecordsThatPassPhaseOne
             Dim splitRecord As Array = record.Split(",")
             For Each field As String In splitRecord
