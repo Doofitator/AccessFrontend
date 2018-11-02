@@ -42,6 +42,7 @@ Partial Class frm_main
         Me.lbl_resultsHint = New System.Windows.Forms.Label()
         Me.tab_results = New System.Windows.Forms.TabControl()
         Me.tpg_specs = New System.Windows.Forms.TabPage()
+        Me.txt_specs = New System.Windows.Forms.TextBox()
         Me.cbx_osSize = New System.Windows.Forms.ComboBox()
         Me.lbl_osSize = New System.Windows.Forms.Label()
         Me.cbx_osName = New System.Windows.Forms.ComboBox()
@@ -98,7 +99,6 @@ Partial Class frm_main
         Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.pdc_Report = New System.Drawing.Printing.PrintDocument()
-        Me.txt_specs = New System.Windows.Forms.TextBox()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
         Me.tab_controls.SuspendLayout()
@@ -333,6 +333,15 @@ Partial Class frm_main
         Me.tpg_specs.TabIndex = 2
         Me.tpg_specs.Text = "Specifications"
         Me.tpg_specs.UseVisualStyleBackColor = True
+        '
+        'txt_specs
+        '
+        Me.txt_specs.Location = New System.Drawing.Point(3, 3)
+        Me.txt_specs.Multiline = True
+        Me.txt_specs.Name = "txt_specs"
+        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txt_specs.Size = New System.Drawing.Size(227, 105)
+        Me.txt_specs.TabIndex = 0
         '
         'cbx_osSize
         '
@@ -639,6 +648,8 @@ Partial Class frm_main
         '
         'lbl_instruct1
         '
+        Me.lbl_instruct1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_instruct1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lbl_instruct1.Location = New System.Drawing.Point(6, 10)
         Me.lbl_instruct1.Name = "lbl_instruct1"
         Me.lbl_instruct1.Size = New System.Drawing.Size(403, 30)
@@ -834,15 +845,6 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Name = "tssl_databaseStatus"
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
-        '
-        'txt_specs
-        '
-        Me.txt_specs.Location = New System.Drawing.Point(3, 3)
-        Me.txt_specs.Multiline = True
-        Me.txt_specs.Name = "txt_specs"
-        Me.txt_specs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txt_specs.Size = New System.Drawing.Size(227, 105)
-        Me.txt_specs.TabIndex = 0
         '
         'frm_main
         '

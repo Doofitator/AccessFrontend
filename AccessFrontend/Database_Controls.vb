@@ -161,7 +161,53 @@
         Next
         '   Console.WriteLine(13)
 
-        'TODO: Make this for edit page
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "variant", True)
+            If Not frm_main.cbx_osVariantEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osVariantEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "version", True)
+            If Not frm_main.cbx_osVersionEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osVersionEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "edition", True)
+            If Not frm_main.cbx_osEditionEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osEditionEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "friendlyName", True)
+            If Not frm_main.cbx_osNameEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osNameEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "ram", True)
+            If Not frm_main.cbx_osRamEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osRamEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaSize", True)
+            If Not frm_main.cbx_osSizeEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osSizeEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaFormat", True)
+            If Not frm_main.cbx_osFormatEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osFormatEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "buildType", True)
+            If Not frm_main.cbx_osBuildEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osBuildEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "parent", True)
+            If Not frm_main.cbx_osParentEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osParentEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "platform", True)
+            If Not frm_main.cbx_osPlatformEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osPlatformEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "boot", True)
+            If Not frm_main.cbx_osBootEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osBootEdit.Items.Add(record)
+        Next
+
+        For Each record As String In getRecordByFieldAsField(field, excluded.Text, "tbl_os", "mediaType", True)
+            If Not frm_main.cbx_osTypeEdit.Items.Contains(record) Then If passesWhiteList(record) Then frm_main.cbx_osTypeEdit.Items.Add(record)
+        Next
         'TODO: With the test data unix, rhapsody, version 4.3, I was getting android 4.3 results. Why? <-- put that in testing table, too.
         'TODO: In regards to the above line, it's because I'm not using the whitelist var I made. Gotta do something about that.
 
@@ -382,6 +428,7 @@
         If fieldToReturn = "mediaType" Then Return arr_mediatype
 
     End Function
+
     Function passesWhiteList(ByVal whatTheProgramWantsToPutInToTheCombobox As String) As Boolean
 
         'Here goes my essay:
@@ -421,6 +468,10 @@
         'Commit #6 - "Still got no idea. Clean Slate." - https://goo.gl/5XPUu1
         'Commit #7 (At this point I was very frustrated) - "Well I've rewritten it AGAIN, and got nowhere AGAIN. Got 1:14 time now to see if I can fail AGAIN or not." - https://goo.gl/p37v6v
         'Commit #8 - "Got Ideas?" (As in I thought I had some ideas) - https://goo.gl/Q2JxzL
+        'Commit #9 - "So tried something else and it still didn't work" - https://goo.gl/X7xk1z
+        'Commit #10 - "I've written an essay" - https://goo.gl/W8u122
+
+        ':(
 
     End Function
 End Module
