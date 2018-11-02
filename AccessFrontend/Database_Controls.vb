@@ -382,60 +382,45 @@
         If fieldToReturn = "mediaType" Then Return arr_mediatype
 
     End Function
-    Dim selections As String = ""
     Function passesWhiteList(ByVal whatTheProgramWantsToPutInToTheCombobox As String) As Boolean
 
-        'for every possible record
-        'for every selected value
-        'dim x
-        'if we split the record by ","
-        'for every split bit
-        'if it equals the selected value
-        'x += 1
-        'next
-        'next
-        'if x = selectedvalues.len
-        'pass
-        'else fail
-        'next
-        Dim ToReturn = False
+        'Here goes my essay:
 
+        'Basically, this function is supposed to look at what the program wants to put in the combobox and see if it matches the criteria set by the other comboboxes.
+        'Unfortunately, I've spent almost 24 hours on this problem and can't make it work, so the program cannot narrow down it's results and this function just says
 
-        For Each cbx As ComboBox In frm_main.tpg_read.Controls.OfType(Of ComboBox)
-            If Not cbx.SelectedItem = "" Or Nothing Then
+        Return True
 
-                If Not selections.Contains(cbx.SelectedItem) Then selections += cbx.SelectedItem & " "
-            End If
-        Next
+        'which sucks.
+        'It was supposed to, however, go something along the lines of the below:
 
-        Dim allCurrentSelectedItems As Array = selections.Split(" ")
+        'Dim selections As String = ""
+        'For Each cbx As ComboBox In frm_main.tpg_read.Controls.OfType(Of ComboBox)
+        '    If Not cbx.SelectedItem = "" Or Nothing Then
+        '
+        '         If Not selections.Contains(cbx.SelectedItem) Then selections += cbx.SelectedItem & " "
+        '
+        '    End If
+        'Next
+        'Dim allCurrentSelectedItems As Array = selections.Split(" ")
 
-        Dim fields As String = "Variant,Version,edition,friendlyName,ram,mediaSize,mediaFormat,buildType,parent,platform,filename,boot,mediaType"
-        Dim arr_fields As Array = fields.Split(",")
-        For Each field As String In arr_fields
-            'Console.WriteLine(field)
-            For Each record As String In getRecordByField(field, whatTheProgramWantsToPutInToTheCombobox, "tbl_os", True)
-                Dim i As Integer = 0
-                If Not record Is Nothing Then
-                    Dim arr_recordFields As Array = record.Split(",")
-                    For Each selection As String In allCurrentSelectedItems
-                        For Each recordField As String In arr_recordFields
-                            If recordField = selection Then
-                                Console.WriteLine(recordField & " = " & selection)
-                                Console.WriteLine(record)
-                                i += 1
-                            End If
-                        Next
-                    Next
-                Else
-                    'Console.WriteLine("Record is nothing.")
-                    ToReturn = True
-                End If
-                If i = allCurrentSelectedItems.Length Then
-                    ToReturn = True
-                End If
-            Next
-        Next
-        Return ToReturn
+        'And then the bit that never worked. Basically, it said:
+        'For each possible record that contained what the program wants to put in the combobox
+        'if that record's fields contain all of what's in allcurrentselecteditems
+        'return true
+        'else return false
+
+        'So just so that a record of all my time is kept somewhere, here's some links to the GitHub commits where this project is 
+        'hosted so that you can browse through the old commits I made when I was dying of tiredness to see what I had attempted.
+
+        'Commit #1 - "Getting somwhere but there's a lot of errors in the way" - https://goo.gl/qrnsA3
+        'Commit #2 - "Got a new error" - https://goo.gl/eBt4ib
+        'Commit #3 - "Now we're (the function) failing always :(" - https://goo.gl/VEMkx6
+        'Commit #4 - "It still doesn't work, and I don't know how to fix it" - https://goo.gl/a8noL6
+        'Commit #5 - "Saving changes because I'm basically rewriting the passeswhitelist function again" - https://goo.gl/kDm9Td
+        'Commit #6 - "Still got no idea. Clean Slate." - https://goo.gl/5XPUu1
+        'Commit #7 (At this point I was very frustrated) - "Well I've rewritten it AGAIN, and got nowhere AGAIN. Got 1:14 time now to see if I can fail AGAIN or not." - https://goo.gl/p37v6v
+        'Commit #8 - "Got Ideas?" (As in I thought I had some ideas) - https://goo.gl/Q2JxzL
+
     End Function
 End Module
