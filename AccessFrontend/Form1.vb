@@ -146,7 +146,6 @@ Public Class frm_main
         '^ Whitelist really doesn't matter anyway. It's not used because I never worked out the function :(
         CheckIfOneRecord()
         Me.Cursor = Cursors.Default
-
     End Sub
 
     Private Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click

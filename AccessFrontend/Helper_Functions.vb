@@ -13,7 +13,7 @@
         End Try
     End Function
 
-    Function CheckIfOneRecord() 'TODO: Make this work for cbx_osNameEdit so that it will auto-populate every other field based on the name and allow you to edit some fields
+    Function CheckIfOneRecord() 'TODO: Make a function like this work for cbx_osNameEdit so that it will auto-populate every other field based on the name and allow you to edit some fields
         Dim specString As String = ""
         If frm_main.cbx_osFileName.Items.Count = 1 Then
             Dim y = getRecordByField("filename", frm_main.cbx_osFileName.Items(0).ToString, "tbl_os")
@@ -23,7 +23,7 @@
 
 
 
-        ElseIf Not frm_main.cbx_osFileName.Selecteditem = "" Then
+        ElseIf Not frm_main.cbx_osFileName.SelectedItem = "" Then
             Dim y = getRecordByField("filename", frm_main.cbx_osFileName.SelectedItem, "tbl_os")
             Dim x = y(0).split(",")
             'specString = variant & " - " & friendlyname & vbcrlf & "Parent: " & Parent & vbcrlf & "Edition: " & Edition & vbcrlf & "Version: " & Version & vbcrlf & so on & so forth
@@ -33,7 +33,7 @@
         frm_main.txt_specs.Text = specString
     End Function
 
-    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False) 'TODO: This has to add "Add new" to every combobox on the edit page
+    Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False)
 
         If Not isconnected Then
             DatabaseConnection.ConnectionString = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" & frm_main.txt_filename.Text
@@ -94,6 +94,10 @@
         Catch
             Console.WriteLine("already closed")
         End Try
+
+        For Each cbx As ComboBox In frm_main.tpg_edit.Controls.OfType(Of ComboBox)
+            cbx.Items.Add("Add new...")
+        Next
 #Disable Warning BC42105 ' Function doesn't return a value on all code paths
     End Function
 #Enable Warning BC42105 ' Function doesn't return a value on all code paths
