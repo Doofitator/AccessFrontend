@@ -98,6 +98,7 @@ Partial Class frm_main
         Me.ofd_database = New System.Windows.Forms.OpenFileDialog()
         Me.strp_connectionStatus = New System.Windows.Forms.StatusStrip()
         Me.tssl_databaseStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.pdg_Report = New System.Windows.Forms.PrintDialog()
         Me.pdc_Report = New System.Drawing.Printing.PrintDocument()
         Me.grp_connect.SuspendLayout()
         Me.grp_control.SuspendLayout()
@@ -846,6 +847,11 @@ Partial Class frm_main
         Me.tssl_databaseStatus.Size = New System.Drawing.Size(79, 17)
         Me.tssl_databaseStatus.Text = "Disconnected"
         '
+        'pdg_Report
+        '
+        Me.pdg_Report.Document = Me.pdc_Report
+        Me.pdg_Report.UseEXDialog = True
+        '
         'frm_main
         '
         Me.AllowDrop = True
@@ -953,7 +959,8 @@ Partial Class frm_main
     Friend WithEvents lbl_instruct1 As Label
     Friend WithEvents lbl_dragDrop As Label
     Friend WithEvents btn_printSearch As Button
-    Friend WithEvents pdc_Report As Printing.PrintDocument
     Friend WithEvents btn_printSpecs As Button
     Friend WithEvents txt_specs As TextBox
+    Friend WithEvents pdg_Report As PrintDialog
+    Friend WithEvents pdc_Report As Printing.PrintDocument
 End Class

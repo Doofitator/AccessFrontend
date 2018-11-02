@@ -33,6 +33,21 @@
         frm_main.txt_specs.Text = specString
     End Function
 
+    Function getStringOfAllAvails() As String
+        Dim specString
+
+        For Each filename In frm_main.cbx_osFileName.Items
+            Dim y = getRecordByField("filename", filename, "tbl_os")
+            For Each z As String In y
+                If z = Nothing Then GoTo future
+                Dim x = z.Split(",")
+                specString += x(1) & "   -   " & x(4) & vbCrLf & "Parent: " & x(9) & vbCrLf & "Edition: " & x(3) & vbCrLf & "Version: " & x(2) & vbCrLf & "Minimum RAM (megabytes): " & x(5) & vbCrLf & "Media format: " & x(7) & vbCrLf & "Media type: " & x(13) & vbCrLf & "Media size: " & x(6) & vbCrLf & "Build type: " & x(8) & vbCrLf & "Boot / BIOS type: " & x(12) & vbCrLf & "Platform: " & x(10) & vbCrLf & "Filename: " & x(11) & "." & x(7) & vbCrLf & vbCrLf & "-------------" & vbCrLf & vbCrLf
+future:
+            Next
+        Next
+        Return specString
+    End Function
+
     Function populateComboBoxes(Optional whitelist As Array = Nothing, Optional exclude As ComboBox = Nothing, Optional isconnected As Boolean = False, Optional isItReallyThough As Boolean = False)
 
         If Not isconnected Then

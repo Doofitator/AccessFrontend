@@ -128,7 +128,11 @@ Public Class frm_main
     Dim stringToPrint As String 'this is what gets printed when u hit the button
 
     Private Sub btn_print_Click(sender As Object, e As EventArgs) Handles btn_printSearch.Click
-        pdc_Report.Print()
+        stringToPrint = getStringOfAllAvails()
+        If pdg_Report.ShowDialog = DialogResult.OK Then
+            pdc_Report.PrinterSettings = pdg_Report.PrinterSettings
+            pdc_Report.Print()
+        End If
     End Sub
 
     Private Sub pdc_report_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs) Handles pdc_report.PrintPage
@@ -205,6 +209,9 @@ whoopsies:
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_printSpecs.Click
         stringToPrint = txt_specs.Text
-        'getRecordByField("parent", "Unix", "tbl_os")
+        If pdg_Report.ShowDialog = DialogResult.OK Then
+            pdc_Report.PrinterSettings = pdg_Report.PrinterSettings
+            pdc_Report.Print()
+        End If
     End Sub
 End Class
